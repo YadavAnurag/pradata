@@ -1,31 +1,32 @@
+import moment from "moment";
 import { createStore, combineReducers } from "redux";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 import { users, plans } from "../fixtures/data";
-
+import { userFilters } from "../fixtures/filters";
 //actions
 
 //user actions
 //ADD_USER
 const addUser = ({
-  firstName = "",
+  firstName = "", // required
   middleName = "",
   lastName = "",
-  gender = "",
-  emailId = "",
-  contactNumber = "",
-  address = "",
-  accountStatus = "inactive",
-  usages = new Array(),
-  createdAt = 0,
-}) => ({
+  gender = "", // required
+  emailId = "", // required
+  contactNumber = "", // required
+  address = "", // required
+  accountStatus = "inactive", // required
+  usages = [],
+  createdAt = moment().valueOf(),
+} = {}) => ({
   type: "ADD_USER",
   user: {
-    id,
-    firstName,
-    middleName,
-    lastName,
-    gender,
-    emailId,
+    id: uuid(),
+    firstName: firstName.toLowerCase(),
+    middleName: middleName.toLowerCase(),
+    lastName: lastName.toLowerCase(),
+    gender: gender.toLowerCase(),
+    emailId: emailId.toLowerCase(),
     contactNumber,
     address,
     accountStatus,
@@ -34,13 +35,20 @@ const addUser = ({
   },
 });
 
+//EDIT_USER
+const editUser = ({ id = "", updates = {} } = {}) => ({
+  type: "EDIT_USER",
+  id,
+  updates,
+});
+
 //#TODO
 //plan actions
 
 //#TODO
 // userFilter actions
 // SET_TEXT_FILTER
-const setTextFilter = ({ text = "" }) => ({
+const setTextFilter = ({ text = "" } = {}) => ({
   type: "SET_TEXT_FILTER",
 });
 
@@ -49,20 +57,36 @@ const setTextFilter = ({ text = "" }) => ({
 
 // ----------- reducers ------------
 // user reducer
-const userReducerDefaultState = new Array();
+// const userReducerDefaultState = new Array();
+const userReducerDefaultState = new Array(...users);
 const userReducer = (state = userReducerDefaultState, action) => {
   switch (action.type) {
     case "ADD_USER":
-      return new Array(...state, action.user);
+      return [...state, action.user];
+    case 'EDIT_USER':
+      return state.map(user => {
+        if (user.id === action.id) {
+          const 
+        } else {
+          return user;
+        }
+      });
+    case 'EDIT_USER_USAGE':
+      return state;
+    default:
+      return state;
   }
 };
 
 // plan reducer
-const planReducerDefaultState = new Array();
+// const planReducerDefaultState = new Array();
+const planReducerDefaultState = new Array(...plans);
 const planReducer = (state = planReducerDefaultState, action) => {
   switch (action.type) {
     case "ADD_PLAN":
-      return new Array(...state, action.plan);
+      return [...state, action.plan];
+    default:
+      return state;
   }
 };
 
@@ -85,28 +109,22 @@ const userFilterReducer = (state = userFilterReducerDefaultState, action) => {
   }
 };
 const getVisibleUsers = (users, plans, userFilters) => {
-  const {
-    text = "",
-    contactNumber = "",
-    planId = "", // using dropdown
-    accountStatus = "", //active or inactive
-    sortBy = "textAsc",
-    startDate = 0,
-    endDate = 0,
-  } = userFilters;
+  // prettier-ignore
+  const { text = "", contactNumber = "", planId = "", accountStatus = "", sortBy = "textAsc", startDate = 0, endDate = 0, } = { ...userFilters };
 
   return users
     .filter((user) => {
-      const textMatch = new Array(
-        user.firstName,
-        user.middleName,
-        user.lastName
-      )
+      const textMatch = [user.firstName, user.middleName, user.lastName]
         .join(" ")
         .toLowerCase()
         .includes(text.toLowerCase());
       const contactNumberMatch = user.contactNumber.includes(contactNumber);
-      const planIdMatch = user.planId
+
+      // plan
+      const userPlanId = user.usages.length
+        ? user.usages[user.usages.length - 1].planId
+        : "";
+      const planIdMatch = userPlanId
         .toLowerCase()
         .includes(planId.toLowerCase());
       const accountStatusMatch = user.accountStatus
@@ -116,11 +134,11 @@ const getVisibleUsers = (users, plans, userFilters) => {
       // calculate dueDate
       let userPlanDueDate = 0;
       if (user.usages.length) {
-        const userPlanLastRenewedAt =
-          user.usages[user.usages.length - 1]["startedAt"];
-        const planValidity = plans.find((plan) => plan.id === planId)[
-          validityPeriod
-        ];
+        const userLastUsage = user.usages[user.usages.length - 1];
+        const userPlanLastRenewedAt = userLastUsage.startedAt;
+        const planValidity = plans.find(
+          (plan) => plan.id === userLastUsage.planId
+        ).validityPeriod;
         userPlanDueDate = userPlanLastRenewedAt + planValidity;
       }
       const startDateMatch =
@@ -139,56 +157,55 @@ const getVisibleUsers = (users, plans, userFilters) => {
     })
     .sort((firstUser, secondUser) => {
       if (sortBy === "textAsc") {
-        firstUserFullName = new Array(
+        const firstUserFullName = [
           firstUser.firstName,
           firstUser.middleName,
-          firstUser.lastName
-        ).join(" ");
-        secondUserFullName = new Array(
+          firstUser.lastName,
+        ].join(" ");
+        const secondUserFullName = [
           secondUser.firstName,
           secondUser.middleName,
-          secondUser.lastName
-        ).join(" ");
+          secondUser.lastName,
+        ].join(" ");
         return firstUserFullName > secondUserFullName;
-      }
-      if (sortBy === "textDesc") {
-        firstUserFullName = new Array(
+      } else if (sortBy === "textDesc") {
+        const firstUserFullName = [
           firstUser.firstName,
           firstUser.middleName,
-          firstUser.lastName
-        ).join(" ");
-        secondUserFullName = new Array(
+          firstUser.lastName,
+        ].join(" ");
+        const secondUserFullName = [
           secondUser.firstName,
           secondUser.middleName,
-          secondUser.lastName
-        ).join(" ");
+          secondUser.lastName,
+        ].join(" ");
         return firstUserFullName < secondUserFullName;
-      }
-      if (sortBy === "dueDateDesc") {
-        firstUserFullName = new Array(
+      } else if (sortBy === "dueDateDesc") {
+        const firstUserFullName = [
           firstUser.firstName,
           firstUser.middleName,
-          firstUser.lastName
-        ).join(" ");
-        secondUserFullName = new Array(
+          firstUser.lastName,
+        ].join(" ");
+        const secondUserFullName = [
           secondUser.firstName,
           secondUser.middleName,
-          secondUser.lastName
-        ).join(" ");
+          secondUser.lastName,
+        ].join(" ");
         return firstUserFullName < secondUserFullName;
-      }
-      if (sortBy === "dueDateAsc") {
-        firstUserFullName = new Array(
+      } else if (sortBy === "dueDateAsc") {
+        const firstUserFullName = [
           firstUser.firstName,
           firstUser.middleName,
-          firstUser.lastName
-        ).join(" ");
-        secondUserFullName = new Array(
+          firstUser.lastName,
+        ].join(" ");
+        const secondUserFullName = [
           secondUser.firstName,
           secondUser.middleName,
-          secondUser.lastName
-        ).join(" ");
+          secondUser.lastName,
+        ].join(" ");
         return firstUserFullName < secondUserFullName;
+      } else {
+        return 0;
       }
     });
 };
@@ -208,14 +225,35 @@ const getVisibleUsers = (users, plans, userFilters) => {
 const store = createStore(
   combineReducers({
     users: userReducer,
+    plans: planReducer,
     userFilters: userFilterReducer,
   })
 );
-
+store.getState();
 const unsubscribe = store.subscribe(() => {
   // console.log(store.getState());
 
   const state = store.getState();
-  const visibleUsers = getVisibleUsers(state.users, state.userFilters);
-  console.log(visibleUsers, state.userFilters);
+  const visibleUsers = getVisibleUsers(
+    state.users,
+    state.plans,
+    state.userFilters
+  );
+  console.log(state.users, state.userFilters);
 });
+
+const firstUser = store.dispatch(
+  addUser({
+    firstName: "Anju",
+    gender: "female",
+    address: "MMMUT",
+    contactNumber: "8354820950",
+    emailId: "anju@gmail.com",
+  })
+);
+const updatedFirst = store.dispatch(
+  editUser({
+    id: firstUser.id,
+    updates: { firstName: "Anju Maurya" },
+  })
+);

@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const users = new Array(
+export const users = [
   {
     id: "1",
     firstName: "Manoj",
@@ -109,13 +109,14 @@ export const users = new Array(
     gender: "female",
     emailId: "shivam@gmail.com",
     contactNumber: "9874000000",
+    accountStatus: "inactive",
     address: "Prayagraj UP Pin-224190",
     usages: new Array(),
     createdAt: moment("2016-05-21").valueOf(),
-  }
-);
+  },
+];
 
-export const plans = new Array(
+export const plans = [
   {
     id: "1",
     title: "super",
@@ -139,5 +140,5 @@ export const plans = new Array(
     description: "special plan",
     validityPeriod: 90 * 24 * 3600 * 1000,
     createdAt: moment("2015-05-21").valueOf(),
-  }
-);
+  },
+];
