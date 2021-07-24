@@ -19,7 +19,7 @@ export const users = [
         paymentDetails: {
           paidAmount: 8000,
           paymentMethod: "cash",
-          paymentRefId: "a1",
+          paymentReferenceId: "a1",
         },
       },
       {
@@ -29,7 +29,7 @@ export const users = [
         paymentDetails: {
           paidAmount: 20000,
           paymentMethod: "online",
-          paymentRefId: "a2",
+          paymentReferenceId: "a2",
         },
       },
       {
@@ -39,7 +39,7 @@ export const users = [
         paymentDetails: {
           paidAmount: 10000,
           paymentMethod: "online",
-          paymentRefId: "a3",
+          paymentReferenceId: "a3",
         },
       }
     ),
@@ -63,7 +63,7 @@ export const users = [
         paymentDetails: {
           paidAmount: 10000,
           paymentMethod: "online",
-          paymentRefId: "a1",
+          paymentReferenceId: "a1",
         },
       },
       {
@@ -73,7 +73,7 @@ export const users = [
         paymentDetails: {
           paidAmount: 18000,
           paymentMethod: "online",
-          paymentRefId: "a2",
+          paymentReferenceId: "a2",
         },
       }
     ),
@@ -96,7 +96,7 @@ export const users = [
       paymentDetails: {
         paidAmount: 8000,
         paymentMethod: "cash",
-        paymentRefId: "a1",
+        paymentReferenceId: "a1",
       },
     }),
     createdAt: moment("2018-05-21").valueOf(),
@@ -120,7 +120,7 @@ export const plans = [
   {
     id: "1",
     title: "super",
-    price: 10000,
+    price: 100 * 100,
     description: "super plan",
     validityPeriod: 30 * 24 * 3600 * 1000,
     createdAt: moment("2015-05-21").valueOf(),
@@ -128,7 +128,7 @@ export const plans = [
   {
     id: "2",
     title: "combo",
-    price: 20000,
+    price: 200 * 100,
     description: "combo plan",
     validityPeriod: 60 * 24 * 3600 * 1000,
     createdAt: moment("2015-05-21").valueOf(),
@@ -136,7 +136,7 @@ export const plans = [
   {
     id: "3",
     title: "special",
-    price: 50000,
+    price: 500 * 100,
     description: "special plan",
     validityPeriod: 90 * 24 * 3600 * 1000,
     createdAt: moment("2015-05-21").valueOf(),

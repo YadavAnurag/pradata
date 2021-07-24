@@ -36,11 +36,129 @@ const addUser = ({
 });
 
 //EDIT_USER
-const editUser = ({ id = "", updates = {} } = {}) => ({
-  type: "EDIT_USER",
+const editUser = ({ id = "", updates = {} } = {}) => {
+  let userUpdates = {};
+
+  if (updates.hasOwnProperty("firstName"))
+    userUpdates = {
+      ...userUpdates,
+      firstName: updates.firstName.toLowerCase(),
+    };
+  if (updates.hasOwnProperty("middleName")) {
+    userUpdates = {
+      ...userUpdates,
+      middleName: updates.middleName.toLowerCase(),
+    };
+  }
+  if (updates.hasOwnProperty("lastName"))
+    userUpdates = {
+      ...userUpdates,
+      lastName: updates.lastName.toLowerCase(),
+    };
+  if (updates.hasOwnProperty("gender"))
+    userUpdates = { ...userUpdates, gender: updates.gender.toLowerCase() };
+  if (updates.hasOwnProperty("emailId"))
+    userUpdates = {
+      ...userUpdates,
+      emailId: updates.emailId.toLowerCase(),
+    };
+  if (updates.hasOwnProperty("accountStatus"))
+    userUpdates = {
+      ...userUpdates,
+      accountStatus: updates.accountStatus.toLowerCase(),
+    };
+
+  return {
+    type: "EDIT_USER",
+    id,
+    updates: { ...updates, ...userUpdates },
+  };
+};
+
+//REMOVE_USER
+const removeUser = ({ id = "" }) => ({
+  type: "REMOVE_USER",
   id,
+});
+//ADD_USAGE
+const addUsage = ({
+  userId = "",
+  planId = "", //required
+  paymentDetails = {},
+}) => {
+  let userPaymentDetails = {};
+  if (!!planId === false) {
+    planId = "1";
+  }
+  if (Object.keys(paymentDetails).length) {
+    console.log("1");
+    if (!paymentDetails.hasOwnProperty("paidAmount")) {
+      console.log("2");
+      userPaymentDetails = {
+        ...paymentDetails,
+        ...userPaymentDetails,
+        paidAmount: 0,
+      };
+    } else {
+      userPaymentDetails = {
+        ...paymentDetails,
+        ...userPaymentDetails,
+        paidAmount:
+          paymentDetails.paidAmount < 0 ? 0 : paymentDetails.paidAmount,
+      };
+    }
+
+    if (!paymentDetails.hasOwnProperty("paymentMethod")) {
+      console.log("3");
+      userPaymentDetails = {
+        ...paymentDetails,
+        ...userPaymentDetails,
+        paymentMethod: "",
+      };
+    } else {
+      console.log("4");
+      userPaymentDetails = {
+        ...paymentDetails,
+        ...userPaymentDetails,
+        paymentMethod: paymentDetails.paymentMethod.toLowerCase(),
+      };
+    }
+
+    if (!paymentDetails.hasOwnProperty("paymentReferenceId")) {
+      console.log("5");
+      userPaymentDetails = {
+        ...paymentDetails,
+        ...userPaymentDetails,
+        paymentReferenceId: "",
+      };
+    }
+  } else {
+    console.log("6");
+    userPaymentDetails = {
+      paidAmount: 0,
+      paymentMethod: "",
+      paymentReferenceId: "",
+    };
+  }
+
+  return {
+    type: "ADD_USAGE",
+    userId,
+    usage: {
+      id: uuid(),
+      planId,
+      startedAt: moment().valueOf(),
+      paymentDetails: userPaymentDetails,
+    },
+  };
+};
+//EDIT_USAGE
+const editUsage = ({ userId = "", updates = {} }) => ({
+  type: "EDIT_USAGE",
+  userId,
   updates,
 });
+//REMOVE_USAGE
 
 //#TODO
 //plan actions
@@ -63,16 +181,41 @@ const userReducer = (state = userReducerDefaultState, action) => {
   switch (action.type) {
     case "ADD_USER":
       return [...state, action.user];
-    case 'EDIT_USER':
-      return state.map(user => {
+    case "EDIT_USER":
+      return state.map((user) => {
         if (user.id === action.id) {
-          const 
+          return { ...user, ...action.updates };
         } else {
           return user;
         }
       });
-    case 'EDIT_USER_USAGE':
+    case "REMOVE_USER":
+      return state.filter(({ id }) => id !== action.id);
+
+    case "ADD_USAGE":
+      return state.map((user) => {
+        if (user.id === action.userId) {
+          return { ...user, usages: user.usages.concat(action.usage) };
+        } else {
+          return user;
+        }
+      });
+    case "EDIT_USAGE":
+      return state.map((user) => {
+        if (user.id === action.userId) {
+          const updatedUsages = user.usages.map((usage) => {
+            if (usage.id === action.id) {
+              return { ...usage, ...action.updates };
+            } else return usage;
+          });
+
+          return { ...user, usages: updatedUsages };
+        } else return user;
+      });
+
+    case "REMOVE_USAGE":
       return state;
+
     default:
       return state;
   }
@@ -118,6 +261,7 @@ const getVisibleUsers = (users, plans, userFilters) => {
         .join(" ")
         .toLowerCase()
         .includes(text.toLowerCase());
+      // console.log("[app.js: getVisibleUsers]", user);
       const contactNumberMatch = user.contactNumber.includes(contactNumber);
 
       // plan
@@ -251,9 +395,62 @@ const firstUser = store.dispatch(
     emailId: "anju@gmail.com",
   })
 );
-const updatedFirst = store.dispatch(
+const secondUser = store.dispatch(
+  addUser({
+    firstName: "Ravi",
+    gender: "male",
+    address: "Varanasi",
+    contactNumber: "987654321",
+    emailId: "ravi@ncr.com",
+  })
+);
+// console.log("returned", firstUser);
+const updatedFirstUser = store.dispatch(
   editUser({
-    id: firstUser.id,
-    updates: { firstName: "Anju Maurya" },
+    id: "1",
+    updates: {
+      firstName: "Aradhana",
+      middleName: "b1",
+      lastName: "Singh",
+      gender: "Female",
+      emailId: "Aradhana@gmail.com",
+      address: "MMMEC Gorakhpur",
+      accountStatus: "Active",
+    },
+  })
+);
+store.dispatch(removeUser({ id: "1" }));
+
+const firstUsage = store.dispatch(
+  addUsage({
+    userId: "4",
+    planId: "3",
+    paymentDetails: {
+      paidAmount: -58.5 * 100,
+      paymentMethod: "On-Line",
+      paymentReferenceId: "A1321sdfabaH",
+    },
+  })
+);
+
+const secondUsage = store.dispatch(
+  addUsage({
+    userId: "3",
+    planId: "3",
+    paymentDetails: {
+      paidAmount: 558.5 * 100,
+      paymentMethod: "On-Line",
+      paymentReferenceId: "A1321sdfabaH",
+    },
+  })
+);
+
+const updatedUsage = store.dispatch(
+  editUsage({
+    userId: "2",
+    usageId: "1",
+    updates: {
+      planId: "",
+    },
   })
 );
