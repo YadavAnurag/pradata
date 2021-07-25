@@ -179,7 +179,7 @@ export const plans = [
     status: "active",
     description: "super plan",
     validityPeriod: 30 * 24 * 3600 * 1000,
-    createdAt: moment("2015-05-21").valueOf(),
+    createdAt: moment("2021-07-01").valueOf(),
   },
   {
     id: "2",
@@ -188,15 +188,15 @@ export const plans = [
     status: "active",
     description: "combo plan",
     validityPeriod: 60 * 24 * 3600 * 1000,
-    createdAt: moment("2015-05-21").valueOf(),
+    createdAt: moment("2021-06-01").valueOf(),
   },
   {
     id: "3",
     title: "special",
     price: 500 * 100,
-    status: "inactive",
+    status: "active",
     description: "special plan",
     validityPeriod: 90 * 24 * 3600 * 1000,
-    createdAt: moment("2015-05-21").valueOf(),
+    createdAt: moment("2021-07-21").valueOf(),
   },
 ];

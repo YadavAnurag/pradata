@@ -2,8 +2,11 @@ import moment from "moment";
 import { createStore, combineReducers } from "redux";
 import { v4 as uuid } from "uuid";
 import { users, plans } from "../fixtures/data";
-import { userFilters } from "../fixtures/filters";
-import { getTotalPaymentReceivedToLastUsage } from "../store/utility/utility";
+import { userFilters, planFilters } from "../fixtures/filters";
+import {
+  getTotalPaymentReceivedToLastUsage,
+  getUserFullName,
+} from "../store/utility/utility";
 //actions
 
 //user actions
@@ -93,7 +96,6 @@ const addUsage = ({
         };
       } else return paymentDetail;
     });
-  } else {
   }
 
   return {
@@ -120,7 +122,7 @@ const addPayment = ({ userId = "", usageId = "", paymentDetail = {} }) => {
       paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
     };
   } else {
-    // payment must have paymentMethod
+    // payment must have to have paymentMethod
   }
 
   return {
@@ -134,12 +136,6 @@ const addPayment = ({ userId = "", usageId = "", paymentDetail = {} }) => {
     },
   };
 };
-
-//#TODO
-//plan actions
-
-//#TODO
-// planFilter actions
 
 // ----------- reducers ------------
 // user reducer
@@ -201,23 +197,11 @@ const userReducer = (state = userReducerDefaultState, action) => {
   }
 };
 
-// plan reducer
-// const planReducerDefaultState = new Array();
-const planReducerDefaultState = new Array(...plans);
-const planReducer = (state = planReducerDefaultState, action) => {
-  switch (action.type) {
-    case "ADD_PLAN":
-      return [...state, action.plan];
-    default:
-      return state;
-  }
-};
-
 //#TODO
 // +userFilter actions
-// SET_TEXT_FILTER
-const setTextFilter = ({ text = "" } = {}) => ({
-  type: "SET_TEXT_FILTER",
+// SET_USER_TEXT_FILTER
+const setUserTextFilter = ({ text = "" } = {}) => ({
+  type: "SET_USER_TEXT_FILTER",
   text,
 });
 
@@ -257,17 +241,19 @@ const setSortByFilter = ({ sortBy = "" }) => ({
   sortBy,
 });
 
-// setStartDateFilter
-const setStartDateFilter = ({
+// setUserStartDateFilter
+const setUserStartDateFilter = ({
   startDate = moment().startOf("month").valueOf(),
 }) => ({
-  type: "SET_START_DATE_FILTER",
+  type: "SET_USER_START_DATE_FILTER",
   startDate,
 });
 
-// setEndDateFilter
-const setEndDateFilter = ({ endDate = moment().endOf("month").valueOf() }) => ({
-  type: "SET_END_DATE_FILTER",
+// setUserEndDateFilter
+const setUserEndDateFilter = ({
+  endDate = moment().endOf("month").valueOf(),
+}) => ({
+  type: "SET_USER_END_DATE_FILTER",
   endDate,
 });
 
@@ -287,7 +273,7 @@ const userFilterReducerDefaultState = {
 };
 const userFilterReducer = (state = userFilterReducerDefaultState, action) => {
   switch (action.type) {
-    case "SET_TEXT_FILTER":
+    case "SET_USER_TEXT_FILTER":
       return { ...state, text: action.text };
     case "SET_CONTACT_NUMBER_FILTER":
       return { ...state, contactNumber: action.contactNumber };
@@ -299,9 +285,9 @@ const userFilterReducer = (state = userFilterReducerDefaultState, action) => {
       return { ...state, userAccountStatus: action.userAccountStatus };
     case "SET_IS_DUE_FILTER":
       return { ...state, isDue: action.isDue };
-    case "SET_START_DATE_FILTER":
+    case "SET_USER_START_DATE_FILTER":
       return { ...state, startDate: action.startDate };
-    case "SET_END_DATE_FILTER":
+    case "SET_USER_END_DATE_FILTER":
       return { ...state, endDate: action.endDate };
     case "SET_SORT_BY_FILTER":
       return { ...state, sortBy: action.sortBy };
@@ -316,7 +302,7 @@ const getVisibleUsers = (users, plans, userFilters) => {
     contactNumber = "",
     currentPlanId = "",
     userAccountStatus = "",
-    isDue = null,
+    isDue = true,
     sortBy = "dueDateAsc",
     startDate = moment().startOf("month").valueOf(),
     endDate = moment().endOf("month").valueOf(),
@@ -324,113 +310,68 @@ const getVisibleUsers = (users, plans, userFilters) => {
 
   return users
     .filter((user) => {
-      const textMatch = [user.firstName, user.middleName, user.lastName]
-        .join(" ")
-        .toLowerCase()
-        .includes(text.toLowerCase());
-      console.log("1 name match", textMatch);
+      const {
+        totalPaymentReceived,
+        dueAmount,
+        currentPlan,
+        currentPlanDueDate,
+        userInDue,
+      } = getTotalPaymentReceivedToLastUsage(user, plans);
 
+      // textMatch
+      const textMatch = getUserFullName(user)
+        .fullName.toLowerCase()
+        .includes(text.toLowerCase());
+
+      // emailIdMatch
       const emailIdMatch = user.emailId
         .toLowerCase()
         .includes(emailId.toLowerCase());
 
-      // contactNumberMarth
+      // contactNumberMatch
       const contactNumberMatch = user.contactNumber.includes(contactNumber);
 
-      // calculate user current plan
-      const userPlanId = user.usages.length
-        ? user.usages[user.usages.length - 1].planId
-        : "";
-      const currentPlanIdMatch = userPlanId
+      // currentPlanIdMatch
+      const currentPlanIdMatch = currentPlan.id
         .toLowerCase()
         .includes(currentPlanId.toLowerCase());
 
-      console.log(
-        "matching",
-        user.status.toLowerCase(),
-        userAccountStatus.toLowerCase()
-      );
       // userAccountStatusMatch
       const userAccountStatusMatch = !!userAccountStatus
         ? user.status.toLowerCase() === userAccountStatus.toLowerCase()
         : true;
 
-      /* check if isDue is null, means no use of calculation of dues of user
-        just mark isDueMatch as true */
-
       // isDueMatch
+      /*
+       initialize isDueMatch as true, because if no dues for a user, 
+       then don't exclude this user, have to include this user so mark match as true
+      */
       let isDueMatch = true;
       if (isDue !== null) {
-        // calculate if user is in due
-        const { userInDue } = getTotalPaymentReceivedToLastUsage(user, plans);
-
         //if user has any due or not
         if (isDue === true) {
           isDueMatch = userInDue === true ? true : false;
         } else {
-          isDueMatch = userInDue === true ? false : true;
+          isDueMatch = userInDue === false ? true : false;
         }
       } else {
         isDueMatch = true;
       }
 
-      // +startDateMatch and endDateMatch
+      // +startDateMatch and endDateMatch with user due date
       let startDateMatch = false,
         endDateMatch = false;
       // calculation of userPlanDueDate
       // let userPlanDueDate = null;
       if (isDue !== null) {
-        const { currentPlanDueDate: userPlanDueDate } =
-          getTotalPaymentReceivedToLastUsage(user, plans);
-        // if (user.usages.length) {
-        //   const userLastUsage = user.usages[user.usages.length - 1];
-        //   const userPlanLastRenewedAt = userLastUsage.startedAt;
-        //   const planValidity = plans.find(
-        //     (plan) => plan.id === userLastUsage.planId
-        //   ).validityPeriod;
-        //   userPlanDueDate = userPlanLastRenewedAt + planValidity;
-        // } else {
-        // }
-
-        startDateMatch =
-          userPlanDueDate === null ? false : userPlanDueDate >= startDate;
-        endDateMatch =
-          userPlanDueDate === null ? false : userPlanDueDate <= endDate;
+        startDateMatch = currentPlanDueDate >= startDate;
+        endDateMatch = currentPlanDueDate <= endDate;
       } else {
+        // get all either having due or no-dues
         startDateMatch = true;
         endDateMatch = true;
       }
 
-      console.log(
-        "all Match",
-        "userId",
-        user.id,
-        "textMatch",
-        textMatch,
-        "contactNumberMatch",
-        contactNumberMatch,
-        "emailIdMatch",
-        emailIdMatch,
-        "currentPlanIdMatch",
-        currentPlanIdMatch,
-        "userAccountStatusMatch",
-        userAccountStatusMatch,
-        "isDueMatch",
-        isDueMatch,
-        "startDateMatch",
-        startDateMatch,
-        "endDateMatch",
-        endDateMatch,
-        "final",
-        textMatch &&
-          contactNumberMatch &&
-          emailIdMatch &&
-          currentPlanIdMatch &&
-          userAccountStatusMatch &&
-          isDueMatch &&
-          startDateMatch &&
-          endDateMatch
-      );
       return (
         textMatch &&
         contactNumberMatch &&
@@ -443,80 +384,237 @@ const getVisibleUsers = (users, plans, userFilters) => {
       );
     })
     .sort((firstUser, secondUser) => {
-      console.log("1");
       if (sortBy.includes("text")) {
-        console.log("2");
-        const firstUserFullName = [
-          firstUser.firstName,
-          firstUser.middleName,
-          firstUser.lastName,
-        ].join(" ");
-        const secondUserFullName = [
-          secondUser.firstName,
-          secondUser.middleName,
-          secondUser.lastName,
-        ].join(" ");
+        const { fullName: firstUserFullName } = getUserFullName(firstUser);
+        const { fullName: secondUserFullName } = getUserFullName(secondUser);
+
         return sortBy === "textAsc"
-          ? firstUserFullName > secondUserFullName
-          : firstUserFullName < secondUserFullName;
+          ? firstUserFullName.toLowerCase() > secondUserFullName.toLowerCase()
+          : firstUserFullName.toLowerCase() < secondUserFullName.toLowerCase();
       } else if (sortBy.includes("dueAmount")) {
-        console.log("4");
-        const {
-          totalPaymentReceived: firstUserTotalPaymentReceived,
-          currentPlanPrice: firstUserCurrentPlanPrice,
-        } = getTotalPaymentReceivedToLastUsage(firstUser, plans);
-        const {
-          totalPaymentReceived: secondUserTotalPaymentReceived,
-          currentPlanPrice: secondUserCurrentPlanPrice,
-        } = getTotalPaymentReceivedToLastUsage(secondUser, plans);
+        const { dueAmount: firstUserDueAmount } =
+          getTotalPaymentReceivedToLastUsage(firstUser, plans);
+        const { dueAmount: secondUserDueAmount } =
+          getTotalPaymentReceivedToLastUsage(secondUser, plans);
 
-        // calculate due amounts
-        const firstUserDueAmount =
-          firstUserCurrentPlanPrice - firstUserTotalPaymentReceived;
-        const secondUserDueAmount =
-          secondUserCurrentPlanPrice - secondUserTotalPaymentReceived;
-
-        console.log(firstUser.firstName, firstUserDueAmount);
-        console.log(secondUser.firstName, secondUserDueAmount);
         return sortBy === "dueAmountAsc"
-          ? firstUserDueAmount > secondUserDueAmount
-          : firstUserDueAmount < secondUserDueAmount;
+          ? firstUserDueAmount - secondUserDueAmount
+          : secondUserDueAmount - firstUserDueAmount;
       } else if (sortBy.includes("dueDate")) {
-        console.log("6", plans);
-
         const { currentPlanDueDate: firstUserCurrentPlanDueDate } =
           getTotalPaymentReceivedToLastUsage(firstUser, plans);
         const { currentPlanDueDate: secondUserCurrentPlanDueDate } =
           getTotalPaymentReceivedToLastUsage(secondUser, plans);
 
-        console.log(
-          firstUser.firstName,
-          moment(firstUserCurrentPlanDueDate).format()
-        );
-        console.log(
-          secondUser.firstName,
-          moment(secondUserCurrentPlanDueDate).format()
-        );
         return sortBy === "dueDateAsc"
-          ? firstUserCurrentPlanDueDate > secondUserCurrentPlanDueDate
-          : firstUserCurrentPlanDueDate > secondUserCurrentPlanDueDate;
+          ? firstUserCurrentPlanDueDate - secondUserCurrentPlanDueDate
+          : secondUserCurrentPlanDueDate - firstUserCurrentPlanDueDate;
       } else {
-        console.log("7");
+        // console.log(`sortBy variable = ${sortBy} didn't match with any filter`);
         return 0;
       }
     });
 };
 
-// planFilter
-// planFilterReducer
+//#TODO
+//plan actions
+// ADD_PLAN
+const addPlan = ({
+  title = "Plan Name Not Decided Yet",
+  price = 0,
+  status = "inactive",
+  description = "A good plan for an average income family",
+  validityPeriod = 0,
+} = {}) => ({
+  type: "ADD_PLAN",
+  plan: {
+    id: uuid(),
+    title,
+    price,
+    status,
+    description,
+    validityPeriod,
+    createdAt: moment().valueOf(),
+  },
+});
 
-// #TODO
-// first check filter with user and plan data if working or not then try with reducers
-// const newFilters = {text: '', judge: '', tags: {stack: true, tree: true, queue: true}, sortBy: 'star', startDate: undefined, endDate: undefined};
-//const newFilters = filters;
-// const newProblems = problems;
-// const result = getVisibleProblems(newProblems, newFilters);
-// console.log('result', result);
+// EDIT_PLAN
+const editPlan = ({ id = "", updates = {} } = {}) => ({
+  type: "EDIT_PLAN",
+  id,
+  updates,
+});
+
+// REMOVE_PLAN
+const removePlan = ({ id = "" } = {}) => ({
+  type: "REMOVE_PLAN",
+  id,
+});
+
+// TODO
+// plan reducer
+// const planReducerDefaultState = [];
+const planReducerDefaultState = [...plans];
+const planReducer = (state = planReducerDefaultState, action) => {
+  switch (action.type) {
+    case "ADD_PLAN":
+      return [...state, action.plan];
+    case "EDIT_PLAN":
+      return state.map((plan) => {
+        if (plan.id === action.id) {
+          return { ...plan, ...action.updates };
+        } else {
+          return plan;
+        }
+      });
+    case "REMOVE_PLAN":
+      return state.filter(({ id }) => id === action.id);
+    default:
+      return state;
+  }
+};
+
+// planFilters actions
+// SET_PLAN_TEXT_FILTER
+const setPlanTextFilter = ({ text = "" } = {}) => ({
+  type: "SET_PLAN_TEXT_FILTER",
+  text,
+});
+
+// SET_PRICE_FILTER
+const setPriceFilter = ({ price = 0 } = {}) => ({
+  type: "SET_PRICE_FILTER",
+  price,
+});
+
+// SET_PLAN_STATUS_FILTER
+const setPlanStatusFilter = ({ planStatus = "active" } = {}) => ({
+  type: "SET_PLAN_STATUS_FILTER",
+  planStatus,
+});
+
+// SET_VALIDITY_PERIOD_FILTER
+const setValidityPeriodFilter = ({ validityPeriod = 0 } = {}) => ({
+  type: "SET_VALIDITY_PERIOD_FILTER",
+  validityPeriod,
+});
+
+// setPlanStartDateFilter
+const setPlanStartDateFilter = ({
+  startDate = moment().startOf("month").valueOf(),
+} = {}) => ({
+  type: "SET_PLAN_START_DATE_FILTER",
+  startDate,
+});
+
+// setPlanEndDateFilter
+const setPlanEndDateFilter = ({
+  endDate = moment().endOf("month").valueOf(),
+} = {}) => ({
+  type: "SET_PLAN_END_DATE_FILTER",
+  endDate,
+});
+
+// setPlanSortByFilter
+const setPlanSortByFilter = ({ sortBy = "price" }) => ({
+  type: "SET_PLAN_SORT_BY_FILTER",
+  sortBy,
+});
+
+// TODO
+// planFilterReducer
+// const planFilterReducerDefaultState = {};
+const planFilterReducerDefaultState = {
+  text: "",
+  price: 0,
+  planStatus: "active",
+  validityPeriod: 0,
+  startDate: moment().startOf("month").valueOf(),
+  endDate: moment().endOf("month").valueOf(),
+  sortBy: "priceAsc",
+};
+const planFilterReducer = (state = planFilterReducerDefaultState, action) => {
+  switch (action.type) {
+    case "SET_PLAN_TEXT_FILTER":
+      return { ...state, text: action.text };
+    case "SET_PRICE_FILTER":
+      return { ...state, price: action.price };
+    case "SET_PLAN_STATUS_FILTER":
+      return { ...state, planStatus: action.planStatus };
+    case "SET_VALIDITY_PERIOD_FILTER":
+      return { ...state, validityPeriod: action.validityPeriod };
+    case "SET_PLAN_START_DATE_FILTER":
+      return { ...state, startDate: action.startDate };
+    case "SET_PLAN_END_DATE_FILTER":
+      return { ...state, endDate: action.endDate };
+    case "SET_PLAN_SORT_BY_FILTER":
+      return { ...state, sortBy: action.sortBy };
+    default:
+      return state;
+  }
+};
+
+// TODO
+// getSelectedPlans
+const getSelectedPlans = (plans, planFilters) => {
+  const {
+    text = "",
+    price = 0,
+    planStatus = "active",
+    validityPeriod = 0,
+    startDate = moment().startOf("month").valueOf(),
+    endDate = moment().endOf("month").valueOf(),
+    sortBy = "priceAsc",
+  } = { ...planFilters };
+
+  return plans
+    .filter((plan) => {
+      // textMatch
+      const textMatch = plan.title.toLowerCase().includes(text);
+
+      // priceMatch
+      const priceMatch = plan.price >= price;
+
+      // planStatusMatch
+      const planStatusMatch = !!planStatus
+        ? plan.status.toLowerCase() === planStatus.toLowerCase()
+        : true;
+
+      // validityPeriodMatch
+      const validityPeriodMatch = plan.validityPeriod >= validityPeriod;
+
+      // startDateMatch
+      const startDateMatch =
+        planStatus === "" ? true : plan.createdAt >= startDate;
+
+      // endDateMatch
+      const endDateMatch = planStatus === "" ? true : plan.createdAt <= endDate;
+
+      return (
+        textMatch &&
+        priceMatch &&
+        planStatusMatch &&
+        validityPeriodMatch &&
+        startDateMatch &&
+        endDateMatch
+      );
+    })
+    .sort((first, second) => {
+      if (sortBy.includes("text")) {
+        return sortBy === "textAsc"
+          ? first.title.toLowerCase() > second.title.toLowerCase()
+          : first.title.toLowerCase() < second.title.toLowerCase();
+      } else if (sortBy.includes("price")) {
+        return sortBy === "priceAsc"
+          ? first.price - second.price
+          : second.price - first.price;
+      } else if (sortBy.includes("validityPeriod")) {
+        return sortBy === "validityPeriodAsc"
+          ? first.validityPeriod - second.validityPeriod
+          : second.validityPeriod - first.validityPeriod;
+      }
+    });
+};
 
 // store creation
 const store = createStore(
@@ -524,20 +622,20 @@ const store = createStore(
     users: userReducer,
     plans: planReducer,
     userFilters: userFilterReducer,
+    planFilters: planFilterReducer,
   })
 );
 store.getState();
 const unsubscribe = store.subscribe(() => {
-  // console.log(store.getState());
-
   const state = store.getState();
-  const visibleUsers = getVisibleUsers(
-    state.users,
-    state.plans,
-    state.userFilters
+  const selectedPlans = getSelectedPlans(state.plans, state.planFilters);
+  console.log("start.plans", state.plans);
+  console.log(
+    "selectedPlans",
+    selectedPlans,
+    "\nplanFilters",
+    state.planFilters
   );
-  // console.log(state.users, state.userFilters);
-  console.log(visibleUsers, state.userFilters);
 });
 
 // const firstUser = store.dispatch(
@@ -652,17 +750,44 @@ const unsubscribe = store.subscribe(() => {
 // );
 // console.log(secondPayment);
 
-// filters
-store.dispatch(setTextFilter({ text: "" }));
-store.dispatch(setContactNumberFilter({ contactNumber: "" }));
-store.dispatch(setEmailIdFilter({ emailId: "" }));
-store.dispatch(setCurrentPlanIdFilter({ currentPlanId: "" }));
-store.dispatch(setUserAccountStatusFilter({ userAccountStatus: "" }));
-store.dispatch(setIsDueFilter({ isDue: null }));
+// store.dispatch(setUserTextFilter({ text: "" }));
+// store.dispatch(setContactNumberFilter({ contactNumber: "" }));
+// store.dispatch(setEmailIdFilter({ emailId: "" }));
+// store.dispatch(setCurrentPlanIdFilter({ currentPlanId: "" }));
+// store.dispatch(setUserAccountStatusFilter({ userAccountStatus: "" }));
+// store.dispatch(setIsDueFilter({ isDue: true }));
 
-store.dispatch(setStartDateFilter({ startDate: moment(0).valueOf() }));
-store.dispatch(setEndDateFilter({ endDate: moment("2022-01-01").valueOf() }));
+// // store.dispatch(setUserStartDateFilter({ startDate: moment(0).valueOf() }));
+// store.dispatch(setUserEndDateFilter({ endDate: moment("2022-01-01").valueOf() }));
 
-// store.dispatch(setSortByFilter({ sortBy: "textAsc" }));
-// store.dispatch(setSortByFilter({ sortBy: "dueAmountAsc" }));
-store.dispatch(setSortByFilter({ sortBy: "dueDateAsc" }));
+// // store.dispatch(setSortByFilter({ sortBy: "textAsc" }));
+// // store.dispatch(setSortByFilter({ sortBy: "dueAmountAsc" }));
+// store.dispatch(setSortByFilter({ sortBy: "dueDateAsc" }));
+
+const firstPlan = store.dispatch(addPlan({}));
+const secondPlan = store.dispatch(
+  addPlan({
+    title: "Gonna Decide Soon",
+    price: 100 * 100,
+    status: "active",
+    description: "Best Plan Ever",
+    validityPeriod: 0,
+  })
+);
+const editedFirstPlan = store.dispatch(
+  editPlan({
+    id: secondPlan.plan.id,
+    updates: {
+      title: "Updated Title",
+      price: 1500 * 100,
+      status: "active",
+      description: "Gonna end soon",
+      validityPeriod: 120 * 24 * 3600 * 1000,
+    },
+  })
+);
+
+// store.dispatch(setPlanEndDateFilter({endDate: }));
+store.dispatch(setPlanSortByFilter({ sortBy: "priceDesc" }));
+// store.dispatch(setPlanStartDateFilter({ startDate: moment(0).valueOf() }));
+store.dispatch(setPlanStatusFilter({ planStatus: "" }));

@@ -11,3 +11,13 @@ export const userFilters = {
   startDate: moment().startOf("month").valueOf(),
   endDate: moment().endOf("month").valueOf(),
 };
+
+export const planFilters = {
+  text: "",
+  price: 0,
+  planStatus: "active",
+  validityPeriod: 0,
+  startDate: moment().startOf("month").valueOf(),
+  endDate: moment().endOf("month").valueOf(),
+  sortBy: "priceAsc",
+};
