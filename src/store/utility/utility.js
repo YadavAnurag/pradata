@@ -71,9 +71,9 @@ export const getUserFullName = (user) => {
   const nameArray = [];
 
   // check if user has properties
-  if (user.hasOwnProperty("firstName")) nameArray.firstName = user.firstName;
-  if (user.hasOwnProperty("middleName")) nameArray.middleName = user.middleName;
-  if (user.hasOwnProperty("lastName")) nameArray.lastName = user.lastName;
+  if (user.hasOwnProperty("firstName")) nameArray[0] = user.firstName;
+  if (user.hasOwnProperty("middleName")) nameArray[1] = user.middleName;
+  if (user.hasOwnProperty("lastName")) nameArray[2] = user.lastName;
 
   const fullName = nameArray.join(" ");
   const fullNameArray = fullName.split(" ");
