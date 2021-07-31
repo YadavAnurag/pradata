@@ -1,15 +1,20 @@
-import Logo from "./components/UI/Logo/Logo";
-import "./App.css";
+import React from "react";
+import { Provider } from "react-redux";
 
-import app from "./playground/app";
+// import './styles/styles.scss';
+import AppRouter from "./routers/AppRouter";
+import configureStore from "./store/configureStore";
+//import app from "./playground/app";
+
+const store = configureStore();
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
 
 function App() {
-  return (
-    <div className="App">
-      <Logo />
-      <p>Let's Start Coding... and make self-reliant Digital India</p>
-    </div>
-  );
+  return { ...jsx };
 }
 
 export default App;

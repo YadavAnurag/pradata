@@ -11,7 +11,7 @@ export const users = [
     contactNumber: "7985000000",
     address: "Sakrawal Tanda Ambedkarnagar",
     status: "active",
-    usages: new Array(
+    usages: [
       {
         id: "1",
         planId: "1",
@@ -67,8 +67,8 @@ export const users = [
             paidAt: moment("2020-07-05").valueOf(),
           },
         ],
-      }
-    ),
+      },
+    ],
     createdAt: moment("2019-05-21").valueOf(),
   },
   {
@@ -107,27 +107,29 @@ export const users = [
     contactNumber: "8354000000",
     address: "Koirana Sakrawal Tanda Ambedkarnagar UP Pin-224190",
     status: "active",
-    usages: new Array({
-      id: "1",
-      planId: "1",
-      startedAt: moment("2021-07-01").valueOf(),
-      paymentDetails: [
-        {
-          id: uuid(),
-          paidAmount: 20 * 100,
-          paymentMethod: "cash",
-          paymentReferenceId: "",
-          paidAt: moment("2021-07-01").valueOf(),
-        },
-        {
-          id: uuid(),
-          paidAmount: 70 * 100,
-          paymentMethod: "Online",
-          paymentReferenceId: "12342",
-          paidAt: moment("2021-07-05").valueOf(),
-        },
-      ],
-    }),
+    usages: [
+      {
+        id: "1",
+        planId: "1",
+        startedAt: moment("2021-07-01").valueOf(),
+        paymentDetails: [
+          {
+            id: uuid(),
+            paidAmount: 20 * 100,
+            paymentMethod: "cash",
+            paymentReferenceId: "",
+            paidAt: moment("2021-07-01").valueOf(),
+          },
+          {
+            id: uuid(),
+            paidAmount: 70 * 100,
+            paymentMethod: "Online",
+            paymentReferenceId: "12342",
+            paidAt: moment("2021-07-05").valueOf(),
+          },
+        ],
+      },
+    ],
     createdAt: moment("2018-05-21").valueOf(),
   },
   {
