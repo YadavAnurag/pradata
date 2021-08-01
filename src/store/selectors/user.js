@@ -1,4 +1,10 @@
-const getSelectedUsers = (users, plans, userFilters) => {
+import moment from "moment";
+import {
+  getTotalPaymentReceivedToLastUsage,
+  getUserFullName,
+} from "../utility/utility";
+
+export const getSelectedUsers = (users, plans, userFilters) => {
   const {
     text = "",
     emailId = "",
@@ -6,7 +12,7 @@ const getSelectedUsers = (users, plans, userFilters) => {
     currentPlanId = "",
     userAccountStatus = "",
     isDue = true,
-    sortBy = "dueDateAsc",
+    sortBy = "textAsc",
     startDate = moment().startOf("month").valueOf(),
     endDate = moment().endOf("month").valueOf(),
   } = { ...userFilters };
@@ -38,8 +44,6 @@ const getSelectedUsers = (users, plans, userFilters) => {
       const currentPlanIdMatch = currentPlan.id
         .toLowerCase()
         .includes(currentPlanId.toLowerCase());
-
-      // userAccountStatusMatch
       const userAccountStatusMatch = !!userAccountStatus
         ? user.status.toLowerCase() === userAccountStatus.toLowerCase()
         : true;
@@ -49,6 +53,8 @@ const getSelectedUsers = (users, plans, userFilters) => {
        initialize isDueMatch as true, because if no dues for a user, 
        then don't exclude this user, have to include this user so mark match as true
       */
+
+      // console.log("isDue", isDue);
       let isDueMatch = true;
       if (isDue !== null) {
         //if user has any due or not
@@ -74,6 +80,25 @@ const getSelectedUsers = (users, plans, userFilters) => {
         startDateMatch = true;
         endDateMatch = true;
       }
+
+      console.log(
+        "textMatch",
+        textMatch,
+        "contactNumberMatch",
+        contactNumberMatch,
+        "emailIdMatch",
+        emailIdMatch,
+        "currentPlanIdMatch",
+        currentPlanIdMatch,
+        "userAccountStatusMatch",
+        userAccountStatusMatch,
+        "isDueMatch",
+        isDueMatch,
+        "startDateMatch",
+        startDateMatch,
+        "endDateMatch",
+        endDateMatch
+      );
 
       return (
         textMatch &&
@@ -118,5 +143,3 @@ const getSelectedUsers = (users, plans, userFilters) => {
       }
     });
 };
-
-export default getSelectedUsers;

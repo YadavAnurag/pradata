@@ -1,4 +1,5 @@
 import * as actionTypes from "../actionTypes";
+import moment from "moment";
 
 export const setUserTextFilter = ({ text = "" } = {}) => ({
   type: actionTypes.SET_USER_TEXT_FILTER,
@@ -24,12 +25,13 @@ export const setCurrentPlanIdFilter = ({ currentPlanId = "" } = {}) => ({
 });
 
 // setUserAccountStatusFilter
-export const setUserAccountStatusFilter = ({
-  userAccountStatus = "",
-} = {}) => ({
-  type: actionTypes.SET_USER_ACCOUNT_STATUS_FILTER,
-  userAccountStatus,
-});
+export const setUserAccountStatusFilter = ({ userAccountStatus = "" } = {}) => {
+  console.log("And got this", userAccountStatus);
+  return {
+    type: actionTypes.SET_USER_ACCOUNT_STATUS_FILTER,
+    userAccountStatus,
+  };
+};
 
 // setIsDueFilter
 export const setIsDueFilter = ({ isDue = null } = {}) => ({

@@ -6,7 +6,7 @@ const UsageList = (props) => {
   return (
     <div>
       {props.usages.map((usage, key) => (
-        <Usage usage={usage} />
+        <Usage key={key} usage={usage} />
       ))}
     </div>
   );

@@ -3,7 +3,8 @@ import { useParams, useLocation, useHistory, u } from "react-router";
 import queryString from "query-string";
 import { connect } from "react-redux";
 
-import Usage from "./Usage";
+import UsageList from "./UsageList";
+import { getSelectedUsers } from "../../store/selectors/index";
 
 const UsagePage = (props) => {
   const location = useLocation();
@@ -15,16 +16,14 @@ const UsagePage = (props) => {
   return (
     <div>
       UsagePage
-      {usages.map((usage, key) => (
-        <Usage key={key} usage={usage} />
-      ))}
+      <UsageList usages={usages} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users,
+    users: getSelectedUsers(state.users, state.plans, state.userFilters),
   };
 };
 export default connect(mapStateToProps)(UsagePage);

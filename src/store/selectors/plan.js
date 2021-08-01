@@ -1,5 +1,7 @@
+import moment from "moment";
+
 // getSelectedPlans
-const getSelectedPlans = (plans, planFilters) => {
+export const getSelectedPlans = (plans, planFilters) => {
   const {
     text = "",
     price = 0,
@@ -58,5 +60,3 @@ const getSelectedPlans = (plans, planFilters) => {
       }
     });
 };
-
-export default getSelectedPlans;

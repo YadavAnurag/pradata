@@ -50,21 +50,21 @@ export const users = [
       {
         id: "3",
         planId: "1",
-        startedAt: moment("2021-06-28").valueOf(),
+        startedAt: moment("2021-07-28").valueOf(),
         paymentDetails: [
           {
             id: uuid(),
             paidAmount: 80 * 100,
             paymentMethod: "On-Line",
             paymentReferenceId: "asdf",
-            paidAt: moment("2020-06-28").valueOf(),
+            paidAt: moment("2020-07-28").valueOf(),
           },
           {
             id: uuid(),
             paidAmount: 20 * 100,
             paymentMethod: "debit card",
             paymentReferenceId: "asdsdf",
-            paidAt: moment("2020-07-05").valueOf(),
+            paidAt: moment("2020-08-05").valueOf(),
           },
         ],
       },
@@ -84,14 +84,14 @@ export const users = [
       {
         id: "1",
         planId: "2",
-        startedAt: moment("2021-05-05").valueOf(),
+        startedAt: moment("2021-06-05").valueOf(),
         paymentDetails: [
           {
             id: uuid(),
             paidAmount: 100 * 100,
             paymentMethod: "cash",
             paymentReferenceId: "",
-            paidAt: moment("2021-05-05").valueOf(),
+            paidAt: moment("2021-06-05").valueOf(),
           },
         ],
       },
@@ -111,21 +111,21 @@ export const users = [
       {
         id: "1",
         planId: "1",
-        startedAt: moment("2021-07-01").valueOf(),
+        startedAt: moment("2021-08-01").valueOf(),
         paymentDetails: [
           {
             id: uuid(),
             paidAmount: 20 * 100,
             paymentMethod: "cash",
             paymentReferenceId: "",
-            paidAt: moment("2021-07-01").valueOf(),
+            paidAt: moment("2021-08-01").valueOf(),
           },
           {
             id: uuid(),
             paidAmount: 70 * 100,
             paymentMethod: "Online",
             paymentReferenceId: "12342",
-            paidAt: moment("2021-07-05").valueOf(),
+            paidAt: moment("2021-08-05").valueOf(),
           },
         ],
       },
@@ -145,6 +145,33 @@ export const users = [
     createdAt: moment("2016-05-21").valueOf(),
   },
   {
+    id: "4",
+    firstName: "Verma",
+    middleName: "",
+    lastName: "Bro",
+    emailId: "verma@outlook.com",
+    contactNumber: "8475000000",
+    status: "inactive",
+    address: "Mau UP Pin-224190",
+    usages: [
+      {
+        id: "1",
+        planId: "3",
+        startedAt: moment("2021-07-31").valueOf(),
+        paymentDetails: [
+          {
+            id: uuid(),
+            paidAmount: 50 * 100,
+            paymentMethod: "cash",
+            paymentReferenceId: "",
+            paidAt: moment("2021-08-01").valueOf(),
+          },
+        ],
+      },
+    ],
+    createdAt: moment("2016-05-21").valueOf(),
+  },
+  {
     id: "5",
     firstName: "Anju",
     middleName: "",
@@ -157,14 +184,14 @@ export const users = [
       {
         id: "1",
         planId: "3",
-        startedAt: moment("2021-07-01").valueOf(),
+        startedAt: moment("2021-08-01").valueOf(),
         paymentDetails: [
           {
             id: uuid(),
             paidAmount: 498 * 100,
             paymentMethod: "credit card",
             paymentReferenceId: "ff123",
-            paidAt: moment("2021-07-01").valueOf(),
+            paidAt: moment("2021-08-01").valueOf(),
           },
         ],
       },

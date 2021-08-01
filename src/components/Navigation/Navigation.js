@@ -9,7 +9,7 @@ const Navigation = () => {
 
       { to: "/users", text: "Users" },
       { to: "/add", text: "Add New User" },
-
+      { to: "/plans", text: "Our Plan" },
       { to: "/renew", text: "Renewal" },
       { to: "/profile", text: "Profile" },
       { to: "/help", text: "Help" },
