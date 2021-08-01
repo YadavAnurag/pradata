@@ -228,4 +228,13 @@ export const plans = [
     validityPeriod: 90 * 24 * 3600 * 1000,
     createdAt: moment("2021-07-21").valueOf(),
   },
+  {
+    id: "4",
+    title: "old one",
+    price: 250 * 100,
+    status: "inactive",
+    description: "old plan",
+    validityPeriod: 15 * 24 * 3600 * 1000,
+    createdAt: moment("2020-07-21").valueOf(),
+  },
 ];

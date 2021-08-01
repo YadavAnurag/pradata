@@ -12,9 +12,9 @@ const setPriceFilter = (state, action) => {
 // const planFilterReducerDefaultState = {};
 const planFilterReducerDefaultState = {
   text: "",
-  price: 0,
+  price: 100,
   planStatus: "active",
-  validityPeriod: 0,
+  validityPeriod: 15,
   startDate: moment().startOf("month").valueOf(),
   endDate: moment().endOf("month").valueOf(),
   sortBy: "priceAsc",

@@ -4,11 +4,11 @@ import moment from "moment";
 export const getSelectedPlans = (plans, planFilters) => {
   const {
     text = "",
-    price = 0,
+    price = 100,
     planStatus = "active",
-    validityPeriod = 0,
-    startDate = moment().startOf("month").valueOf(),
-    endDate = moment().endOf("month").valueOf(),
+    validityPeriod = 15,
+    startDate = null,
+    endDate = null,
     sortBy = "priceAsc",
   } = { ...planFilters };
 
@@ -18,7 +18,7 @@ export const getSelectedPlans = (plans, planFilters) => {
       const textMatch = plan.title.toLowerCase().includes(text);
 
       // priceMatch
-      const priceMatch = plan.price >= price;
+      const priceMatch = plan.price >= price * 100;
 
       // planStatusMatch
       const planStatusMatch = !!planStatus
@@ -26,23 +26,39 @@ export const getSelectedPlans = (plans, planFilters) => {
         : true;
 
       // validityPeriodMatch
-      const validityPeriodMatch = plan.validityPeriod >= validityPeriod;
+      const validityPeriodMatch =
+        plan.validityPeriod >= validityPeriod * 24 * 3600 * 1000;
 
       // startDateMatch
-      const startDateMatch =
-        planStatus === "" ? true : plan.createdAt >= startDate;
+      // const startDateMatch =
+      //   planStatus === "" ? true : plan.createdAt >= startDate;
+      // console.log(
+      //   "plan.createdAt <= startDate",
+      //   moment(plan.createdAt).format(),
+      //   moment(startDate).format,
+      //   plan.createdAt >= startDate
+      // );
 
       // endDateMatch
-      const endDateMatch = planStatus === "" ? true : plan.createdAt <= endDate;
-
-      return (
-        textMatch &&
-        priceMatch &&
-        planStatusMatch &&
-        validityPeriodMatch &&
-        startDateMatch &&
-        endDateMatch
+      // const endDateMatch = planStatus === "" ? true : plan.createdAt <= endDate;
+      // console.log(
+      //   "plan.createdAt <= EndDate",
+      //   moment(plan.createdAt).format(),
+      //   moment(endDate).format(),
+      //   plan.createdAt <= endDate
+      // );
+      console.log(
+        "textMatch",
+        textMatch,
+        "priceMatch",
+        priceMatch,
+        "planStatusMatch",
+        planStatusMatch,
+        "validityPeriodMatch",
+        validityPeriodMatch
       );
+
+      return textMatch && priceMatch && planStatusMatch && validityPeriodMatch;
     })
     .sort((first, second) => {
       if (sortBy.includes("text")) {

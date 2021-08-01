@@ -5,12 +5,8 @@ import Payment from "./PaymentDetail";
 const PaymentDetailList = (props) => {
   return (
     <div>
-      {props.paymentDetails.map((paymentDetail) => {
-        return (
-          <div>
-            <Payment paymentDetail={paymentDetail} />
-          </div>
-        );
+      {props.paymentDetails.map((paymentDetail, key) => {
+        return <Payment key={key} paymentDetail={paymentDetail} />;
       })}
     </div>
   );

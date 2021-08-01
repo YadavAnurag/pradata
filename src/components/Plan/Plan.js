@@ -10,7 +10,7 @@ const Plan = (props) => {
     <div>
       <p>id: {id}</p>
       <p>title: {title}</p>
-      <p>price: {price}</p>
+      <p>price: {price / 100}</p>
       <p>status: {status}</p>
       <p>description: {description}</p>
       <div>
