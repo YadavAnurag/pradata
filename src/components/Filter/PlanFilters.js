@@ -16,7 +16,7 @@ const PlanFilters = (props) => {
   // state
   const [text, setText] = useState(props.filters.text);
   const [price, setPrice] = useState(props.filters.price);
-  const [planStatus, setPlanStatus] = useState(props.filters.planStatus);
+  const [planStatus, setPlanStatus] = useState("active");
   const [validityPeriod, setValidityPeriod] = useState(
     props.filters.validityPeriod
   );

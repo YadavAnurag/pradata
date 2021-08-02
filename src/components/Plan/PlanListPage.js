@@ -1,22 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import PlanList from "./PlanList";
 import { getSelectedPlans } from "../../store/selectors/index";
 import PlanFilters from "../Filter/PlanFilters";
+import PlansSummary from "./PlansSummary";
+import { removePlan } from "../../store/actions/plan/plan";
 
 const PlanListPage = (props) => {
+  const history = useHistory();
+
+  const onRemove = (id) => {
+    props.removePlan(id);
+    history.push("/plans");
+  };
+
   const jsx = (
     <div>
+      <PlansSummary />
       <PlanFilters />
-      {props.plans.length === 0 ? (
-        <p>No plans to show...</p>
-      ) : (
-        <React.Fragment>
-          <p>Showing {props.plans.length} Plans</p>
-          <PlanList plans={props.plans} />
-        </React.Fragment>
-      )}
+      <PlanList plans={props.plans} onRemove={onRemove} />
     </div>
   );
 
@@ -28,4 +32,7 @@ const mapStateToProps = (state) => {
     plans: getSelectedPlans(state.plans, state.planFilters),
   };
 };
-export default connect(mapStateToProps)(PlanListPage);
+const mapDispatchToProps = (dispatch) => ({
+  removePlan: (id) => dispatch(removePlan({ id })),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(PlanListPage);

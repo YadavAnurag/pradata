@@ -48,6 +48,8 @@ export const getSelectedPlans = (plans, planFilters) => {
       //   plan.createdAt <= endDate
       // );
       console.log(
+        "id",
+        plan.id,
         "textMatch",
         textMatch,
         "priceMatch",

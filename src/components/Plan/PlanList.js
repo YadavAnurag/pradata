@@ -6,7 +6,7 @@ const PlanList = (props) => {
   return (
     <div>
       {props.plans.map((plan, key) => {
-        return <Plan key={key} plan={plan} />;
+        return <Plan key={key} plan={plan} onRemove={props.onRemove} />;
       })}
     </div>
   );

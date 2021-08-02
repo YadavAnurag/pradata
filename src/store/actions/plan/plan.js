@@ -1,3 +1,6 @@
+import { v4 as uuid } from "uuid";
+import moment from "moment";
+
 import * as actionTypes from "../actionTypes";
 
 //plan actions
@@ -29,7 +32,10 @@ export const editPlan = ({ id = "", updates = {} } = {}) => ({
 });
 
 // REMOVE_PLAN
-export const removePlan = ({ id = "" } = {}) => ({
-  type: actionTypes.REMOVE_PLAN,
-  id,
-});
+export const removePlan = ({ id = "" } = {}) => {
+  console.log("got id", id);
+  return {
+    type: actionTypes.REMOVE_PLAN,
+    id,
+  };
+};

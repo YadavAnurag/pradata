@@ -14,7 +14,12 @@ const editPlan = (state, action) => {
   });
 };
 const removePlan = (state, action) => {
-  return state.filter(({ id }) => id === action.id);
+  const updated = state.filter(({ id }) => {
+    console.log("[action/plan]", id, action.id);
+    return id !== action.id;
+  });
+  console.log(updated);
+  return updated;
 };
 
 // plan reducer
