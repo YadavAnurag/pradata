@@ -7,13 +7,11 @@ const PaymentDetail = (props) => {
 
   return (
     <div>
+      <h3>Payment Detail </h3>
       <p>id: {id}</p>
-      <p>paidAmount: {paidAmount}</p>
+      <p>paidAmount: {paidAmount / 100}</p>
       <p>paymentMethod: {paymentMethod}</p>
-      <p>
-        PaymentReferenceId:{" "}
-        {paymentMethod === "cash" ? "Please Use BHIM App" : paymentReferenceId}
-      </p>
+      <p>PaymentReferenceId:{paymentReferenceId}</p>
       <p>paidAt: {moment(paidAt).format("D-MMM-YYYY")}</p>
     </div>
   );

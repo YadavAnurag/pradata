@@ -18,13 +18,11 @@ const removeUser = (state, action) => {
 };
 
 const addUsage = (state, action) => {
+  console.log("reducer", action.usage);
   return state.map((user) => {
     if (user.id === action.userId) {
-      /* 
-      TODO - add feature of override recharge, means additional usage addition
-       even if current usage plan is not completed yet, override existing usage
-       and somehow mark it as completed and add new one as current plan.
-      */
+      console.log("first was\n", user);
+      console.log("now", { ...user, usages: user.usages.concat(action.usage) });
       return { ...user, usages: user.usages.concat(action.usage) };
     } else return user;
   });

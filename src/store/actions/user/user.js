@@ -1,3 +1,6 @@
+import moment from "moment";
+import { v4 as uuid } from "uuid";
+
 import * as actionTypes from "../actionTypes";
 
 // user action
@@ -74,22 +77,24 @@ export const removeUser = ({ id = "" }) => ({
 });
 
 //ADD_USAGE
-const addUsage = ({
+export const addUsage = ({
   userId = "",
   planId = "", //required
   paymentDetails = [],
 }) => {
-  let userPaymentDetails = [];
-  if (paymentDetails.length) {
-    userPaymentDetails = paymentDetails.map((paymentDetail) => {
-      if (paymentDetail.hasOwnProperty("paymentMethod")) {
-        return {
-          ...paymentDetail,
-          paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
-        };
-      } else return paymentDetail;
-    });
-  }
+  // console.log("got", paymentDetails);
+  // let userPaymentDetails = [];
+  // if (paymentDetails.length) {
+  //   userPaymentDetails = paymentDetails.map((paymentDetail) => {
+  //     if (paymentDetail.hasOwnProperty("paymentMethod")) {
+  //       return {
+  //         ...paymentDetail,
+  //         paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
+  //       };
+  //     } else return paymentDetail;
+  //   });
+  // }
+  // console.log("now", userPaymentDetails);
 
   return {
     type: actionTypes.ADD_USAGE,
@@ -98,7 +103,7 @@ const addUsage = ({
       id: uuid(),
       planId,
       startedAt: moment().valueOf(),
-      paymentDetails: userPaymentDetails,
+      paymentDetails,
     },
   };
 };

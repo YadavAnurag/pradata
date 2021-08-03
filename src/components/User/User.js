@@ -20,17 +20,18 @@ const User = (props) => {
 
   return (
     <div>
-      <p>
-        Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
-      </p>
-      <p>emailId: {emailId}</p>
-      <p>contactNumber: {contactNumber}</p>
-      <p>address: {address}</p>
-      <p>Account Status: {status}</p>
-      <div>Usage: {usages.length}</div>
-      <p>Account Created: {moment(createdAt).format()}</p>
-      <Link to={`/usage?id=${id}`}>See Usages</Link>
-      <br />
+      <Link to={`/usages?id=${id}`}>
+        <p>
+          Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
+        </p>
+        <p>emailId: {emailId}</p>
+        <p>contactNumber: {contactNumber}</p>
+        <p>address: {address}</p>
+        <p>Account Status: {status}</p>
+        <div>Usage: {usages.length}</div>
+        <p>Account Created: {moment(createdAt).format()}</p>
+        <br />
+      </Link>
     </div>
   );
 };
