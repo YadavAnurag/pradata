@@ -11,6 +11,8 @@ export const users = [
     contactNumber: "7985000000",
     address: "Sakrawal Tanda Ambedkarnagar",
     status: "active",
+    isAdmin: false,
+
     usages: [
       {
         id: "1",
@@ -80,6 +82,7 @@ export const users = [
     contactNumber: "9123000000",
     address: "Varanasi UP",
     status: "active",
+    isAdmin: false,
     usages: [
       {
         id: "1",
@@ -107,6 +110,7 @@ export const users = [
     contactNumber: "8354000000",
     address: "Koirana Sakrawal Tanda Ambedkarnagar UP Pin-224190",
     status: "active",
+    isAdmin: false,
     usages: [
       {
         id: "1",
@@ -140,6 +144,7 @@ export const users = [
     emailId: "shivam@outlook.com",
     contactNumber: "9874000000",
     status: "inactive",
+    isAdmin: false,
     address: "Prayagraj UP Pin-224190",
     usages: [],
     createdAt: moment("2016-05-21").valueOf(),
@@ -152,6 +157,7 @@ export const users = [
     emailId: "verma@outlook.com",
     contactNumber: "8475000000",
     status: "inactive",
+    isAdmin: false,
     address: "Mau UP Pin-224190",
     usages: [
       {
@@ -180,6 +186,7 @@ export const users = [
     contactNumber: "1234000000",
     address: "Hyderabad Telangana",
     status: "active",
+    isAdmin: false,
     usages: [
       {
         id: "1",
@@ -196,6 +203,32 @@ export const users = [
         ],
       },
     ],
+    createdAt: moment("2019-07-01").valueOf(),
+  },
+  {
+    id: "xyz1",
+    firstName: "Gopal",
+    middleName: "",
+    lastName: "",
+    emailId: "gopal@india.com",
+    contactNumber: "9999000000",
+    address: "India",
+    status: "active",
+    usages: [],
+    isAdmin: true,
+    createdAt: moment("2019-07-01").valueOf(),
+  },
+  {
+    id: "xyz2",
+    firstName: "Manoj",
+    middleName: "Kumar",
+    lastName: "Gupta",
+    emailId: "manoj@india.com",
+    contactNumber: "9999000000",
+    address: "India",
+    status: "active",
+    usages: [],
+    isAdmin: true,
     createdAt: moment("2019-07-01").valueOf(),
   },
 ];

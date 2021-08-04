@@ -13,8 +13,9 @@ const Profile = (props) => {
     contactNumber,
     address,
     status,
+    isAdmin,
     createdAt,
-  } = props.admin;
+  } = props.user;
 
   return (
     <div>

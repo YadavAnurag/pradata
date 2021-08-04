@@ -12,7 +12,7 @@ const Plan = (props) => {
       <Link to={`/plans/edit?id=${id}`}>
         <p>id: {id}</p>
         <p>title: {title}</p>
-        <p>price: {price / 100}</p>
+        <p>price: &#8377;{price / 100}</p>
         <p>status: {status}</p>
         <p>description: {description}</p>
         <div>

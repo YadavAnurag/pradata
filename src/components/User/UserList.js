@@ -6,7 +6,7 @@ const UserList = (props) => {
   return (
     <div>
       {props.users.map((user, key) => {
-        return <User key={key} user={user} />;
+        if (!user.isAdmin) return <User key={key} user={user} />;
       })}
     </div>
   );

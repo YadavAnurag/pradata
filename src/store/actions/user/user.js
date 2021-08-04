@@ -14,6 +14,7 @@ export const addUser = ({
   contactNumber = "", // required
   address = "", // required
   status = "inactive", // required
+  isAdmin = false,
   usages = [],
   createdAt = moment().valueOf(),
 } = {}) => ({
@@ -27,6 +28,7 @@ export const addUser = ({
     contactNumber,
     address,
     status,
+    isAdmin,
     usages,
     createdAt,
   },
@@ -114,24 +116,25 @@ export const addPayment = ({
   usageId = "",
   paymentDetail = {},
 }) => {
-  let userPaymentDetail = {};
-  if (paymentDetail.hasOwnProperty("paymentMethod")) {
-    userPaymentDetail = {
-      ...paymentDetail,
-      paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
-    };
-  } else {
-    // payment must have to have paymentMethod
-  }
+  console.log("And I got this\n", {
+    userId,
+    usageId,
+    paymentDetail,
+  });
+  // let userPaymentDetail = {};
+  // if (paymentDetail.hasOwnProperty("paymentMethod")) {
+  //   userPaymentDetail = {
+  //     ...paymentDetail,
+  //     paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
+  //   };
+  // } else {
+  //   // payment must have to have paymentMethod
+  // }
 
   return {
     type: actionTypes.ADD_PAYMENT,
     userId,
     usageId,
-    paymentDetail: {
-      ...userPaymentDetail,
-      id: uuid(),
-      paidAt: moment().valueOf(),
-    },
+    paymentDetail,
   };
 };

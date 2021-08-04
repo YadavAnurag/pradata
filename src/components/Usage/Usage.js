@@ -2,16 +2,22 @@ import React from "react";
 import moment from "moment";
 import PaymentDetailList from "../PaymentDetail/PaymentDetailList";
 import { Link } from "react-router-dom";
+import { getUsagePaymentDetails } from "../../store/utility/utility";
 
 const Usage = (props) => {
   const { id, planId, startedAt, paymentDetails } = props.usage;
 
+  console.log("[AddPaymentPage.js] - props.user", props);
   return (
     <div>
       <h3>Usage</h3>
-      <Link to={`/users/add-payment?userid=${props.userId}&usageid=${id}`}>
-        {" "}
-        Add Payment{" "}
+      <p>
+        Total Due: &#8377;
+        {getUsagePaymentDetails({ usage: props.usage, plans: props.plans })
+          .totalDueToThisUsage / 100}
+      </p>
+      <Link to={`/users/add-payment?userid=${props.user.id}&usageid=${id}`}>
+        Add Payment
       </Link>
       <p>id: {id}</p>
       <p>planId: {planId}</p>

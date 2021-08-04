@@ -1,192 +1,157 @@
 import React, { useState } from "react";
-// import moment from "moment";
+import moment from "moment";
+import { v4 as uuid } from "uuid";
 // import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 const PaymentForm = (props) => {
   // +state
-  const [title, setTitle] = useState(props.plan ? props.plan.title : "");
-  const [price, setPrice] = useState(props.plan ? props.plan.price / 100 : 100);
-  const [status, setStatus] = useState(
-    props.plan ? props.plan.status : "active"
-  );
-  const [description, setDescription] = useState(
-    props.plan ? props.plan.description : ""
-  );
-  const [validityPeriod, setValidityPeriod] = useState(
-    props.plan ? props.plan.validityPeriod / (24 * 3600 * 1000) : 30
-  );
+  const [paidAmount, setPaidAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("digital");
+  const [paymentReferenceId, setPaymentReferenceId] = useState("");
   const [error, setError] = useState({
-    title: "",
-    price: "",
-    status: "",
-    description: "",
-    validityPeriod: "",
+    paidAmount: "",
+    paymentMethod: "",
+    paymentReferenceId: "",
+    suggestDigital: "",
   });
-  console.log("useState, error", error);
   // -state
 
-  // configs
-  const planStatusConfigs = [
-    { text: "Active", value: "active" },
-    { text: "Inactive", value: "inactive" },
+  const paymentMethodConfigs = [
+    { text: "Digital", value: "digital" },
+    { text: "Cash", value: "cash" },
   ];
 
   // handles
-  const handleTitleChange = (e) => {
+  const handlePaidAmountChange = (e) => {
     const value = e.target.value;
-    setTitle(value);
 
-    setError((previousError) => ({
-      ...previousError,
-      title: "",
-    }));
-  };
-  const handleValidityPeriod = (e) => {
-    const value = e.target.value;
     if (!value || value.match(/^\d{1,}(\.?\d{0,2})$/)) {
-      setValidityPeriod(value);
-
-      setError((previousError) => ({
-        ...previousError,
-        validityPeriod: "",
-      }));
-      return;
+      // set error if user enters more price than required for selected plan
+      if (value * 100 <= props.dueAmount) {
+        // update and clear error
+        setError({ paidAmount: "" });
+        setPaidAmount(value);
+      } else {
+        setError({
+          paidAmount:
+            props.dueAmount === 0
+              ? "No dues... all payment received already"
+              : `Amount can't be more than ${props.dueAmount / 100}`,
+        });
+      }
     } else {
-      setError((previousError) => ({
-        ...previousError,
-        validityPeriod: "Should be only number",
-      }));
+      // set error only number allowed
+      setError({ paidAmount: "Please enter amount" });
     }
   };
-  const handlePriceChange = (e) => {
+  const handlePaymentMethodChange = (e) => {
     const value = e.target.value;
-    if (!value || value.match(/^\d{1,}(\.?\d{0,2})$/)) {
-      setPrice(value);
+    setPaymentMethod(value);
 
-      setError((previousError) => ({
-        ...previousError,
-        price: "",
-      }));
-      return;
+    if (value === "cash") {
+      // clear error for reference id and suggest for digi
+      setError({
+        paymentMethod: "",
+        paymentReferenceId: "",
+        suggestDigital:
+          "Always accept only Digital Transaction, through BHIM App",
+      });
     } else {
-      setError((previousError) => ({
-        ...previousError,
-        price: "Should be only number",
-      }));
+      // clear error and thanks for digi
+      setError({
+        paymentMethod: "",
+        suggestDigital: "Thanks for accepting only digital transaction",
+      });
     }
   };
-  const handleDescriptionChange = (e) => {
+  const handlePaymentReferenceIdChange = (e) => {
     const value = e.target.value;
-    setDescription(value);
-
-    setError((previousError) => ({
-      ...previousError,
-      description: "",
-    }));
-  };
-  const handleStatusChange = (e) => {
-    const value = e.target.value;
-    setStatus(value);
+    setPaymentReferenceId(value);
+    setError({ paymentReferenceId: "" });
   };
 
   const handleSubmit = (e) => {
+    console.log("[PaymentForm: handleSubmit - props.onSubmit]");
     e.preventDefault();
-    console.log("[PlanForm: handleSubmit]");
-    console.log("[PlanForm: handleSubmit - props.onSubmit]");
-    if (title === "") {
+    if (paidAmount === "") {
       setError((previousError) => ({
         ...previousError,
-        title: "Please enter plan title",
+        paidAmount: "Please enter amount paid",
       }));
     }
-    if (!!!price) {
-      setError((previousError) => ({
-        ...previousError,
-        price: "Should be more than zero",
-      }));
-    }
-    if (!!!validityPeriod) {
-      setError((previousError) => ({
-        ...previousError,
-        validityPeriod: "Should be more than zero",
-      }));
-    }
-    if (description === "") {
-      setError((previousError) => ({
-        ...previousError,
-        description: "Please enter some description",
-      }));
-    }
-    console.log(
-      !!!error.title,
-      !!!error.description,
-      !!!error.price,
-      !!!error.validityPeriod
-    );
-
-    if (
-      title !== "" &&
-      description !== "" &&
-      validityPeriod !== "" &&
-      price !== ""
-    ) {
-      props.onSubmit({
-        title,
-        validityPeriod: Number.parseInt(validityPeriod) * 24 * 3600 * 1000,
-        price: Number.parseInt(price) * 100,
-        description,
-        status,
+    if (paymentMethod === "") {
+      setError((previousError) => {
+        return {
+          ...previousError,
+          paymentMethod: "Please choose payment method",
+        };
       });
+    }
+    if (paymentMethod === "digital" && paymentReferenceId === "") {
+      setError((previousError) => ({
+        ...previousError,
+        paymentReferenceId: "Please enter transaction id",
+      }));
+    }
+
+    let finalMatch = paidAmount !== "" && paymentMethod !== "";
+    if (paymentMethod === "digital")
+      finalMatch = finalMatch && paymentReferenceId !== "";
+    if (finalMatch) {
+      console.log("matched\n");
+      const paymentDetail = {
+        id: uuid(),
+        paidAmount: Number.parseFloat(paidAmount) * 100,
+        paymentMethod,
+        paymentReferenceId:
+          paymentMethod === "digital"
+            ? paymentReferenceId
+            : "Always accept only Digital Transaction, through BHIM App",
+        paidAt: moment().valueOf(),
+      };
+      console.log(paymentDetail);
+      props.onSubmit(paymentDetail);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>{/* show error using state */}</div>
-      <div>
-        <label>Title</label>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={handleTitleChange}
-        />
-        <span>{error.title}</span>
+      <h3>Payment Details</h3>
+      <label>Amount</label>
+      <input
+        type="text"
+        placeholder="Amount"
+        value={paidAmount}
+        onChange={handlePaidAmountChange}
+      />
+      <span>{error.paidAmount}</span>
 
-        <label>Validity Period in Days</label>
-        <input
-          type="text"
-          placeholder="Validity Period"
-          value={validityPeriod}
-          onChange={handleValidityPeriod}
-        />
-        <label>Price</label>
-        <input
-          type="text"
-          placeholder="Price"
-          value={price}
-          onChange={handlePriceChange}
-        />
-        <label>Description</label>
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-        <span>{error.description}</span>
-        <label>Status</label>
-        <select name="status" value={status} onChange={handleStatusChange}>
-          {planStatusConfigs.map((status, key) => {
-            return (
-              <option key={key} value={status.value}>
-                {status.text}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+      <label>Payment Method</label>
+      <select
+        name="method"
+        value={paymentMethod}
+        onChange={handlePaymentMethodChange}
+      >
+        {paymentMethodConfigs.map((paymentMethod, key) => {
+          return (
+            <option key={key} value={paymentMethod.value}>
+              {paymentMethod.text}
+            </option>
+          );
+        })}
+      </select>
+      <span>{error.paymentMethod}</span>
+
+      <label>Payment Reference Id</label>
+      <input
+        type="text"
+        placeholder="Reference Id"
+        value={paymentReferenceId}
+        onChange={handlePaymentReferenceIdChange}
+      />
+      <span>{error.paymentReferenceId}</span>
+
       <div>
         <button>Save Plan</button>
       </div>

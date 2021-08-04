@@ -9,7 +9,7 @@ const PaymentDetail = (props) => {
     <div>
       <h3>Payment Detail </h3>
       <p>id: {id}</p>
-      <p>paidAmount: {paidAmount / 100}</p>
+      <p>paidAmount: &#8377;{paidAmount / 100}</p>
       <p>paymentMethod: {paymentMethod}</p>
       <p>PaymentReferenceId:{paymentReferenceId}</p>
       <p>paidAt: {moment(paidAt).format("D-MMM-YYYY")}</p>

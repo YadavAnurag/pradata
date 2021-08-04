@@ -15,6 +15,7 @@ export const getSelectedUsers = (users, plans, userFilters) => {
     sortBy = "textAsc",
     startDate = moment().startOf("month").valueOf(),
     endDate = moment().endOf("month").valueOf(),
+    isAdmin = false,
   } = { ...userFilters };
 
   return users
@@ -81,6 +82,9 @@ export const getSelectedUsers = (users, plans, userFilters) => {
         endDateMatch = true;
       }
 
+      // return only non admin user
+      const isNotAdminMatch = user.isAdmin === false;
+
       console.log(
         "textMatch",
         textMatch,
@@ -108,7 +112,8 @@ export const getSelectedUsers = (users, plans, userFilters) => {
         userAccountStatusMatch &&
         isDueMatch &&
         startDateMatch &&
-        endDateMatch
+        endDateMatch &&
+        isNotAdminMatch
       );
     })
     .sort((firstUser, secondUser) => {

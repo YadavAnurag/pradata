@@ -87,3 +87,50 @@ export const getUserFullName = (user) => {
   // join all capitalized words for full capitalized name
   return { fullName: fullNameArray.join(" ") };
 };
+
+export const getUsagePaymentDetails = ({ usage = {}, plans = [] }) => {
+  //return - totalDueToThisUsage, totalPaidAmountToThisUsage,
+  // planNameToThisUsage, planDueDateToThisUsage
+
+  let totalDueToThisUsage = 0,
+    totalPaidAmountToThisUsage = 0,
+    planDueDateToThisUsage = 1e13; // Please don't use Infinity, javascript sort method doesn't work with Infinity
+
+  let planToThisUsage = {};
+
+  /* calculate totalPaidAmountToThisUsage
+  if usage.paymentDetails.length === 0
+    totalPaidAmountToThisUsage = 0
+  else
+    use reducer to calculate total payment received
+  */
+
+  if (Object.keys(usage).length) {
+    if (usage.paymentDetails.length) {
+      totalPaidAmountToThisUsage = usage.paymentDetails.reduce(
+        (totalPaidAmount, paymentDetail) =>
+          totalPaidAmount + paymentDetail.paidAmount,
+        0
+      );
+    } else {
+      totalPaidAmountToThisUsage = 0;
+    }
+
+    planToThisUsage = plans.find(({ id }) => id === usage.planId);
+  } else {
+    totalPaidAmountToThisUsage = 0;
+  }
+
+  totalDueToThisUsage = planToThisUsage.price - totalPaidAmountToThisUsage;
+  totalDueToThisUsage = totalDueToThisUsage < 0 ? 0 : totalDueToThisUsage;
+
+  planDueDateToThisUsage = usage.startedAt + planToThisUsage.validityPeriod;
+
+  return {
+    totalDueToThisUsage,
+    totalPaidAmountToThisUsage,
+    planDueDateToThisUsage,
+    planName: planToThisUsage.title === undefined ? "" : planToThisUsage.title,
+    planPrice: planToThisUsage.price === undefined ? "" : planToThisUsage.price,
+  };
+};
