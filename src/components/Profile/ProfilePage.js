@@ -1,26 +1,13 @@
 import React from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 
+import { editUser } from "../../store/actions/index";
 import Profile from "./Profile";
 
 const ProfilePage = (props) => {
-  const {
-    id = "xyz",
-    firstName = "Sai",
-    middleName = "Prasad",
-    lastName = "Srihasam",
-    emailId = "sai@ncr.com",
-    contactNumber = "9999000000",
-    address = "Hyderabad Telangana",
-    status = "active",
-    isAdmin = true,
-    createdAt = moment("2019-07-01").valueOf(),
-  } = props.user;
-
   return (
     <div>
-      <Profile user={props.user} />
+      <Profile user={props.user} editUser={props.editUser} />
     </div>
   );
 };
@@ -31,6 +18,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return { editUser: (id, updates) => dispatch(editUser({ id, updates })) };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

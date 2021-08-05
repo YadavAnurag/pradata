@@ -25,6 +25,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <Navigation />
       <Switch>
+        {/* +admin */}
         <Route path="/users" exact>
           <UserListPage />
         </Route>

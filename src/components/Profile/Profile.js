@@ -1,33 +1,19 @@
 import React from "react";
 import moment from "moment";
+import { toast } from "react-toastify";
 
-import { getUserFullName } from "../../store/utility/utility";
+import UserForm from "../User/UserForm";
 
 const Profile = (props) => {
-  const {
-    id,
-    firstName,
-    middleName,
-    lastName,
-    emailId,
-    contactNumber,
-    address,
-    status,
-    isAdmin,
-    createdAt,
-  } = props.user;
+  const onSubmit = (updates) => {
+    props.editUser(props.user.id, updates);
+    // history.push("/users");
+    toast.info("User Updated");
+  };
 
   return (
     <div>
-      <p>
-        Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
-      </p>
-      <p>emailId: {emailId}</p>
-      <p>contactNumber: {contactNumber}</p>
-      <p>address: {address}</p>
-      <p>Account Status: {status}</p>
-      <p>Account Created: {moment(createdAt).format()}</p>
-      <br />
+      <UserForm user={props.user} onSubmit={onSubmit} />
     </div>
   );
 };
