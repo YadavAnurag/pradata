@@ -45,8 +45,8 @@ const addPayment = (state, action) => {
 };
 
 // user reducer
-// const userReducerDefaultState = new Array();
-const userReducerDefaultState = new Array(...users);
+const userReducerDefaultState = new Array();
+// const userReducerDefaultState = new Array(...users);
 export const userReducer = (state = userReducerDefaultState, action) => {
   switch (action.type) {
     case actionTypes.ADD_USER:

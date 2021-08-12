@@ -2,6 +2,10 @@
 export const ADD_USER = "ADD_USER";
 export const EDIT_USER = "EDIT_USER";
 export const REMOVE_USER = "REMOVE_USER";
+// set user from server
+export const SET_USERS = "SET_USERS";
+export const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
+
 // usages
 export const ADD_USAGE = "ADD_USAGE";
 // payment
@@ -31,3 +35,7 @@ export const SET_VALIDITY_PERIOD_FILTER = "SET_VALIDITY_PERIOD_FILTER";
 export const SET_PLAN_START_DATE_FILTER = "SET_PLAN_START_DATE_FILTER";
 export const SET_PLAN_END_DATE_FILTER = "SET_PLAN_END_DATE_FILTER";
 export const SET_PLAN_SORT_BY_FILTER = "SET_PLAN_SORT_BY_FILTER";
+
+// auth actions
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";

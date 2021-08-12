@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props) => {
   const routes = {
     admin: [
       { to: "/", text: "Home" },
+      { to: "/dashboard", text: "Dashboard" },
       { to: "/users", text: "Users" },
       { to: "/plans", text: "Our Plan" },
       { to: "/profile", text: "Profile" },
-      { to: "/about", text: "About" },
+      { to: "/help", text: "Help" },
     ],
     user: [],
   };
@@ -23,6 +24,7 @@ const Navigation = () => {
             </Link>
           );
         })}
+        <button onClick={props.initLogout}>Logout</button>
       </ul>
     </div>
   );

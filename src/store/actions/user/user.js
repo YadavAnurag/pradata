@@ -1,7 +1,9 @@
+import axios from "../../../utils/axiosSetup";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 
 import * as actionTypes from "../actionTypes";
+import config from "../../../utils/config";
 
 // user action
 
@@ -136,5 +138,37 @@ export const addPayment = ({
     userId,
     usageId,
     paymentDetail,
+  };
+};
+
+// set users from server
+export const setUsers = (users) => {
+  return {
+    type: actionTypes.SET_USERS,
+    users,
+  };
+};
+
+// if fetch users failed
+export const fetchUsersFailed = () => {
+  return {
+    type: actionTypes.FETCH_USERS_FAILED,
+  };
+};
+
+// set initSetUsers
+export const initSetUsers = () => {
+  // console.log("called");
+  return (dispatch) => {
+    axios
+      .get(`${config.userEndpoint}`)
+      .then((response) => {
+        console.log(response.data);
+        // dispatch(setUsers(response.data));
+      })
+      .catch((error) => {
+        // dispatch(fetchUsersFailed());
+        console.log("fetch failed");
+      });
   };
 };

@@ -6,6 +6,7 @@ import {
   userFilterReducer,
   planReducer,
   planFilterReducer,
+  authReducer,
 } from "./reducers/index";
 
 const composeEnhancers =
@@ -32,6 +33,8 @@ const rootReducer = combineReducers({
 
   plans: planReducer,
   planFilters: planFilterReducer,
+
+  auth: authReducer,
 });
 
 // store creation

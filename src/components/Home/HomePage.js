@@ -1,8 +1,6 @@
 import React from "react";
 
-import Logo from "../UI/Logo/Logo";
-
-const UserHome = () => {
+const HomePage = () => {
   return (
     <div>
       <p>Home, Let's Start Coding... and make self-reliant Digital India</p>
@@ -10,4 +8,4 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+export default HomePage;

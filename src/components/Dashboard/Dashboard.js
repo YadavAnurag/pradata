@@ -1,11 +1,9 @@
 import React from "react";
 
-import UserDashboard from "./UserDashboard";
-
 const Dashboard = (props) => {
   return (
     <div>
-      <UserDashboard />
+      <p>Dashboard Page for User/Admin</p>
     </div>
   );
 };
