@@ -8,7 +8,7 @@ import configureStore from "./store/configureStore";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const store = configureStore();
+export const store = configureStore();
 const jsx = (
   <Provider store={store}>
     <ToastContainer
@@ -27,8 +27,11 @@ const jsx = (
   </Provider>
 );
 
-function App() {
+// function App() {
+//   return { ...jsx };
+// }
+const App = () => {
   return { ...jsx };
-}
+};
 
 export default App;

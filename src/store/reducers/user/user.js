@@ -44,6 +44,11 @@ const addPayment = (state, action) => {
   });
 };
 
+// set users
+const setUsers = (state, action) => {
+  return action.users;
+};
+
 // user reducer
 const userReducerDefaultState = new Array();
 // const userReducerDefaultState = new Array(...users);
@@ -62,6 +67,8 @@ export const userReducer = (state = userReducerDefaultState, action) => {
     case actionTypes.ADD_PAYMENT:
       return addPayment(state, action);
 
+    case actionTypes.SET_USERS:
+      return setUsers(state, action);
     default:
       return state;
   }

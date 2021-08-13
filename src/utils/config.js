@@ -21,6 +21,9 @@ if (devConfig.devConfig) {
 }
 
 // set seedDatabase true of false
-config.seedStore = false;
+config.seedStore = true;
+
+// is Auth Required for login
+config.isAuthRequired = true;
 
 module.exports = config;

@@ -157,18 +157,17 @@ export const fetchUsersFailed = () => {
 };
 
 // set initSetUsers
-export const initSetUsers = () => {
-  // console.log("called");
-  return (dispatch) => {
-    axios
-      .get(`${config.userEndpoint}`)
-      .then((response) => {
-        console.log(response.data);
-        // dispatch(setUsers(response.data));
-      })
-      .catch((error) => {
-        // dispatch(fetchUsersFailed());
-        console.log("fetch failed");
-      });
-  };
+export const initSetUsers = (dispatch) => {
+  console.log("called");
+  axios
+    .get(`${config.userEndpoint}`)
+    .then((response) => {
+      console.log(response.data);
+      console.log(typeof dispatch);
+      dispatch(setUsers(response.data.users));
+    })
+    .catch((error) => {
+      dispatch(fetchUsersFailed());
+      console.log("fetch failed");
+    });
 };
