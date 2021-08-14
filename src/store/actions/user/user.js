@@ -1,28 +1,33 @@
-import axios from "../../../utils/axiosSetup";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 
 import * as actionTypes from "../actionTypes";
 import config from "../../../utils/config";
+import userDataService from "../../../services/userData.Service";
 
 // user action
 
 //ADD_USER
-export const addUser = ({
-  firstName = "", // required
-  middleName = "",
-  lastName = "",
-  emailId = "", // required
-  contactNumber = "", // required
-  address = "", // required
-  status = "inactive", // required
-  isAdmin = false,
-  usages = [],
-  createdAt = moment().valueOf(),
-} = {}) => ({
-  type: actionTypes.ADD_USER,
-  user: {
-    id: uuid(),
+export const addUser = (user) => {
+  console.log("addUser called");
+  return {
+    type: actionTypes.ADD_USER,
+    user,
+  };
+};
+
+// init addUser
+export const initAddUser = (userObject = {}) => {
+  const {
+    firstName = "", // required
+    middleName = "",
+    lastName = "",
+    emailId = "", // required
+    contactNumber = "", // required
+    address = "", // required
+    status = "inactive", // required
+  } = userObject;
+  const user = {
     firstName: firstName.toLowerCase(),
     middleName: middleName.toLowerCase(),
     lastName: lastName.toLowerCase(),
@@ -30,47 +35,44 @@ export const addUser = ({
     contactNumber,
     address,
     status,
-    isAdmin,
-    usages,
-    createdAt,
-  },
-});
+
+    id: uuid(),
+    isAdmin: false,
+    usages: [],
+    createdAt: moment().valueOf(),
+  };
+
+  return async (dispatch) => {
+    try {
+      const response = await userDataService.create(user);
+      dispatch(addUser(response.data.user));
+      return Promise.resolve(response.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+};
 
 //EDIT_USER
-export const editUser = ({ id = "", updates = {} } = {}) => {
-  let userUpdates = {};
-
-  if (updates.hasOwnProperty("firstName"))
-    userUpdates = {
-      ...userUpdates,
-      firstName: updates.firstName.toLowerCase(),
-    };
-  if (updates.hasOwnProperty("middleName")) {
-    userUpdates = {
-      ...userUpdates,
-      middleName: updates.middleName.toLowerCase(),
-    };
-  }
-  if (updates.hasOwnProperty("lastName"))
-    userUpdates = {
-      ...userUpdates,
-      lastName: updates.lastName.toLowerCase(),
-    };
-  if (updates.hasOwnProperty("emailId"))
-    userUpdates = {
-      ...userUpdates,
-      emailId: updates.emailId.toLowerCase(),
-    };
-  if (updates.hasOwnProperty("status"))
-    userUpdates = {
-      ...userUpdates,
-      status: updates.status.toLowerCase(),
-    };
-
+export const editUser = ({ id, updates }) => {
   return {
     type: actionTypes.EDIT_USER,
     id,
-    updates: { ...updates, ...userUpdates },
+    updates,
+  };
+};
+
+// initEditUser
+export const initEditUser = ({ id = "", updates = {} } = {}) => {
+  return async (dispatch) => {
+    try {
+      const response = await userDataService.update(id, updates);
+      dispatch(editUser({ id, updates: response.data.updates }));
+      return Promise.resolve(response.data.updates);
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
   };
 };
 
@@ -80,26 +82,30 @@ export const removeUser = ({ id = "" }) => ({
   id,
 });
 
+// initRemoteUser
+export const initRemoveUser = ({ id = "" } = {}) => {
+  return async (dispatch) => {
+    try {
+      const response = await userDataService.delete(id);
+      if (response.data.err) {
+        throw new Error(response.data.err);
+      }
+      console.log(response);
+      dispatch(removeUser({ id: response.data.removed }));
+      return Promise.resolve(response.data.removed);
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  };
+};
+
 //ADD_USAGE
 export const addUsage = ({
   userId = "",
   planId = "", //required
   paymentDetails = [],
 }) => {
-  // console.log("got", paymentDetails);
-  // let userPaymentDetails = [];
-  // if (paymentDetails.length) {
-  //   userPaymentDetails = paymentDetails.map((paymentDetail) => {
-  //     if (paymentDetail.hasOwnProperty("paymentMethod")) {
-  //       return {
-  //         ...paymentDetail,
-  //         paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
-  //       };
-  //     } else return paymentDetail;
-  //   });
-  // }
-  // console.log("now", userPaymentDetails);
-
   return {
     type: actionTypes.ADD_USAGE,
     userId,
@@ -157,17 +163,16 @@ export const fetchUsersFailed = () => {
 };
 
 // set initSetUsers
-export const initSetUsers = (dispatch) => {
-  console.log("called");
-  axios
-    .get(`${config.userEndpoint}`)
-    .then((response) => {
-      console.log(response.data);
-      console.log(typeof dispatch);
+export const initSetUsers = () => {
+  // console.log("user.js - initSetUsers - being initSetUsers");
+  return async (dispatch) => {
+    try {
+      const response = await userDataService.getAll();
+
+      // console.log("user.js - initSetUsers - response", response);
       dispatch(setUsers(response.data.users));
-    })
-    .catch((error) => {
-      dispatch(fetchUsersFailed());
-      console.log("fetch failed");
-    });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };

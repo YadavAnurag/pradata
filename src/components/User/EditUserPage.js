@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import queryString from "query-string";
 import { toast } from "react-toastify";
 
-import { editUser } from "../../store/actions/index";
+import { initEditUser, initRemoveUser } from "../../store/actions/index";
 import UserForm from "./UserForm";
 
 export const EditUserPage = (props) => {
@@ -13,9 +13,15 @@ export const EditUserPage = (props) => {
   const user = props.users.find(({ id }) => id === userId);
 
   const onSubmit = (updates) => {
-    props.editUser(userId, updates);
+    console.log("EditUserPage.js - got updates", updates);
+    props.onInitEditUser(userId, updates);
     history.push("/users");
     toast.info("User Updated");
+  };
+  const onRemoveHandler = () => {
+    props.onInitRemoveUser(userId);
+    history.push("/users");
+    toast.info("User Removed");
   };
 
   return (
@@ -28,6 +34,7 @@ export const EditUserPage = (props) => {
         </div>
       </div>
       <div className="content-container">
+        <button onClick={onRemoveHandler}>Remove</button>
         <UserForm onSubmit={onSubmit} user={user} />
       </div>
     </div>
@@ -38,6 +45,7 @@ const mapStateToProps = (state) => ({
   users: state.users,
 });
 const mapDispatchToProps = (dispatch) => ({
-  editUser: (id, updates) => dispatch(editUser({ id, updates })),
+  onInitEditUser: (id, updates) => dispatch(initEditUser({ id, updates })),
+  onInitRemoveUser: (id) => dispatch(initRemoveUser({ id })),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditUserPage);

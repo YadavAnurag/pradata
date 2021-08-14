@@ -1,7 +1,10 @@
 export {
   addUser,
+  initAddUser,
   editUser,
+  initEditUser,
   removeUser,
+  initRemoveUser,
   addUsage,
   addPayment,
 } from "./user/user";

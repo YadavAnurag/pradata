@@ -10,16 +10,23 @@ import { initSetUsers } from "./store/actions/user/user";
 
 let hasRendered = false;
 const renderApp = () => {
-  if (!hasRendered) {
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      document.getElementById("root")
-    );
+  // if (!hasRendered) {
+  //   ReactDOM.render(
+  //     <React.StrictMode>
+  //       <App />
+  //     </React.StrictMode>,
+  //     document.getElementById("root")
+  //   );
 
-    hasRendered = true;
-  }
+  //   hasRendered = true;
+  // }
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
 };
 
 // TODO - use below render before app loads
@@ -33,7 +40,7 @@ if (config.isAuthRequired) {
   if (user) {
     store.dispatch(login(user.uid));
     if (config.seedStore) {
-      initSetUsers(store.dispatch);
+      initSetUsers()(store.dispatch);
     }
     renderApp();
   } else {

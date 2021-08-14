@@ -2,14 +2,14 @@ import React from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
 
-import { addUser } from "../../store/actions/index";
+import { initAddUser } from "../../store/actions/index";
 import UserForm from "./UserForm";
 
 export const AddUserPage = (props) => {
   const history = useHistory();
 
   const onSubmit = (user) => {
-    props.addUser(user);
+    props.onInitAddUser(user);
     history.push("/users");
   };
 
@@ -30,6 +30,6 @@ export const AddUserPage = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addUser: (user) => dispatch(addUser(user)),
+  onInitAddUser: (user) => dispatch(initAddUser(user)),
 });
 export default connect(undefined, mapDispatchToProps)(AddUserPage);
