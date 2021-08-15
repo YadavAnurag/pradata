@@ -27,7 +27,7 @@ import PrivateRoute from "./PrivateRouter";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} exact={true} />
         <PrivateRoute path="/users" component={UserListPage} exact={true} />

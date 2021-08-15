@@ -11,8 +11,12 @@ import { getUserFullName } from "../../store/utility/utility";
 
 const UsagePage = (props) => {
   const location = useLocation();
-  const { id: userId } = queryString.parse(location.search);
-  const user = props.users.find(({ id }) => id === userId);
+  const { userId } = queryString.parse(location.search);
+  console.log("This one", userId, location.search, props.users);
+  const user = props.users.find((user) => {
+    console.log(user);
+    return user.id === userId;
+  });
   const usages = user.usages;
 
   const {
@@ -30,7 +34,7 @@ const UsagePage = (props) => {
     <div>
       <div>
         <Link to={`/users/edit?id=${userId}`}> Edit </Link>
-        <Link to={`/users/renew?id=${userId}`}> Renew Plan </Link>
+        <Link to={`/users/renew?userId=${userId}`}> Renew Plan </Link>
         <p>
           Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
         </p>

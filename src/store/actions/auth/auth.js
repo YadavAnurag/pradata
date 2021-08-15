@@ -1,14 +1,28 @@
 import * as actionTypes from "../actionTypes";
 
 // login
-export const login = (uid) => ({
+export const login = (userId) => ({
   type: actionTypes.LOGIN,
-  uid,
+  userId,
 });
 
 export const initLogin = () => {
-  return () => {
-    console.log("TODO - Will init login");
+  return async (dispatch) => {
+    try {
+      console.log("TODO - Will Create login");
+      // const response = await userAuthService.authenticate(userAuth);
+      const response = {
+        auth: {
+          userId: "123",
+        },
+      };
+
+      dispatch(login(response.auth.userId));
+      return Promise.resolve(response.auth.userId);
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
   };
 };
 

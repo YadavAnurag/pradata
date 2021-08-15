@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { history } from "./routers/AppRouter";
 import config from "./utils/config";
 import { store } from "./App";
 import { login, logout } from "./store/actions/index";
@@ -10,44 +11,47 @@ import { initSetUsers } from "./store/actions/user/user";
 
 let hasRendered = false;
 const renderApp = () => {
-  // if (!hasRendered) {
-  //   ReactDOM.render(
-  //     <React.StrictMode>
-  //       <App />
-  //     </React.StrictMode>,
-  //     document.getElementById("root")
-  //   );
+  if (!hasRendered) {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+      document.getElementById("root")
+    );
 
-  //   hasRendered = true;
-  // }
-
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    document.getElementById("root")
-  );
+    hasRendered = true;
+  }
 };
 
 // TODO - use below render before app loads
 // ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
-if (config.isAuthRequired) {
-  // TODO - create event management to call below uid if onAuthStateChanged as same on expensify and utils/auth.js
-  const user = {
-    uid: "anu",
-  };
-  if (user) {
-    store.dispatch(login(user.uid));
-    if (config.seedStore) {
-      initSetUsers()(store.dispatch);
-    }
+// if (config.isAuthRequired) {
+//   // TODO - create event management to call below uid if onAuthStateChanged as same on expensify and utils/auth.js
+//   if (store.getState().auth.userId) {
+//     store.dispatch(login(store.getState().auth.userId));
+//     if (config.seedStore) {
+//       // initSetUsers()(store.dispatch);
+//       store.dispatch(initSetUsers()).then(() => {
+//         renderApp();
+//       });
+//     }
+//   } else {
+//     store.dispatch(logout());
+//     renderApp();
+//   }
+// } else {
+//   renderApp();
+// }
+
+if (store.getState().auth.userId) {
+  console.log("store.getState().auth.userId", store.getState().auth.userId);
+  store.dispatch(login(store.getState().auth.userId));
+  store.dispatch(initSetUsers()).then(() => {
     renderApp();
-  } else {
-    store.dispatch(logout());
-    renderApp();
-  }
+  });
 } else {
+  store.dispatch(logout());
   renderApp();
 }
 

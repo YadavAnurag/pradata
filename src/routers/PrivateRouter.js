@@ -8,7 +8,6 @@ export const PrivateRoute = ({
   component: Component,
   ...rest
 }) => {
-  console.log("isAuthenticated", isAuthenticated);
   return (
     <Route
       {...rest}
@@ -27,7 +26,7 @@ export const PrivateRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.uid,
+  isAuthenticated: !!state.auth.userId,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

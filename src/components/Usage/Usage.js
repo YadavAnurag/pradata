@@ -16,7 +16,7 @@ const Usage = (props) => {
         {getUsagePaymentDetails({ usage: props.usage, plans: props.plans })
           .totalDueToThisUsage / 100}
       </p>
-      <Link to={`/users/add-payment?userid=${props.user.id}&usageid=${id}`}>
+      <Link to={`/users/add-payment?userId=${props.user.id}&usageId=${id}`}>
         Add Payment
       </Link>
       <p>id: {id}</p>

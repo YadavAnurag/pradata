@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import * as actionTypes from "../actionTypes";
 import config from "../../../utils/config";
 import userDataService from "../../../services/userData.Service";
+import usageDataService from "../../../services/usageData.Service";
 
 // user action
 
@@ -42,9 +43,11 @@ export const initAddUser = (userObject = {}) => {
     createdAt: moment().valueOf(),
   };
 
+  console.log("Gonna send", user);
   return async (dispatch) => {
     try {
       const response = await userDataService.create(user);
+      console.log("Got response", response);
       dispatch(addUser(response.data.user));
       return Promise.resolve(response.data);
     } catch (err) {
@@ -101,20 +104,42 @@ export const initRemoveUser = ({ id = "" } = {}) => {
 };
 
 //ADD_USAGE
-export const addUsage = ({
-  userId = "",
-  planId = "", //required
-  paymentDetails = [],
-}) => {
+export const addUsage = ({ userId = "", usage = {} }) => {
   return {
     type: actionTypes.ADD_USAGE,
     userId,
-    usage: {
-      id: uuid(),
-      planId,
-      startedAt: moment().valueOf(),
-      paymentDetails,
-    },
+    usage,
+  };
+};
+
+// init add usage
+export const initAddUsage = ({
+  userId = "",
+  planId = "", //required
+  paymentDetails = [],
+} = {}) => {
+  const usage = {
+    id: uuid(),
+    planId,
+    startedAt: moment().valueOf(),
+    paymentDetails,
+    createdAt: moment().valueOf(),
+  };
+
+  return async (dispatch) => {
+    try {
+      console.log("Gonna send", usage);
+      const response = await usageDataService.create(userId, usage);
+      if (response.data.err) {
+        throw new Error(response.data.err);
+      }
+      console.log("Got response", response);
+      dispatch(addUsage({ userId, usage }));
+      return Promise.resolve(response.data.removed);
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
   };
 };
 
@@ -164,15 +189,16 @@ export const fetchUsersFailed = () => {
 
 // set initSetUsers
 export const initSetUsers = () => {
-  // console.log("user.js - initSetUsers - being initSetUsers");
+  console.log("user.js - initSetUsers - being initSetUsers");
   return async (dispatch) => {
     try {
       const response = await userDataService.getAll();
 
-      // console.log("user.js - initSetUsers - response", response);
+      console.log("user.js - initSetUsers - response", response);
       dispatch(setUsers(response.data.users));
+      return Promise.resolve(response.data.users);
     } catch (err) {
-      console.log(err);
+      return Promise.reject(err);
     }
   };
 };

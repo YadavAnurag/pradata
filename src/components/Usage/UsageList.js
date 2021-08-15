@@ -8,7 +8,7 @@ import Usage from "./Usage";
 const UsageList = (props) => {
   // find id of plan
   const history = useHistory();
-  const { id: userId } = queryString.parse(history.location.search);
+  const { userId } = queryString.parse(history.location.search);
   const user = props.users.find((user) => user.id === userId);
 
   return (

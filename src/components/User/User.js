@@ -25,7 +25,9 @@ const User = (props) => {
 
   return (
     <div>
-      <Link to={`/usages?id=${id}`}>
+      <Link to={`/usages?userId=${id}`}>
+        {" "}
+        {/*UsagePage*/}
         <p>
           Total Due: &#8377;
           {getUserPaymentDetailsWithAllUsages(props.user, props.plans)

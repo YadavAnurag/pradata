@@ -1,8 +1,8 @@
-export const authReducer = (state = { uid: "aja" }, action) => {
+export const authReducer = (state = { userId: "" }, action) => {
   switch (action.type) {
     case "LOGIN":
       return {
-        uid: action.uid,
+        userId: action.userId,
       };
     case "LOGOUT":
       return {};
