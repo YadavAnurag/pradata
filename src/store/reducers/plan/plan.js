@@ -22,9 +22,13 @@ const removePlan = (state, action) => {
   return updated;
 };
 
+// set plans
+const setPlans = (state, action) => {
+  return action.plans;
+};
+
 // plan reducer
-// const planReducerDefaultState = [];
-const planReducerDefaultState = [...plans];
+const planReducerDefaultState = [];
 export const planReducer = (state = planReducerDefaultState, action) => {
   switch (action.type) {
     case actionTypes.ADD_PLAN:
@@ -33,6 +37,8 @@ export const planReducer = (state = planReducerDefaultState, action) => {
       return editPlan(state, action);
     case actionTypes.REMOVE_PLAN:
       return removePlan(state, action);
+    case actionTypes.SET_PLANS:
+      return setPlans(state, action);
     default:
       return state;
   }

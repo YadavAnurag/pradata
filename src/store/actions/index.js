@@ -11,6 +11,12 @@ export {
   initSetUsers, // initAddPayment
 } from "./user/user";
 
-export { addPlan, editPlan, removePlan } from "./plan/plan";
+export {
+  addPlan,
+  initAddPlan,
+  editPlan,
+  removePlan,
+  initSetPlans,
+} from "./plan/plan";
 
 export { login, initLogin, logout, initLogout } from "./auth/auth";

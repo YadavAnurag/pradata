@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
-import { addPlan } from "../../store/actions/index";
 
+import { initAddPlan } from "../../store/actions/index";
 import PlanForm from "./PlanForm";
 
 export const AddPlanPage = (props) => {
@@ -10,7 +10,7 @@ export const AddPlanPage = (props) => {
 
   const onSubmit = (plan) => {
     console.log("[AddPlanPage] - submitted", plan);
-    props.addPlan(plan);
+    props.onInitAddPlan(plan);
     history.push("/plans");
   };
 
@@ -31,6 +31,6 @@ export const AddPlanPage = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addPlan: (plan) => dispatch(addPlan(plan)),
+  onInitAddPlan: (plan) => dispatch(initAddPlan(plan)),
 });
 export default connect(undefined, mapDispatchToProps)(AddPlanPage);

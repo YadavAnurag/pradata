@@ -26,6 +26,9 @@ export const SET_USER_END_DATE_FILTER = "SET_USER_END_DATE_FILTER";
 export const ADD_PLAN = "ADD_PLAN";
 export const EDIT_PLAN = "EDIT_PLAN";
 export const REMOVE_PLAN = "REMOVE_PLAN";
+// set user from server
+export const SET_PLANS = "SET_PLANS";
+export const FETCH_PLANS_FAILED = "FETCH_PLANS_FAILED";
 
 // plan filter action
 export const SET_PLAN_TEXT_FILTER = "SET_PLAN_TEXT_FILTER";

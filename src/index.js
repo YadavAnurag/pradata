@@ -7,6 +7,7 @@ import config from "./utils/config";
 import { store } from "./App";
 import { login, logout } from "./store/actions/index";
 import { initSetUsers } from "./store/actions/user/user";
+import { initSetPlans } from "./store/actions/index";
 // import }reportWebVitals from './reportWebVitals';
 
 let hasRendered = false;
@@ -44,16 +45,20 @@ const renderApp = () => {
 //   renderApp();
 // }
 
-if (store.getState().auth.userId) {
-  console.log("store.getState().auth.userId", store.getState().auth.userId);
-  store.dispatch(login(store.getState().auth.userId));
-  store.dispatch(initSetUsers()).then(() => {
+// set plans
+console.log("gonna call");
+store.dispatch(initSetPlans()).then(() => {
+  if (store.getState().auth.userId) {
+    console.log("store.getState().auth.userId", store.getState().auth.userId);
+    store.dispatch(login(store.getState().auth.userId));
+    store.dispatch(initSetUsers()).then(() => {
+      renderApp();
+    });
+  } else {
+    store.dispatch(logout());
     renderApp();
-  });
-} else {
-  store.dispatch(logout());
-  renderApp();
-}
+  }
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
