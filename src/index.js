@@ -10,19 +10,31 @@ import { initSetUsers } from "./store/actions/user/user";
 import { initSetPlans } from "./store/actions/index";
 // import }reportWebVitals from './reportWebVitals';
 
-let hasRendered = false;
-const renderApp = () => {
-  if (!hasRendered) {
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      document.getElementById("root")
-    );
+// let hasRendered = false;
+// const renderApp = () => {
+//   if (!hasRendered) {
+//     ReactDOM.render(
+//       <React.StrictMode>
+//         <App />
+//       </React.StrictMode>,
+//       document.getElementById("root")
+//     );
 
-    hasRendered = true;
-  }
+//     hasRendered = true;
+//   }
+// };
+
+// + remove me, use above one
+const renderApp = () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
 };
+
+// - remove me
 
 // TODO - use below render before app loads
 // ReactDOM.render(<LoadingPage />, document.getElementById('app'));

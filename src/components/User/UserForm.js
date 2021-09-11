@@ -1,8 +1,18 @@
 import React, { useState } from "react";
+// import queryString from "query-string";
+// import { useLocation } from "react-router-dom";
 
 import { validateEmailId, validateDigits } from "../../utils/validation";
 
 const UserForm = (props) => {
+  const isAdmin = props.user.isAdmin && props.user.id.startsWith("xyz");
+  console.log("isAdmin", props.user.isAdmin);
+
+  // check location
+  // const location = useLocation();
+  // const pathname = location.pathname;
+  // console.log(pathname, pathname === "/profile");
+
   // +state
   const [firstName, setFirstName] = useState(
     props.user ? props.user.firstName : ""
@@ -197,6 +207,7 @@ const UserForm = (props) => {
           placeholder="Email Id"
           value={emailId}
           onChange={handleEmailIdChange}
+          readOnly={!isAdmin}
         />
         <span>{error.emailId}</span>
 
@@ -207,6 +218,7 @@ const UserForm = (props) => {
           placeholder="Contact Number"
           value={contactNumber}
           onChange={handleContactNumberChange}
+          readOnly={!isAdmin}
         />
         <span>{error.contactNumber}</span>
 
@@ -221,16 +233,19 @@ const UserForm = (props) => {
         ></textarea>
         <span>{error.address}</span>
 
-        <label>Status</label>
-        <select name="status" value={status} onChange={handleStatusChange}>
-          {statusConfigs.map((status, key) => {
-            return (
-              <option key={key} value={status.value}>
-                {status.text}
-              </option>
-            );
-          })}
-        </select>
+        {/* hide status change if user is not admin */}
+        <div hidden={!isAdmin}>
+          <label>Status</label>
+          <select name="status" value={status} onChange={handleStatusChange}>
+            {statusConfigs.map((status, key) => {
+              return (
+                <option key={key} value={status.value}>
+                  {status.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
       </div>
       <div>
         <button>Save</button>
