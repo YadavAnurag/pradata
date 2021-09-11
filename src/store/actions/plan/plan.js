@@ -39,7 +39,7 @@ export const initAddPlan = (planObject = {}) => {
       const response = await planDataService.create(plan);
       console.log("Got response", response);
       if (response.data.error) {
-        throw new Error(response.data.error);
+        return Promise.reject(response.data.error);
       } else {
         dispatch(addPlan(response.data.plan));
         return Promise.resolve(response.data);
@@ -58,12 +58,52 @@ export const editPlan = ({ id = "", updates = {} } = {}) => ({
   updates,
 });
 
+// initEditPlan
+export const initEditPlan = ({ id = "", updates = {} } = {}) => {
+  console.log("gonna update plan");
+  return async (dispatch) => {
+    try {
+      const response = await planDataService.update(id, updates);
+      console.log("Got response", response);
+      if (response.data.error) {
+        return Promise.reject(response.data.error);
+      } else {
+        dispatch(editPlan({ id, updates: response.data.updates }));
+        return Promise.resolve(response.data);
+      }
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  };
+};
+
 // REMOVE_PLAN
 export const removePlan = ({ id = "" } = {}) => {
   console.log("got id", id);
   return {
     type: actionTypes.REMOVE_PLAN,
     id,
+  };
+};
+
+// initRemove
+export const initRemovePlan = ({ id = "" } = {}) => {
+  console.log("gonna remove plan");
+  return async (dispatch) => {
+    try {
+      const response = await planDataService.delete(id);
+      console.log("Got response", response);
+      if (response.data.error) {
+        return Promise.reject(response.data.error);
+      } else {
+        dispatch(removePlan({ id: response.data.removed }));
+        return Promise.resolve(response.data.removed);
+      }
+    } catch (err) {
+      console.log(err);
+      return Promise.reject(err);
+    }
   };
 };
 

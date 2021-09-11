@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import queryString from "query-string";
 import { toast } from "react-toastify";
 
-import { editPlan } from "../../store/actions/index";
+import { initEditPlan } from "../../store/actions/index";
 import PlanForm from "./PlanForm";
 
 export const EditPlanPage = (props) => {
@@ -15,7 +15,7 @@ export const EditPlanPage = (props) => {
 
   const onSubmit = (updates) => {
     console.log("[EditPlanPage] - submitted", planId, updates);
-    props.editPlan(planId, updates);
+    props.onInitEditPlan(planId, updates);
     history.push("/plans");
     toast.info("Plan Updated");
   };
@@ -40,6 +40,6 @@ const mapStateToProps = (state) => ({
   plans: state.plans,
 });
 const mapDispatchToProps = (dispatch) => ({
-  editPlan: (id, updates) => dispatch(editPlan({ id, updates })),
+  onInitEditPlan: (id, updates) => dispatch(initEditPlan({ id, updates })),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditPlanPage);

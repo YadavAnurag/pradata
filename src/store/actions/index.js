@@ -15,7 +15,9 @@ export {
   addPlan,
   initAddPlan,
   editPlan,
+  initEditPlan,
   removePlan,
+  initRemovePlan,
   initSetPlans,
 } from "./plan/plan";
 

@@ -1,19 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import PlanList from "./PlanList";
 import { getSelectedPlans } from "../../store/selectors/index";
 import PlanFilters from "../Filter/PlanFilters";
 import PlansSummary from "./PlansSummary";
-import { removePlan } from "../../store/actions/plan/plan";
+import { initRemovePlan } from "../../store/actions/plan/plan";
 
 const PlanListPage = (props) => {
   const history = useHistory();
 
   const onRemove = (id) => {
-    props.removePlan(id);
+    props.onInitRemovePlan(id);
     history.push("/plans");
+    toast.info("Plan Removed");
   };
 
   const jsx = (
@@ -33,6 +35,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  removePlan: (id) => dispatch(removePlan({ id })),
+  onInitRemovePlan: (id) => dispatch(initRemovePlan({ id })),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PlanListPage);
