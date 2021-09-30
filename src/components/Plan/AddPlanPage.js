@@ -4,14 +4,22 @@ import { connect } from "react-redux";
 
 import { initAddPlan } from "../../store/actions/index";
 import PlanForm from "./PlanForm";
+import { toast } from "react-toastify";
 
 export const AddPlanPage = (props) => {
   const history = useHistory();
 
   const onSubmit = (plan) => {
     console.log("[AddPlanPage] - submitted", plan);
-    props.onInitAddPlan(plan);
-    history.push("/plans");
+    props
+      .onInitAddPlan(plan)
+      .then(() => {
+        toast.success("Plan Added Successfully");
+        history.push("/plans");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   return (

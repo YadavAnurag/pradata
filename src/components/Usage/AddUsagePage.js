@@ -13,10 +13,15 @@ export const AddUsagePage = (props) => {
 
   const onSubmit = ({ planId, paymentDetails }) => {
     console.log("[AddUsagePage] - submitted", planId);
-    props.onInitAddUsage({ userId, planId, paymentDetails }).then(() => {
-      toast.success("Plan Renewed Successfully");
-      history.goBack();
-    });
+    props
+      .onInitAddUsage({ userId, planId, paymentDetails })
+      .then(() => {
+        toast.success("Plan Renewed Successfully");
+        history.goBack();
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   return (

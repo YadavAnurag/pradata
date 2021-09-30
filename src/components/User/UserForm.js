@@ -1,12 +1,32 @@
 import React, { useState } from "react";
 // import queryString from "query-string";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { validateEmailId, validateDigits } from "../../utils/validation";
 
 const UserForm = (props) => {
-  const isAdmin = props.user.isAdmin && props.user.id.startsWith("xyz");
-  console.log("isAdmin", props.user.isAdmin);
+  /* 
+    check location, if pathname is "/profile"
+    then match if users is admin or not
+  */
+  const location = useLocation();
+  const pathname = location.pathname;
+  // console.log(pathname, "pathname === /profile", pathname === "/profile");
+
+  // TODO check if admin or not for all cases
+  let isAdmin = true;
+  if (pathname === "/profile") {
+    isAdmin = props.user
+      ? props.user.isAdmin && props.user.id.startsWith("xyz")
+      : false;
+    // console.log(
+    //   "isAdmin",
+    //   props.user
+    //     ? props.user.isAdmin && props.user.id.startsWith("xyz")
+    //     : false,
+    //   props.user
+    // );
+  }
 
   // check location
   // const location = useLocation();
@@ -17,7 +37,7 @@ const UserForm = (props) => {
   const [firstName, setFirstName] = useState(
     props.user ? props.user.firstName : ""
   );
-  console.log("firstName", firstName);
+  // console.log("firstName", firstName);
   const [middleName, setMiddleName] = useState(
     props.user ? props.user.middleName : ""
   );

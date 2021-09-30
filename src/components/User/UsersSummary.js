@@ -5,13 +5,25 @@ import { connect } from "react-redux";
 import { getSelectedUsers } from "../../store/selectors/user";
 
 const UsersSummary = (props) => {
-  const { userCount } = props;
-  const userWord = userCount === 1 ? "user" : "users";
+  const { usersCount, users } = props;
+  const userWord = usersCount === 1 ? "user" : "users";
+
+  // count non-admin hidden users
+  const totalUsers = users.length;
+  let adminUsersCount = 0;
+  users.map(({ isAdmin }) => {
+    if (isAdmin) adminUsersCount++;
+  });
+  const hiddenUsersCount =
+    usersCount < totalUsers - adminUsersCount
+      ? totalUsers - adminUsersCount - usersCount
+      : 0;
 
   return (
     <div>
       <h3>
-        Viewing <span>{userCount}</span> {userWord}
+        Viewing <span>{usersCount}</span> {userWord}
+        {hiddenUsersCount > 0 && <span>, hidden {hiddenUsersCount}</span>}
       </h3>
       <div>
         <Link to="/users/add">Add User</Link>
@@ -28,7 +40,8 @@ const mapStateToProps = (state) => {
   );
 
   return {
-    userCount: selectedUsers.length,
+    usersCount: selectedUsers.length,
+    users: state.users,
   };
 };
 export default connect(mapStateToProps)(UsersSummary);

@@ -39,7 +39,8 @@ export const initAddPlan = (planObject = {}) => {
       const response = await planDataService.create(plan);
       console.log("Got response", response);
       if (response.data.error) {
-        return Promise.reject(response.data.error);
+        console.log(response.data.error);
+        return Promise.reject(response.data.msg);
       } else {
         dispatch(addPlan(response.data.plan));
         return Promise.resolve(response.data);
@@ -66,7 +67,8 @@ export const initEditPlan = ({ id = "", updates = {} } = {}) => {
       const response = await planDataService.update(id, updates);
       console.log("Got response", response);
       if (response.data.error) {
-        return Promise.reject(response.data.error);
+        console.log(response.data.error);
+        return Promise.reject(response.data.msg);
       } else {
         dispatch(editPlan({ id, updates: response.data.updates }));
         return Promise.resolve(response.data);
@@ -95,7 +97,7 @@ export const initRemovePlan = ({ id = "" } = {}) => {
       const response = await planDataService.delete(id);
       console.log("Got response", response);
       if (response.data.error) {
-        return Promise.reject(response.data.error);
+        return Promise.reject(response.data.msg);
       } else {
         dispatch(removePlan({ id: response.data.removed }));
         return Promise.resolve(response.data.removed);
@@ -129,8 +131,8 @@ export const initSetPlans = () => {
     try {
       const response = await planDataService.getAll();
       if (response.data.error) {
-        console.log("got response", response.data.msg);
-        return Promise.reject(response.data.error);
+        console.log("got response", response.data.err);
+        return Promise.reject(response.data.msg);
       } else {
         dispatch(setPlans(response.data.plans));
         return Promise.resolve(response.data);

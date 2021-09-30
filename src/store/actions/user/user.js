@@ -1,5 +1,6 @@
 import moment from "moment";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 
 import * as actionTypes from "../actionTypes";
 import config from "../../../utils/config";
@@ -130,13 +131,18 @@ export const initAddUsage = ({
     try {
       console.log("Gonna send", usage);
       const response = await usageDataService.create(userId, usage);
-      if (response.data.err) {
-        throw new Error(response.data.err);
-      }
       console.log("Got response", response);
-      dispatch(addUsage({ userId, usage }));
+      if (response.data.error) {
+        // if got error, then don't dispatch
+        toast.error(response.data.error);
+        return Promise.reject(response.data.error);
+      } else {
+        // if got no error, then dispatch
+        dispatch(addUsage({ userId, usage }));
+      }
       return Promise.resolve(response.data.removed);
     } catch (err) {
+      toast.error("Got error");
       console.log(err);
       return Promise.reject(err);
     }
@@ -148,27 +154,55 @@ export const addPayment = ({
   userId = "",
   usageId = "",
   paymentDetail = {},
-}) => {
-  console.log("And I got this\n", {
-    userId,
-    usageId,
-    paymentDetail,
-  });
-  // let userPaymentDetail = {};
-  // if (paymentDetail.hasOwnProperty("paymentMethod")) {
-  //   userPaymentDetail = {
-  //     ...paymentDetail,
-  //     paymentMethod: paymentDetail.paymentMethod.toLowerCase(),
-  //   };
-  // } else {
-  //   // payment must have to have paymentMethod
-  // }
-
+} = {}) => {
   return {
     type: actionTypes.ADD_PAYMENT,
     userId,
     usageId,
     paymentDetail,
+  };
+};
+
+// init add payment
+export const initAddPayment = ({
+  userId = "",
+  usageId = "", //required
+  paymentDetail = {},
+} = {}) => {
+  const paymentData = {
+    userId,
+    usageId,
+    paymentDetail,
+  };
+
+  return async (dispatch) => {
+    try {
+      console.log("Gonna send", userId, usageId, paymentDetail);
+      const response = await usageDataService.addPayment(
+        paymentData.userId,
+        paymentData
+      );
+      console.log("Got response", response);
+      if (response.data.error) {
+        // if got error, then don't dispatch
+        toast.error(response.data.msg);
+        return Promise.reject(response.data.msg);
+      } else {
+        // if got no error, then dispatch
+        dispatch(
+          addPayment({
+            userId: paymentData.userId,
+            usageId: paymentData.usageId,
+            paymentDetail: paymentData.paymentDetail,
+          })
+        );
+      }
+      return Promise.resolve(response.data.msg);
+    } catch (err) {
+      toast.error("Got Error...");
+      console.log(err);
+      return Promise.reject(err);
+    }
   };
 };
 

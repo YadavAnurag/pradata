@@ -2,8 +2,9 @@ import React from "react";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import queryString from "query-string";
+import { toast } from "react-toastify";
 
-import { addPayment } from "../../store/actions/index";
+import { initAddPayment } from "../../store/actions/index";
 import {
   getUserFullName,
   getUsagePaymentDetails,
@@ -13,12 +14,10 @@ import moment from "moment";
 
 export const AddPaymentPage = (props) => {
   const history = useHistory();
-  const { userid: userId, usageid: usageId } = queryString.parse(
-    history.location.search
-  );
-
+  const { userId, usageId } = queryString.parse(history.location.search);
   const user = props.users.find(({ id }) => id === userId);
   const usage = user.usages.find(({ id }) => id === usageId);
+
   const {
     totalDueToThisUsage,
     totalPaidAmountToThisUsage,
@@ -28,9 +27,15 @@ export const AddPaymentPage = (props) => {
   } = getUsagePaymentDetails({ usage, plans: props.plans });
 
   const onSubmit = (paymentDetail) => {
-    console.log("[AddPaymentPage] - submitted", paymentDetail);
-    props.addPayment(userId, usageId, paymentDetail);
-    history.goBack();
+    props
+      .onInitAddPayment(userId, usageId, paymentDetail)
+      .then(() => {
+        toast.success("Payment Added Successfully");
+        history.goBack();
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   // if no due then display no payment required jsx
@@ -98,9 +103,8 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  addPayment: (userId, usageId, paymentDetail) => {
-    console.log("I got this", { userId, usageId, paymentDetail });
-    return dispatch(addPayment({ userId, usageId, paymentDetail }));
+  onInitAddPayment: (userId, usageId, paymentDetail) => {
+    return dispatch(initAddPayment({ userId, usageId, paymentDetail }));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddPaymentPage);

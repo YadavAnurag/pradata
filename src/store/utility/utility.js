@@ -116,21 +116,31 @@ export const getUsagePaymentDetails = ({ usage = {}, plans = [] }) => {
       totalPaidAmountToThisUsage = 0;
     }
 
-    planToThisUsage = plans.find(({ id }) => id === usage.planId);
+    const planFound = plans.find(({ id }) => id === usage.planId);
+    planToThisUsage = planFound === undefined ? { price: 0 } : planFound;
+
+    totalDueToThisUsage = planToThisUsage.price - totalPaidAmountToThisUsage;
+    totalDueToThisUsage = totalDueToThisUsage < 0 ? 0 : totalDueToThisUsage;
+
+    planDueDateToThisUsage = usage.startedAt + planToThisUsage.validityPeriod;
+
+    return {
+      totalDueToThisUsage,
+      totalPaidAmountToThisUsage,
+      planDueDateToThisUsage,
+      planName:
+        planToThisUsage.title === undefined ? "" : planToThisUsage.title,
+      planPrice:
+        planToThisUsage.price === undefined ? "" : planToThisUsage.price,
+    };
   } else {
-    totalPaidAmountToThisUsage = 0;
+    // if no usages, set default for return
+    return {
+      totalDueToThisUsage: 0,
+      totalPaidAmountToThisUsage: 0,
+      planDueDateToThisUsage: 0,
+      planName: "",
+      planPrice: 0,
+    };
   }
-
-  totalDueToThisUsage = planToThisUsage.price - totalPaidAmountToThisUsage;
-  totalDueToThisUsage = totalDueToThisUsage < 0 ? 0 : totalDueToThisUsage;
-
-  planDueDateToThisUsage = usage.startedAt + planToThisUsage.validityPeriod;
-
-  return {
-    totalDueToThisUsage,
-    totalPaidAmountToThisUsage,
-    planDueDateToThisUsage,
-    planName: planToThisUsage.title === undefined ? "" : planToThisUsage.title,
-    planPrice: planToThisUsage.price === undefined ? "" : planToThisUsage.price,
-  };
 };

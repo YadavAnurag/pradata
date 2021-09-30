@@ -8,6 +8,7 @@ export {
   addUsage,
   initAddUsage,
   addPayment,
+  initAddPayment,
   initSetUsers, // initAddPayment
 } from "./user/user";
 

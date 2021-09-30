@@ -13,7 +13,8 @@ export const initLogin = () => {
       // const response = await userAuthService.authenticate(userAuth);
       const response = {
         auth: {
-          userId: "1",
+          userId: "anything",
+          isAdmin: true,
         },
       };
 

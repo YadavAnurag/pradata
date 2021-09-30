@@ -4,13 +4,21 @@ import { connect } from "react-redux";
 
 import { initAddUser } from "../../store/actions/index";
 import UserForm from "./UserForm";
+import { toast } from "react-toastify";
 
 export const AddUserPage = (props) => {
   const history = useHistory();
 
   const onSubmit = (user) => {
-    props.onInitAddUser(user);
-    history.push("/users");
+    props
+      .onInitAddUser(user)
+      .then(() => {
+        toast.success("User Added Successfully");
+        history.push("/users");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   return (
