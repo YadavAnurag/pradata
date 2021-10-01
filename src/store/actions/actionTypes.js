@@ -2,9 +2,13 @@
 export const ADD_USER = "ADD_USER";
 export const EDIT_USER = "EDIT_USER";
 export const REMOVE_USER = "REMOVE_USER";
+
 // set user from server
 export const SET_USERS = "SET_USERS";
 export const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
+
+// set user dashboard data
+export const SET_DASHBOARD_DATA = "SET_DASHBOARD_DATA";
 
 // usages
 export const ADD_USAGE = "ADD_USAGE";

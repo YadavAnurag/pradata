@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 
-// import './styles/styles.scss';
+import "./styles/styles.scss";
 import AppRouter from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 //import app from "./playground/app";

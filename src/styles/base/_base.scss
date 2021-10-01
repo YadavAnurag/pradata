@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // color: white;
+}
+html {
+  font-size: 62%;
+}
+body {
+  font-family: "Ubuntu", Helvetica, Arial, sans-serif;
+  font-size: $medium;
+  line-height: 1.6;
+  background-color: $quaternary;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+.content-wrap {
+  padding-bottom: 8rem;
+  @media #{$mobile-breakpoint} {
+    margin-top: 8rem;
+  }
+  @media #{$tablet-breakpoint}, #{$desktop-breakpoint} {
+    margin-top: 8rem;
+  }
+}

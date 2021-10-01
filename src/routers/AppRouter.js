@@ -20,6 +20,7 @@ import UsagePage from "../components/Usage/UsagePage";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRouter";
+import LoginPage from "../components/Login/LoginPage";
 
 // const history = createBrowserHistory({
 //   forceRefresh: false,
@@ -42,6 +43,7 @@ const AppRouter = () => {
         <PrivateRoute path="/usages" component={UsagePage} exact />
         <PrivateRoute path="/users/renew" component={AddUsagePage} exact />
 
+        <PublicRoute path="/login" component={LoginPage} exact />
         <PrivateRoute path="/plans/" component={PlanListPage} exact />
         <PrivateRoute path="/plans/add" component={AddPlanPage} exact />
         <PrivateRoute path="/plans/edit" component={EditPlanPage} exact />

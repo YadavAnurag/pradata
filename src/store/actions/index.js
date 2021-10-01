@@ -12,6 +12,8 @@ export {
   initSetUsers, // initAddPayment
 } from "./user/user";
 
+export { initGetDashboardData } from "./user/dashboard";
+
 export {
   addPlan,
   initAddPlan,

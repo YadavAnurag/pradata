@@ -20,6 +20,10 @@ class UserDataService {
   delete = (id) => {
     return axiosCommon.delete(`user-management/users/${id}`);
   };
+
+  getDashboardData = (id) => {
+    return axiosCommon.get(`user-management/dashboard/${id}`);
+  };
 }
 
 export default new UserDataService();
