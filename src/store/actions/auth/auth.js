@@ -1,31 +1,48 @@
 import * as actionTypes from "../actionTypes";
 
+import authService from "../../../services/auth.Service";
+
 // login
-export const login = ({ userId = "", isAdmin = "" } = {}) => ({
+export const login = ({ userId, isAdmin }) => ({
   type: actionTypes.LOGIN,
   userId,
   isAdmin,
 });
 
-export const initLogin = ({ id = "" } = {}) => {
+export const initLogin = (authDetails) => {
   return async (dispatch) => {
-    if (id === "") return Promise.reject("User Id can't be empty string");
+    console.log("gonna send ", authDetails);
+    // try {
+    //   const response = await authService.authenticate(authDetails);
+    //   console.log("got response", response);
+    //   dispatch(
+    //     login({ userId: response.data.userId, isAdmin: response.data.isAdmin })
+    //   );
+    //   return Promise.resolve(response.data.userId);
+    // } catch (err) {
+    //   console.log(err);
+    //   return Promise.reject("Authentication Failed, Please try again later...");
+    // }
 
     try {
-      console.log("TODO - Will Create login");
-      // const response = await userAuthService.authenticate(userAuth);
-      const response = {
-        auth: {
-          userId: "xyz3",
-          isAdmin: true,
-        },
-      };
+      const response = await authService.authenticate(authDetails);
 
-      dispatch(login(response.auth));
-      return Promise.resolve(true);
+      console.log("got response", response.data.error);
+
+      if (response.data.error) {  
+        return Promise.reject(response.data.msg);
+      } else {
+        dispatch(
+          login({
+            userId: response.data.userId,
+            isAdmin: response.data.isAdmin,
+          })
+        );
+        return Promise.resolve(response.data.userId);
+      }
     } catch (err) {
       console.log(err);
-      return Promise.reject("Login Failed, Please try again later...");
+      return Promise.reject("Authentication Failed, Please try again later...");
     }
   };
 };
@@ -36,7 +53,13 @@ export const logout = () => {
 };
 
 export const initLogout = () => {
-  return () => {
-    console.log("TODO - Will init logout");
+  return async (dispatch) => {
+    try {
+      dispatch(logout());
+      return Promise.resolve(true);
+    } catch (err) {
+      console.log(err);
+      return Promise.reject("Logout Failed");
+    }
   };
 };

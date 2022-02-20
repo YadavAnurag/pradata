@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 import { connect } from "react-redux";
-import queryString from "query-string";
 import { toast } from "react-toastify";
 
 import { initLogin, initSetUsers } from "../../store/actions";
@@ -9,47 +9,37 @@ import LoginForm from "./LoginForm";
 
 const LoginPage = (props) => {
   const history = useHistory();
-  const { userId } = queryString.parse(history.location.search);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const loginHandler = () => {
-    console.log("porps", props.history.location.pathname);
+  const onSubmit = (authDetails) => {
+    console.log("submitted");
+    setIsLoading(true);
     props
-      .onInitLogin(userId)
+      .onInitLogin(authDetails)
       .then((userId) => {
-        console.log(
-          userId,
-          "logged in, Will redirect to dashboard page",
-          props.history.push
-        );
-        props
-          .onInitSetUsers()
-          .then(() => {
-            props.history.push("/dashboard");
-          })
-          .catch((err) => {
-            console.log("[HomePage.js] - Got error while fetching users", err);
-          });
+        toast.success("Successfully Logged In");
+        history.push(`/dashboard`);
       })
       .catch((err) => {
-        console.log("[HomePage.js] - Got error while login", err);
+        setIsLoading(false);
+        toast.error(err);
       });
   };
 
   return (
     <div>
-      <LoginForm />
+      {isLoading ? (
+        <LoginForm onSubmit={onSubmit} isLoading={true} />
+      ) : (
+        <LoginForm onSubmit={onSubmit} isLoading={false} />
+      )}
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     users: state.users,
-//   };
-// };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitLogin: (id) => dispatch(initLogin({ id })),
+    onInitLogin: (authDetails) => dispatch(initLogin(authDetails)),
     onInitSetUsers: () => dispatch(initSetUsers()),
   };
 };
