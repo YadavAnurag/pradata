@@ -76,53 +76,65 @@ const PlanFilters = (props) => {
   };
 
   return (
-    <div>
-      <label>Title</label>
-      <input
-        type="text"
-        value={text}
-        name="text"
-        onChange={handleTextChange}
-        placeholder="Plan Title"
-      />
-      <label>Price</label>
-      <input
-        type="text"
-        value={price}
-        onChange={handlePriceChange}
-        placeholder="Plan Price"
-      />
-      <label>Plan Status</label>
-      <select
-        name="planStatus"
-        value={planStatus}
-        onChange={handlePlanStatusChange}
-      >
-        {planStatusConfigs.map((status, key) => {
-          return (
-            <option key={key} value={status.value}>
-              {status.text}
-            </option>
-          );
-        })}
-      </select>
-      <label>Validity Period</label>
-      <input
-        type="text"
-        value={validityPeriod}
-        onChange={handleValidityPeriodChange}
-        placeholder="Validity Period"
-      />
-      <label>Sort By</label>
-      <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
-        {sortByConfigs.map((sortBy, key) => {
-          return (
-            <option key={key} value={sortBy.value}>
-              {sortBy.text}
-            </option>
-          );
-        })}
-      </select>
+    <div className="plan-filter-content">
+      <div className="plan-filter">
+        <div className="plan-filter-title">
+          <label>Title:</label>
+          <input
+            type="text"
+            value={text}
+            name="text"
+            onChange={handleTextChange}
+            placeholder="Plan Title"
+          />
+        </div>
+        <div className="plan-filter-price">
+          <label>Price:</label>
+          <input
+            type="text"
+            value={price}
+            onChange={handlePriceChange}
+            placeholder="Plan Price"
+          />
+        </div>
+        <div className="plan-filter-status">
+          <label>Status:</label>
+          <select
+            name="planStatus"
+            value={planStatus}
+            onChange={handlePlanStatusChange}
+          >
+            {planStatusConfigs.map((status, key) => {
+              return (
+                <option key={key} value={status.value}>
+                  {status.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="plan-filter-validity-period">
+          <label>Validity:</label>
+          <input
+            type="text"
+            value={validityPeriod}
+            onChange={handleValidityPeriodChange}
+            placeholder="Validity Period"
+          />
+        </div>
+        <div className="plan-filter-sort-by">
+          <label>Sort:</label>
+          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+            {sortByConfigs.map((sortBy, key) => {
+              return (
+                <option key={key} value={sortBy.value}>
+                  {sortBy.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
     </div>
   );
 };

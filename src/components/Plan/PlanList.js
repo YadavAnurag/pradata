@@ -4,7 +4,7 @@ import Plan from "./Plan";
 
 const PlanList = (props) => {
   return (
-    <div>
+    <div className="plan-list">
       {props.plans.map((plan, key) => {
         return <Plan key={key} plan={plan} onRemove={props.onRemove} />;
       })}

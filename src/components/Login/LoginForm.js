@@ -119,52 +119,63 @@ const LoginForm = (props) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form onSubmit={handleSubmit} className="login__form">
+      <div className="form__component">
         <label>Email Id</label>
         <input
           type="email"
           name="emailId"
-          placeholder="Email Id"
+          // placeholder="Email Id"
           value={emailId}
           onChange={handleEmailIdChange}
           required
         />
         <span>{error.emailId}</span>
-
+      </div>
+      <div className="form__component">
         <label>Password</label>
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          // placeholder="Password"
           value={password}
           onChange={handlePasswordChange}
           title={`Password Should Contain\n\n1 Uppercase Character(A-Z) \n1 Lowercase Character(a-z) \n1 Special Character(!@#$%^&*)\n1 Digit(0-9)\nTotal 8 Characters length`}
           required
         />
         <span>{error.password}</span>
-
-        <div>
-          <label>Captcha</label>
+      </div>
+      <div className="form__component">
+        {/* <label>Captcha</label> */}
+        <div className="captcha">
           <LoadCanvasTemplate />
         </div>
-
-        <label>Captcha</label>
+      </div>
+      <div className="form__component">
+        {/* <label>Captcha</label> */}
         <input
           type="text"
           name="captcha"
-          placeholder="Captcha"
+          placeholder="Enter above captcha"
           value={captcha}
           onChange={handleCaptchaChange}
           required
         />
         <span>{error.captcha}</span>
       </div>
-      <div>
-        <button disabled={props.isLoading}>Login</button>
-        <div hidden={!props.isLoading}>
+
+      <div className="form__component__submit">
+        {props.isLoading ? (
           <Spinner />
+        ) : (
+          <button className="button">Login</button>
+        )}
+        {/* <div>
+          <button disabled={props.isLoading}>Login</button>
         </div>
+        <div hidden={props.isLoading}>
+          <Spinner />
+        </div> */}
       </div>
     </form>
   );

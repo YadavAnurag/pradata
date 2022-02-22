@@ -27,7 +27,12 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div>
+    <div className="login">
+      <div className="login-header-content">
+        <h2>Pradata</h2>
+        <h3>Sign In</h3>
+        <p></p>
+      </div>
       {isLoading ? (
         <LoginForm onSubmit={onSubmit} isLoading={true} />
       ) : (

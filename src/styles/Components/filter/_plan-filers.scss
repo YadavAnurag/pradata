@@ -1,0 +1,65 @@
+.plan-filter-content {
+  //   margin: $small $large;
+
+  margin: auto;
+  width: 80%;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-radius: $xsmall;
+}
+.plan-filter {
+  display: flex;
+  justify-content: center;
+  background: $quaternary;
+  border-radius: $xsmall;
+  padding: $medium;
+  color: white;
+
+  label {
+    margin-right: $xsmall;
+  }
+
+  input {
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: medium;
+  }
+
+  select {
+    border: none;
+    width: 100px;
+    height: 38px;
+    border-radius: $xsmall;
+  }
+}
+
+.plan-filter-title {
+  //   display: flex;
+  //   flex-direction: column;
+  margin: 0 $small 0 0;
+}
+
+.plan-filter-price {
+  //   display: flex;
+  //   flex-direction: column;
+  margin: 0 $small 0 0;
+}
+
+.plan-filter-status {
+  //   display: flex;
+  //   flex-direction: column;
+  margin: 0 $small 0 0;
+}
+
+.plan-filter-validity-period {
+  //   display: flex;
+  //   flex-direction: column;
+  margin: 0 $small 0 0;
+}
+
+.plan-filter-sort-by {
+  //   display: flex;
+  //   flex-direction: column;
+  margin: 0 $small 0 0;
+}

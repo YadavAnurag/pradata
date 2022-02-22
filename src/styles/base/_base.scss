@@ -11,7 +11,7 @@ body {
   font-family: "Ubuntu", Helvetica, Arial, sans-serif;
   font-size: $medium;
   line-height: 1.6;
-  background-color: $quaternary;
+  background-color: $background;
 }
 
 .page-container {
@@ -26,4 +26,8 @@ body {
   @media #{$tablet-breakpoint}, #{$desktop-breakpoint} {
     margin-top: 8rem;
   }
+}
+
+a {
+  text-decoration: none;
 }

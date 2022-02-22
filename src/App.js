@@ -7,6 +7,7 @@ import configureStore from "./store/configureStore";
 //import app from "./playground/app";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "./components/Header/Header";
 
 export const store = configureStore();
 const jsx = (

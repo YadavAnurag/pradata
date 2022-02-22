@@ -28,7 +28,7 @@ import LoginPage from "../components/Login/LoginPage";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Switch>
         <PrivateRoute path="/dashboard" component={Dashboard} exact={true} />
         <PrivateRoute path="/users" component={UserListPage} exact={true} />
@@ -43,11 +43,13 @@ const AppRouter = () => {
         <PrivateRoute path="/usages" component={UsagePage} exact />
         <PrivateRoute path="/users/renew" component={AddUsagePage} exact />
 
-        <PublicRoute path="/login" component={LoginPage} exact />
-        <PrivateRoute path="/plans/" component={PlanListPage} exact />
         <PrivateRoute path="/plans/add" component={AddPlanPage} exact />
         <PrivateRoute path="/plans/edit" component={EditPlanPage} exact />
-        <PrivateRoute path="/profile" component={ProfilePage} exact />
+
+        {/* <PrivateRoute path="/dashboard" component={Dashboard} exact={true} /> */}
+        <PublicRoute path="/login" component={LoginPage} exact />
+        <PublicRoute path="/plans/" component={PlanListPage} exact />
+        <PublicRoute path="/profile" component={ProfilePage} exact />
         <PublicRoute path="/help" component={HelpPage} exact />
         <PublicRoute path="/" component={HomePage} exact />
         <Route>

@@ -1,2 +1,22 @@
 @import "./base/settings";
 @import "./base/base";
+
+@import "utils/button";
+
+@import "./Components/header";
+@import "./Components/home";
+@import "./Components/navigation";
+@import "./Components/login-page";
+@import "./Components/login-form";
+
+// filters
+@import "./Components/filter/plan-filers";
+@import "./Components/filter/user-filters";
+
+// plan
+@import "./Components/plan/add-plan-page";
+@import "./Components/plan/edit-plan-page";
+@import "./Components/plan/plan-form";
+@import "./Components/plan/plan-list-page";
+@import "./Components/plan/plan-list";
+@import "./Components/plan/plan";

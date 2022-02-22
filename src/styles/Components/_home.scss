@@ -1,0 +1,74 @@
+.home-header-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5 * $xlarge 5 * $xlarge;
+
+  //   background-image: url("./../../assets/images/digi.png");
+  //   height: 100%;
+  //   width: 100%;
+  //   background-repeat: no-repeat no-repeat;
+  //   background-position: right;
+  //   margin: $xlarge 0 $xlarge 0;
+
+  .home-header {
+    width: 30%;
+    h3 {
+      font-size: large;
+    }
+    h2 {
+      font-size: $large;
+      line-height: $large;
+    }
+    .home-header__button {
+      margin-top: $medium;
+    }
+  }
+  .home-header-image {
+    width: 50%;
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  }
+}
+
+.card-content {
+  margin: $large 2 * $xlarge;
+  background: white;
+  border-radius: $medium;
+  padding: $medium 0;
+}
+
+.card {
+  display: flex;
+  margin: $large;
+  justify-content: space-between;
+  padding: $large;
+
+  .card__left {
+    margin-right: 6 * $large;
+    h4 {
+      font-size: $large;
+      line-height: $large;
+    }
+    p {
+      margin-top: $medium;
+      color: gray;
+    }
+  }
+  .card__right {
+    // width: 60%;
+
+    img {
+      border-radius: $medium;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.card-divider {
+  border-top: 1px solid #cfd8dc;
+}
