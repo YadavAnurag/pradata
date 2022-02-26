@@ -17,7 +17,7 @@ const UserForm = (props) => {
   let isAdmin = true;
   if (pathname === "/profile") {
     isAdmin = props.user
-      ? props.user.isAdmin && props.user.id.startsWith("xyz")
+      ? props.user.auth.isAdmin && props.user.id.startsWith("xyz")
       : false;
     // console.log(
     //   "isAdmin",
@@ -189,86 +189,88 @@ const UserForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={firstName}
-          onChange={handleFirstNameChange}
-        />
-        <span>{error.firstName}</span>
+      {/* <label>First Name</label> */}
+      <input
+        type="text"
+        name="firstName"
+        placeholder={error.firstName ? error.firstName : "First Name"}
+        value={firstName}
+        onChange={handleFirstNameChange}
+      />
+      {/* <span>{error.firstName}</span> */}
 
-        <label>Middle Name</label>
-        <input
-          type="text"
-          name="middleName"
-          placeholder="Middle Name"
-          value={middleName}
-          onChange={handleMiddleNameChange}
-        />
-        <span>{error.middleName}</span>
+      {/* <label>Middle Name</label> */}
+      <input
+        type="text"
+        name="middleName"
+        placeholder={error.middleName ? `${error.middleName}` : "Middle Name"}
+        value={middleName}
+        onChange={handleMiddleNameChange}
+      />
+      {/* <span>{error.middleName}</span> */}
 
-        <label>Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={handleLastNameChange}
-        />
-        <span>{error.lastName}</span>
+      {/* <label>Last Name</label> */}
+      <input
+        type="text"
+        name="lastName"
+        placeholder={error.lastName ? error.lastName : "Last Name"}
+        value={lastName}
+        onChange={handleLastNameChange}
+      />
+      {/* <span>{error.lastName}</span> */}
 
-        <label>Email Id</label>
-        <input
-          type="text"
-          name="emailId"
-          placeholder="Email Id"
-          value={emailId}
-          onChange={handleEmailIdChange}
-          readOnly={!isAdmin}
-        />
-        <span>{error.emailId}</span>
+      {/* <label>Email Id</label> */}
+      <input
+        type="text"
+        name="emailId"
+        placeholder={error.emailId ? error.emailId : "Email Id"}
+        value={emailId}
+        onChange={handleEmailIdChange}
+        readOnly={!isAdmin}
+      />
+      {/* <span>{error.emailId}</span> */}
 
-        <label>Contact Number</label>
-        <input
-          type="text"
-          name="contactNumber"
-          placeholder="Contact Number"
-          value={contactNumber}
-          onChange={handleContactNumberChange}
-          readOnly={!isAdmin}
-        />
-        <span>{error.contactNumber}</span>
+      {/* <label>Contact Number</label> */}
+      <input
+        type="text"
+        name="contactNumber"
+        placeholder={
+          error.contactNumber ? error.contactNumber : "Contact Number"
+        }
+        value={contactNumber}
+        onChange={handleContactNumberChange}
+        readOnly={!isAdmin}
+        className="text-input"
+      />
+      {/* <span>{error.contactNumber}</span> */}
 
-        <label>Address</label>
-        <textarea
-          name="address"
-          placeholder="Address"
-          value={address}
-          onChange={handleAddressChange}
-          rows="2"
-          cols="30"
-        ></textarea>
-        <span>{error.address}</span>
+      {/* <label>Address</label> */}
+      <textarea
+        name="address"
+        placeholder={error.address ? error.address : "Address"}
+        value={address}
+        onChange={handleAddressChange}
+        rows="2"
+        cols="30"
+      ></textarea>
+      {/* <span>{error.address}</span> */}
 
-        {/* hide status change if user is not admin */}
-        <div hidden={!isAdmin}>
-          <label>Status</label>
-          <select name="status" value={status} onChange={handleStatusChange}>
-            {statusConfigs.map((status, key) => {
-              return (
-                <option key={key} value={status.value}>
-                  {status.text}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+      {/* hide status change if user is not admin */}
+      <div hidden={!isAdmin}>
+        {/* <label>Status</label> */}
+        <select name="status" value={status} onChange={handleStatusChange}>
+          {statusConfigs.map((status, key) => {
+            return (
+              <option key={key} value={status.value}>
+                {status.text}
+              </option>
+            );
+          })}
+        </select>
       </div>
+
       <div>
-        <button>Save</button>
+        <button className="button">Save</button>
       </div>
     </form>
   );

@@ -27,17 +27,25 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div className="login">
-      <div className="login-header-content">
-        <h2>Pradata</h2>
+    // <div className="login">
+    //   <div className="login-header-content">
+    //     <h2>Pradata</h2>
+    //     <h3>Sign In</h3>
+    //     <p></p>
+    //   </div>
+
+    // </div>
+    <div className="box-layout">
+      <div className="box-layout__box">
+        <h1 className="box-layout__title">Pradata App</h1>
         <h3>Sign In</h3>
-        <p></p>
+        <p>It's time to connect with us.</p>
+        {isLoading ? (
+          <LoginForm onSubmit={onSubmit} isLoading={true} />
+        ) : (
+          <LoginForm onSubmit={onSubmit} isLoading={false} />
+        )}
       </div>
-      {isLoading ? (
-        <LoginForm onSubmit={onSubmit} isLoading={true} />
-      ) : (
-        <LoginForm onSubmit={onSubmit} isLoading={false} />
-      )}
     </div>
   );
 };

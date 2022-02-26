@@ -137,86 +137,38 @@ const UserFilters = (props) => {
   });
 
   return (
-    <div>
-      <label>Name</label>
-      <input
-        type="text"
-        value={text}
-        name="text"
-        onChange={handleTextChange}
-        placeholder="Enter Text"
-      />
-      <label>Contact Number</label>
-      <input
-        type="text"
-        value={contactNumber}
-        onChange={handleContactNumberChange}
-        placeholder="Contact Number"
-      />
-      <label>Email Id</label>
-      <input
-        type="email"
-        value={emailId}
-        onChange={handleEmailIdChange}
-        placeholder="Email Id"
-      />
+    <div className="content-container">
+      <div className="input-group">
+        <div className="input-group__item">
+          {/* <label>Name</label> */}
+          <input
+            type="text"
+            value={text}
+            name="text"
+            onChange={handleTextChange}
+            placeholder="Enter Text"
+          />
+        </div>
+        <div className="input-group__item">
+          {/* <label>Contact Number</label> */}
+          <input
+            type="text"
+            value={contactNumber}
+            onChange={handleContactNumberChange}
+            placeholder="Contact Number"
+          />
+        </div>
+        <div className="input-group__item">
+          {/* <label>Email Id</label> */}
+          <input
+            type="email"
+            value={emailId}
+            onChange={handleEmailIdChange}
+            placeholder="Email Id"
+          />
+        </div>
 
-      <label>Plan</label>
-      <select name="planId" value={planId} onChange={handleCurrentPlanIdChange}>
-        <option key={"all"} value={""}>
-          {"All"}
-        </option>
-        {props.plans.map((plan, key) => {
-          return (
-            <option key={key} value={plan.id}>
-              {plan.title}
-            </option>
-          );
-        })}
-      </select>
-
-      <label>Account Status</label>
-      <select
-        name="accountStatus"
-        value={accountStatus}
-        onChange={handleAccountStatusChange}
-      >
-        {accountStatusConfigs.map((status, key) => {
-          return (
-            <option key={key} value={status.value}>
-              {status.text}
-            </option>
-          );
-        })}
-      </select>
-
-      <label>Dues</label>
-      <select
-        name="isDue"
-        value={isDue === null ? "" : isDue}
-        onChange={handleIsDueChange}
-      >
-        {isDueConfigs.map((due, key) => {
-          return (
-            <option key={key} value={due.value}>
-              {due.text}
-            </option>
-          );
-        })}
-      </select>
-
-      <label>Sort By</label>
-      <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
-        {sortByConfigs.map((sortBy, key) => {
-          return (
-            <option key={key} value={sortBy.value}>
-              {sortBy.text}
-            </option>
-          );
-        })}
-      </select>
-
-      {/* <label>Start Date</label>
+        {/* <label>Start Date</label>
       <ReactDatePicker
         selected={startDate}
         onChange={handleStartDateChange}
@@ -235,6 +187,84 @@ const UserFilters = (props) => {
         isClearable
         placeholderText="I have been cleared!"
       /> */}
+      </div>
+      <div className="input-group">
+        <div className="input-group__item">
+          {/* <label>Plan</label> */}
+          <select
+            name="planId"
+            value={planId}
+            onChange={handleCurrentPlanIdChange}
+          >
+            <option key={"select"} value={"select"}>
+              {"Select Plan"}
+            </option>
+            <option key={"all"} value={""}>
+              {"All"}
+            </option>
+            {props.plans.map((plan, key) => {
+              return (
+                <option key={key} value={plan.id}>
+                  {plan.title}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="input-group__item">
+          {/* <label>Account Status</label> */}
+          <select
+            name="accountStatus"
+            value={accountStatus}
+            onChange={handleAccountStatusChange}
+          >
+            <option key={"select"} value={"select"}>
+              {"Select Status"}
+            </option>
+            {accountStatusConfigs.map((status, key) => {
+              return (
+                <option key={key} value={status.value}>
+                  {status.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="input-group__item">
+          {/* <label>Dues</label> */}
+          <select
+            name="isDue"
+            value={isDue === null ? "" : isDue}
+            onChange={handleIsDueChange}
+          >
+            <option key={"select"} value={"select"}>
+              {"Select Due"}
+            </option>
+            {isDueConfigs.map((due, key) => {
+              return (
+                <option key={key} value={due.value}>
+                  {due.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="input-group__item">
+          {/* <label>Sort By</label> */}
+          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+            <option key={"select"} value={"select"}>
+              {"Sort By"}
+            </option>
+            {sortByConfigs.map((sortBy, key) => {
+              return (
+                <option key={key} value={sortBy.value}>
+                  {sortBy.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,86 +1,11 @@
-.plan_component {
-  margin: $large $small;
-  //   border: 3px solid blue;
-  border-radius: 6px;
-
-  width: 100%;
-  text-transform: capitalize;
-  background: white;
-  border-radius: $small;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-}
-.plan {
-  //   margin: $large;
-  padding: $medium 2.5rem;
-
-  a {
-    text-decoration: none;
-  }
-}
-.plan__title {
-  font-weight: bold;
-  font-size: 2.2rem;
-  color: $quaternary;
-}
-.plan__description {
-  .plan__description1 {
-    font-style: italic;
-    font-size: $small;
-    color: black;
-  }
-  .plan__description2 {
+.list-item__price {
+  p:nth-child(1) {
     font-weight: bold;
-    margin-top: $small;
-    font-size: 1.5rem;
-    color: grey;
-  }
-  .plan__description3 {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: grey;
   }
 }
-.plan__price {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: space-between;
 
-  .plan__price-text {
+.list-item__validity {
+  p:nth-child(1) {
     font-weight: bold;
-    color: $quaternary;
   }
-  .plan__price-value {
-    color: #6d7175;
-  }
-}
-.plan__status {
-  display: flex;
-  justify-content: space-between;
-  padding: $small;
-  background: $quaternary;
-  font-style: italic;
-  border-radius: $small $small 0 0;
-  color: white;
-
-  .plan__status-text {
-  }
-  .plan__status-value {
-    font-size: $small;
-  }
-  .plan__remove {
-    color: white;
-    text-decoration: none;
-  }
-}
-.plan__validity {
-  display: flex;
-  justify-content: space-between;
-}
-.plan__validity_period {
-  font-weight: bold;
-  color: $quaternary;
-}
-.plan__validity_duration {
-  color: #6d7175;
 }

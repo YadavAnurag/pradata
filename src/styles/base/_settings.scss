@@ -5,13 +5,17 @@
 // $quaternary: #ffbd69;
 
 // colors
-$background: #eff1f2;
+$background: #f7f7f7;
 $primary: #364f6b;
 $secondary: #3fc1c9;
 $tertiary: #f5f5f5;
 $quaternary: #fc5185;
 
 $disabled: #72d6c9;
+
+// font-size
+$font-size-large: 1.8rem;
+$font-size-small: 1.4rem;
 
 // spacing
 $xsmall: 0.8rem;
@@ -23,4 +27,4 @@ $xlarge: 4.8rem;
 // breakpoints
 $mobile-breakpoint: "(max-width: 499px)";
 $tablet-breakpoint: "(min-width: 500px) and (max-width: 1000px)";
-$desktop-breakpoint: "(min-width: 1001px)";
+$desktop-breakpoint: 45rem;

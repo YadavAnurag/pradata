@@ -76,10 +76,10 @@ const PlanFilters = (props) => {
   };
 
   return (
-    <div className="plan-filter-content">
-      <div className="plan-filter">
-        <div className="plan-filter-title">
-          <label>Title:</label>
+    <div className="content-container">
+      <div className="input-group">
+        <div className="input-group__item">
+          {/* <label>Title:</label> */}
           <input
             type="text"
             value={text}
@@ -88,8 +88,8 @@ const PlanFilters = (props) => {
             placeholder="Plan Title"
           />
         </div>
-        <div className="plan-filter-price">
-          <label>Price:</label>
+        <div className="input-group__item">
+          {/* <label>Price:</label> */}
           <input
             type="text"
             value={price}
@@ -97,24 +97,8 @@ const PlanFilters = (props) => {
             placeholder="Plan Price"
           />
         </div>
-        <div className="plan-filter-status">
-          <label>Status:</label>
-          <select
-            name="planStatus"
-            value={planStatus}
-            onChange={handlePlanStatusChange}
-          >
-            {planStatusConfigs.map((status, key) => {
-              return (
-                <option key={key} value={status.value}>
-                  {status.text}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <div className="plan-filter-validity-period">
-          <label>Validity:</label>
+        <div className="input-group__item">
+          {/* <label>Validity:</label> */}
           <input
             type="text"
             value={validityPeriod}
@@ -122,17 +106,35 @@ const PlanFilters = (props) => {
             placeholder="Validity Period"
           />
         </div>
-        <div className="plan-filter-sort-by">
-          <label>Sort:</label>
-          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
-            {sortByConfigs.map((sortBy, key) => {
-              return (
-                <option key={key} value={sortBy.value}>
-                  {sortBy.text}
-                </option>
-              );
-            })}
-          </select>
+        <div className="input-group">
+          <div className="input-group__item">
+            {/* <label>Sort:</label> */}
+            <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+              {sortByConfigs.map((sortBy, key) => {
+                return (
+                  <option key={key} value={sortBy.value}>
+                    {sortBy.text}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="input-group__item">
+            {/* <label>Status:</label> */}
+            <select
+              name="planStatus"
+              value={planStatus}
+              onChange={handlePlanStatusChange}
+            >
+              {planStatusConfigs.map((status, key) => {
+                return (
+                  <option key={key} value={status.value}>
+                    {status.text}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
       </div>
     </div>

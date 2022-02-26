@@ -30,21 +30,21 @@ const AppRouter = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <PrivateRoute path="/dashboard" component={Dashboard} exact={true} />
-        <PrivateRoute path="/users" component={UserListPage} exact={true} />
-        <PrivateRoute path="/users/add" component={AddUserPage} exact />
-        <PrivateRoute path="/users/edit" component={EditUserPage} exact />
-        <PrivateRoute
+        <PublicRoute path="/dashboard" component={Dashboard} exact={true} />
+        <PublicRoute path="/users" component={UserListPage} exact={true} />
+        <PublicRoute path="/users/add" component={AddUserPage} exact />
+        <PublicRoute path="/users/edit" component={EditUserPage} exact />
+        <PublicRoute
           path="/users/add-payment"
           component={AddPaymentPage}
           exact
         />
 
-        <PrivateRoute path="/usages" component={UsagePage} exact />
-        <PrivateRoute path="/users/renew" component={AddUsagePage} exact />
+        <PublicRoute path="/usages" component={UsagePage} exact />
+        <PublicRoute path="/users/renew" component={AddUsagePage} exact />
 
-        <PrivateRoute path="/plans/add" component={AddPlanPage} exact />
-        <PrivateRoute path="/plans/edit" component={EditPlanPage} exact />
+        <PublicRoute path="/plans/add" component={AddPlanPage} exact />
+        <PublicRoute path="/plans/edit" component={EditPlanPage} exact />
 
         {/* <PrivateRoute path="/dashboard" component={Dashboard} exact={true} /> */}
         <PublicRoute path="/login" component={LoginPage} exact />

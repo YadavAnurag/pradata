@@ -1,0 +1,105 @@
+.list-header {
+  background: $quaternary;
+  border: 1px solid darken($color: $quaternary, $amount: 7%);
+  box-shadow: $quaternary 0px 4px 8px -2px, $quaternary 0px 0px 0px 1px;
+  border-radius: $xsmall;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: $small $medium;
+}
+
+.list-body {
+  margin-bottom: $medium;
+  @media (min-width: $desktop-breakpoint) {
+    margin-bottom: $large;
+  }
+}
+
+.list-item {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border: 1px solid darken($color: $background, $amount: 7%);
+  border-top: none;
+  border-radius: 0 0 $xsmall $xsmall;
+  color: darken($color: grey, $amount: 70%);
+  display: flex;
+  flex-direction: column;
+  padding: $small;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: background 0.3s ease;
+  background: $background;
+  &:hover {
+    background: $background;
+  }
+  @media (min-width: $desktop-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $medium;
+  }
+}
+
+.list-item-top {
+  background: $quaternary;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 0 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border: 1px solid darken($color: $background, $amount: 7%);
+  border-bottom: 1px solid darken($color: $background, $amount: 7%);
+  border-radius: $xsmall $xsmall 0 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: $xsmall;
+  // padding: $small;
+  text-decoration: none;
+  font-style: italic;
+  font-size: 12px;
+  text-transform: capitalize;
+  transition: background 0.3s ease;
+
+  @media (min-width: $desktop-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 $medium;
+  }
+}
+
+.list-item-top__remove {
+  color: white;
+}
+
+// .list-item-top:nth-child(1) {
+//   margin-top: 0;
+// }
+
+// .list-item--message {
+//   align-items: center;
+//   color: grey;
+//   justify-content: center;
+//   &:hove {
+//     background: none;
+//   }
+// }
+
+.list-item__title {
+  font-weight: bold;
+  margin: 0;
+  word-break: break-all;
+}
+
+.list-item__subtitle {
+  color: grey;
+  font-size: $font-size-small;
+}
+
+.list-item__data {
+  margin: $small 0 0 0;
+
+  @media (min-width: $desktop-breakpoint) {
+    margin: 0;
+    padding-left: $medium;
+  }
+}

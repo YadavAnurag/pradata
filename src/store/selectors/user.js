@@ -20,6 +20,8 @@ export const getSelectedUsers = (users, plans, userFilters) => {
 
   return users
     .filter((user) => {
+      console.log("got", user);
+
       const {
         totalPaymentReceived,
         dueAmount,
@@ -83,7 +85,7 @@ export const getSelectedUsers = (users, plans, userFilters) => {
       }
 
       // return only non admin user
-      const isNotAdminMatch = user.isAdmin === false;
+      const isNotAdminMatch = user.auth.isAdmin === false;
 
       console.log(
         "textMatch",
@@ -102,6 +104,19 @@ export const getSelectedUsers = (users, plans, userFilters) => {
         startDateMatch,
         "endDateMatch",
         endDateMatch
+      );
+
+      console.log(
+        "show or not",
+        textMatch &&
+          contactNumberMatch &&
+          emailIdMatch &&
+          currentPlanIdMatch &&
+          userAccountStatusMatch &&
+          isDueMatch &&
+          startDateMatch &&
+          endDateMatch &&
+          isNotAdminMatch
       );
 
       return (

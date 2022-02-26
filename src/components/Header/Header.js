@@ -33,7 +33,8 @@ export const Header = (props) => {
   let routes = null;
   if (!!!props.userId) {
     console.log("1");
-    routes = routesObject.public;
+    // routes = routesObject.public; UNDO
+    routes = routesObject.admin;
   } else {
     console.log("2");
     if (props.isAdmin) {

@@ -8,39 +8,37 @@ const Plan = (props) => {
 
   return (
     <div className="plan_component">
-      <div className="plan__status">
-        {/* <p className="plan__status-text">status:</p> */}
+      <div className="list-item-top">
         <p className="plan__status-value">{status}</p>
-        <Link onClick={() => props.onRemove(id)} className="plan__remove">
+        <Link
+          onClick={() => props.onRemove(id)}
+          className="list-item-top__remove"
+        >
           X
         </Link>
       </div>
-      <div className="plan">
-        <Link to={`/plans/edit?id=${id}`} className="plan__link">
-          {/* <p>id: {id}</p> */}
+      <Link to={`/plans/edit?id=${id}`} className="list-item">
+        {/* <p>id: {id}</p> */}
 
-          <p className="plan__title">{title}</p>
-          <div className="plan__description">
-            <p className="plan__description1">{description}</p>
-            <p className="plan__description2">Uninterrupted Supply</p>
-            <p className="plan__description3">Unlimited Watch Time</p>
-          </div>
+        <p className="list-item__title">{title}</p>
+        <div className="list-item__description">
+          <p>Uninterrupted Supply</p>
+          <p>Unlimited Watch Time</p>
+          <p>{description}</p>
+        </div>
 
-          <div className="plan__price">
-            <p className="plan__price-text">Price:</p>
-            <p className="plan__price-value">&#8377;{price / 100}</p>
-          </div>
-          <div className="plan__validity">
-            <p className="plan__validity_period">Validity:</p>
-            <p className="plan__validity_duration">
-              {moment.duration(validityPeriod, "milliseconds").asDays()} Days
-            </p>
-          </div>
-          {/* <p className="plan__create_at">
+        <div className="list-item__price">
+          <p>Price:</p>
+          <p>&#8377;{price / 100}</p>
+        </div>
+        <div className="list-item__validity">
+          <p>Validity:</p>
+          <p>{moment.duration(validityPeriod, "milliseconds").asDays()} Days</p>
+        </div>
+        {/* <p className="plan__create_at">
             Created On: {moment(createdAt).format()}
           </p> */}
-        </Link>
-      </div>
+      </Link>
     </div>
   );
 };

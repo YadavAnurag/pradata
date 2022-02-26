@@ -1,0 +1,27 @@
+.box-layout {
+  align-items: center;
+  // background: url("/public/images/connect.png");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  // height: 100vh;
+  width: 100vw;
+}
+
+.box-layout__box {
+  background: fade-out($color: white, $amount: 0);
+  border-radius: 3px;
+  padding: $large $medium;
+  text-align: center;
+  width: 32rem;
+
+  p {
+    padding-bottom: $medium;
+  }
+}
+
+.box-layout__title {
+  color: $quaternary;
+  margin: 0 0 $medium 0;
+  line-height: 1;
+}

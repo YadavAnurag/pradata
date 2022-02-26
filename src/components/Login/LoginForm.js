@@ -121,11 +121,11 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={handleSubmit} className="login__form">
       <div className="form__component">
-        <label>Email Id</label>
+        {/* <label>Email Id</label> */}
         <input
           type="email"
           name="emailId"
-          // placeholder="Email Id"
+          placeholder="Email Id"
           value={emailId}
           onChange={handleEmailIdChange}
           required
@@ -133,11 +133,11 @@ const LoginForm = (props) => {
         <span>{error.emailId}</span>
       </div>
       <div className="form__component">
-        <label>Password</label>
+        {/* <label>Password</label> */}
         <input
           type="password"
           name="password"
-          // placeholder="Password"
+          placeholder="Password"
           value={password}
           onChange={handlePasswordChange}
           title={`Password Should Contain\n\n1 Uppercase Character(A-Z) \n1 Lowercase Character(a-z) \n1 Special Character(!@#$%^&*)\n1 Digit(0-9)\nTotal 8 Characters length`}

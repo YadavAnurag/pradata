@@ -14,18 +14,14 @@ body {
   background-color: $background;
 }
 
-.page-container {
-  position: relative;
-  min-height: 100vh;
+button {
+  cursor: pointer;
 }
-.content-wrap {
-  padding-bottom: 8rem;
-  @media #{$mobile-breakpoint} {
-    margin-top: 8rem;
-  }
-  @media #{$tablet-breakpoint}, #{$desktop-breakpoint} {
-    margin-top: 8rem;
-  }
+button:disabled {
+  cursor: default;
+}
+.is-active {
+  font-weight: bold;
 }
 
 a {

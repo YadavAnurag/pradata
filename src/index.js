@@ -59,17 +59,20 @@ const renderApp = () => {
 
 // set plans
 console.log("gonna call");
+//store.dispatch(initSetPlans()).then(() => {
 store.dispatch(initSetPlans()).then(() => {
-  if (store.getState().auth.userId) {
-    console.log("store.getState().auth.userId", store.getState().auth.userId);
-    store.dispatch(login(store.getState().auth.userId));
-    store.dispatch(initSetUsers()).then(() => {
+  store.dispatch(initSetUsers()).then(() => {
+    if (store.getState().auth.userId) {
+      console.log("store.getState().auth.userId", store.getState().auth.userId);
+      store.dispatch(login(store.getState().auth.userId));
+      store.dispatch(initSetUsers()).then(() => {
+        renderApp();
+      });
+    } else {
+      store.dispatch(logout());
       renderApp();
-    });
-  } else {
-    store.dispatch(logout());
-    renderApp();
-  }
+    }
+  });
 });
 
 // If you want to start measuring performance in your app, pass a function

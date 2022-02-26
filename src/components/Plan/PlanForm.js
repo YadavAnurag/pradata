@@ -143,52 +143,52 @@ const PlanForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>{/* show error using state */}</div>
-      <div>
-        <label>Title</label>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={handleTitleChange}
-        />
-        <span>{error.title}</span>
+      {/* <div>show error using state</div> */}
+      {/* <div> */}
+      {/* <label>Title</label> */}
+      <input
+        type="text"
+        placeholder={error.title ? error.title : "Title"}
+        value={title}
+        onChange={handleTitleChange}
+      />
+      {/* <span>{error.title}</span> */}
 
-        <label>Validity Period in Days</label>
-        <input
-          type="text"
-          placeholder="Validity Period"
-          value={validityPeriod}
-          onChange={handleValidityPeriod}
-        />
-        <label>Price</label>
-        <input
-          type="text"
-          placeholder="Price"
-          value={price}
-          onChange={handlePriceChange}
-        />
-        <label>Description</label>
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-        <span>{error.description}</span>
-        <label>Status</label>
-        <select name="status" value={status} onChange={handleStatusChange}>
-          {planStatusConfigs.map((status, key) => {
-            return (
-              <option key={key} value={status.value}>
-                {status.text}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+      {/* <label>Validity Period in Days</label> */}
+      <input
+        type="text"
+        placeholder="Validity Period in Days"
+        value={validityPeriod}
+        onChange={handleValidityPeriod}
+      />
+      {/* <label>Price</label> */}
+      <input
+        type="text"
+        placeholder="Price"
+        value={price}
+        onChange={handlePriceChange}
+      />
+      {/* <label>Description</label> */}
+      <input
+        type="text"
+        placeholder={error.description ? error.description : "Description"}
+        value={description}
+        onChange={handleDescriptionChange}
+      />
+      {/* <span>{error.description}</span> */}
+      {/* <label>Status</label> */}
+      <select name="status" value={status} onChange={handleStatusChange}>
+        {planStatusConfigs.map((status, key) => {
+          return (
+            <option key={key} value={status.value}>
+              {status.text}
+            </option>
+          );
+        })}
+      </select>
+      {/* </div> */}
       <div>
-        <button>Save Plan</button>
+        <button className="button">Save Plan</button>
       </div>
     </form>
   );

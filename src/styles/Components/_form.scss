@@ -1,0 +1,46 @@
+form {
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin-bottom: $medium;
+  }
+}
+
+.form__error {
+  margin: 0 0 $medium 0;
+  font-style: italic;
+}
+
+input[type="text"] {
+  border: 1px solid #cacccd;
+  border-radius: $xsmall;
+  height: 50px;
+  font-size: $font-size-large;
+  font-weight: 300;
+  padding: $small;
+}
+
+input[type="email"] {
+  @extend input[type="text"];
+}
+
+input[type="password"] {
+  @extend input[type="text"];
+}
+
+select {
+  @extend input[type="text"];
+}
+
+textarea {
+  @extend input[type="text"];
+  height: 100px;
+  font-size: $small;
+}
+
+.captcha {
+  div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
