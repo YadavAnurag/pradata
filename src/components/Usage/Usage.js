@@ -12,17 +12,22 @@ const Usage = (props) => {
     .title;
 
   console.log(planName, "[AddPaymentPage.js] - props.user", props);
+  const isAdmin = JSON.parse(localStorage.getItem("auth")).isAdmin;
+
   return (
     <div>
       <div className="list-item-top">
         <p className="plan__status-value">Usage</p>
-        <Link
-          to={`/users/add-payment?userId=${props.user.id}&usageId=${id}`}
-          className="list-item-top__usage-link"
-        >
-          Add Payment
-        </Link>
+        {isAdmin && (
+          <Link
+            to={`/users/add-payment?userId=${props.user.id}&usageId=${id}`}
+            className="list-item-top__usage-link"
+          >
+            Add Payment
+          </Link>
+        )}
       </div>
+
       <div className="user-list-item">
         <div className="list-item__user-details">
           <div>

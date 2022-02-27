@@ -14,6 +14,7 @@ import HomePage from "../components/Home/HomePage";
 import HelpPage from "../components/Help/HelpPage";
 import Header from "../components/Header/Header";
 import PlanListPage from "../components/Plan/PlanListPage";
+import PaymentPage from "../components/UserPayment/UserPayment";
 import ProfilePage from "../components/Profile/ProfilePage";
 import UserListPage from "../components/User/UserListPage";
 import UsagePage from "../components/Usage/UsagePage";
@@ -49,6 +50,7 @@ const AppRouter = () => {
         {/* <PrivateRoute path="/dashboard" component={Dashboard} exact={true} /> */}
         <PublicRoute path="/login" component={LoginPage} exact />
         <PublicRoute path="/plans/" component={PlanListPage} exact />
+        <PublicRoute path="/payments" component={PaymentPage} exact />
         <PublicRoute path="/profile" component={ProfilePage} exact />
         <PublicRoute path="/help" component={HelpPage} exact />
         <PublicRoute path="/" component={HomePage} exact />

@@ -19,6 +19,7 @@ export const Header = (props) => {
       { to: "/", text: "Home" },
       { to: "/dashboard", text: "Dashboard" },
       { to: "/plans", text: "Plans" },
+      { to: "/payments", text: "Payments" },
       { to: "/profile", text: "Profile" },
       { to: "/help", text: "Help" },
     ],

@@ -54,8 +54,7 @@ const PaymentForm = (props) => {
       setError({
         paymentMethod: "",
         paymentReferenceId: "",
-        suggestDigital:
-          "Always accept only Digital Transaction, through BHIM App",
+        suggestDigital: "Use BHIM App for Digital Transaction",
       });
     } else {
       // clear error and thanks for digi
@@ -107,7 +106,7 @@ const PaymentForm = (props) => {
         paymentReferenceId:
           paymentMethod === "digital"
             ? paymentReferenceId
-            : "Always accept only Digital Transaction, through BHIM App",
+            : "Use BHIM App for Digital Transaction",
         paidAt: moment().valueOf(),
       };
       console.log(paymentDetail);
