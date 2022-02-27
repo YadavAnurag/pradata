@@ -23,9 +23,11 @@ const PlansSummary = (props) => {
           Viewing <span>{planCount}</span> {planWord}{" "}
         </h1>
         <div className="page-header__actions">
-          <Link to="/plans/add" className="button">
-            Add Plan
-          </Link>
+          {props.isAdmin === true && (
+            <Link to="/plans/add" className="button">
+              Add Plan
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -34,9 +36,9 @@ const PlansSummary = (props) => {
 
 const mapStateToProps = (state) => {
   const selectedPlans = getSelectedPlans(state.plans, state.planFilters);
-
   return {
     planCount: selectedPlans.length,
+    isAdmin: state.auth.isAdmin,
   };
 };
 export default connect(mapStateToProps)(PlansSummary);
