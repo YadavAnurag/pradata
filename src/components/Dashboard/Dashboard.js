@@ -26,7 +26,7 @@ const Dashboard = (props) => {
   } else {
     console.log("2");
     if (props.isAdmin) {
-      console.log("3");
+      console.log("3- props.adminDashboardData", props.adminDashboardData);
       dashboardJSX = (
         <AdminDashboardPage
           adminDashboardDataObject={props.adminDashboardData}
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
     isAdmin: state.auth.isAdmin,
     userId: state.auth.userId,
     userDashboardData: state.userDashboard,
-    adminDashboardData: state.userDashboard,
+    adminDashboardData: state.adminDashboard,
     user: state.users.find(({ id }) => id === state.auth.userId),
   };
 };
