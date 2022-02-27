@@ -12,26 +12,17 @@ export const login = ({ userId, isAdmin }) => ({
 export const initLogin = (authDetails) => {
   return async (dispatch) => {
     console.log("gonna send ", authDetails);
-    // try {
-    //   const response = await authService.authenticate(authDetails);
-    //   console.log("got response", response);
-    //   dispatch(
-    //     login({ userId: response.data.userId, isAdmin: response.data.isAdmin })
-    //   );
-    //   return Promise.resolve(response.data.userId);
-    // } catch (err) {
-    //   console.log(err);
-    //   return Promise.reject("Authentication Failed, Please try again later...");
-    // }
 
     try {
       const response = await authService.authenticate(authDetails);
 
       console.log("got response", response.data.error);
 
-      if (response.data.error) {  
+      if (response.data.error) {
         return Promise.reject(response.data.msg);
       } else {
+        // no error
+
         dispatch(
           login({
             userId: response.data.userId,

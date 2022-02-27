@@ -1,9 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import queryString from "query-string";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import Header from "../Header/Header";
 import digiPic from "../../assets/images/digi.png";
@@ -15,6 +12,7 @@ import profilePic from "../../assets/images/profile.png";
 import { initLogin, initSetUsers } from "../../store/actions";
 
 const HomePage = (props) => {
+  console.log("loginButton", JSON.parse(localStorage.getItem("auth")));
   return (
     <div>
       <Header />
@@ -25,9 +23,16 @@ const HomePage = (props) => {
           <h3>Pradata</h3>
           <h2>Fast and Secure</h2>
           <h2>cable TV connection</h2>
-          <Link to={`/login`} className="button home-header__button">
-            Login
-          </Link>
+
+          {JSON.parse(localStorage.getItem("auth")).userId === "" ? (
+            <Link to={`/login`} className="button home-header__button">
+              Login
+            </Link>
+          ) : (
+            <Link to={`/plans`} className="button home-header__button">
+              Plans
+            </Link>
+          )}
         </div>
         <div className="home-header-image">
           <img src={digiPic} alt="connect"></img>

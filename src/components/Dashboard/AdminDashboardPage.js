@@ -8,7 +8,5 @@ const AdminDashboard = (props) => {
     </div>
   );
 };
-// const mapStateToProps = (state) => {
-//   return {};
-// };
+
 export default AdminDashboard;

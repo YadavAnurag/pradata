@@ -7,7 +7,5 @@ const UserDashboard = (props) => {
     </div>
   );
 };
-// const mapStateToProps = (state) => {
-//   return {};
-// };
+
 export default UserDashboard;

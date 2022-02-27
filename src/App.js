@@ -9,7 +9,12 @@ import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
 
+import onAuthStateChanged from "./utils/auth";
+
 export const store = configureStore();
+// subscribe functions to store eg. for authChange
+store.subscribe(() => onAuthStateChanged(store.getState().auth));
+
 const jsx = (
   <Provider store={store}>
     <ToastContainer

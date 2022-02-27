@@ -45,7 +45,6 @@ const configureStore = () => {
     rootReducer,
     composeEnhancers(applyMiddleware(thunk, logger))
   );
-
   return store;
 };
 

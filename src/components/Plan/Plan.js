@@ -10,12 +10,12 @@ const Plan = (props) => {
     <div className="plan_component">
       <div className="list-item-top">
         <p className="plan__status-value">{status}</p>
-        <Link
+        <button
           onClick={() => props.onRemove(id)}
-          className="list-item-top__remove"
+          className="list-item-top__remove button--link"
         >
           X
-        </Link>
+        </button>
       </div>
       <Link to={`/plans/edit?id=${id}`} className="list-item">
         {/* <p>id: {id}</p> */}

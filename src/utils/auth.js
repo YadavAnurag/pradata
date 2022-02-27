@@ -1,21 +1,37 @@
-// const onAuthStateChanged = new Promise((resolve, reject) => {
-//   // TODO
-//   /* if state.auth.uid !== localStorage.auth.uid
-//     then check if
-//     then call auth login and get below uid
-//   */
-//   if (localStorage.auth.uid === "") {
-//     if (state.auth.uid !== localStorage.auth.uid) {
-//       localStorage.auth.uid = state.auth.uid;
-//     }
-//   } else {
-//     resolve("");
-//   }
+const onAuthStateChanged = (auth) => {
+  //   console.log(
+  //     "[onAuthStateChanged] Called ",
+  //     auth,
+  //     localStorage,
+  //     localStorage.length
+  //   );
 
-//   const uid = "anu";
-//   if (uid) {
-//     resolve(uid);
-//   } else {
-//     reject(new Error("Not Found"));
-//   }
-// });
+  return new Promise((resolve, reject) => {
+    if (!localStorage.length) {
+      // no storage
+      localStorage.setItem("auth", JSON.stringify(auth));
+    } else {
+      const previousAuth = JSON.parse(localStorage.getItem("auth"));
+      console.log("previousAuth", previousAuth);
+      console.log(
+        previousAuth.userId,
+        auth.userId,
+        previousAuth.userId !== auth.userId
+      );
+      console.log(
+        previousAuth.isAdmin,
+        auth.isAdmin,
+        previousAuth.isAdmin !== auth.isAdmin
+      );
+      if (
+        previousAuth.userId !== auth.userId ||
+        previousAuth.isAdmin !== auth.isAdmin
+      ) {
+        localStorage.setItem("auth", JSON.stringify(auth));
+      }
+    }
+    resolve("");
+  });
+};
+
+export default onAuthStateChanged;
