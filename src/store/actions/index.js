@@ -24,4 +24,10 @@ export {
   initSetPlans,
 } from "./plan/plan";
 
+export {
+  editConnect,
+  initEditConnect,
+  initSetConnect,
+} from "./connect/connect";
+
 export { login, initLogin, logout, initLogout } from "./auth/auth";

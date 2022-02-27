@@ -1,6 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { initSetConnect } from "../../store/actions/index";
 
 const ConnectPage = (props) => {
+  React.useEffect(() => {
+    if (Object.keys(props.connectData).length === 0) {
+      props.onInitSetConnect();
+    }
+  }, []);
+
   return (
     <div className="page-header">
       <div className="content-container">
@@ -20,4 +29,14 @@ const ConnectPage = (props) => {
   );
 };
 
-export default ConnectPage;
+const mapStateToProps = (state) => {
+  return {
+    connectData: state.connect,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInitSetConnect: () => dispatch(initSetConnect()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectPage);

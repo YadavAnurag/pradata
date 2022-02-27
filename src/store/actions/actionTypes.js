@@ -47,3 +47,9 @@ export const SET_PLAN_SORT_BY_FILTER = "SET_PLAN_SORT_BY_FILTER";
 // auth actions
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+
+// connect actions
+export const EDIT_CONNECT = "EDIT_CONNECT";
+// set connect from server
+export const SET_CONNECT = "SET_CONNECT";
+export const FETCH_CONNECT_FAILED = "FETCH_CONNECT_FAILED";

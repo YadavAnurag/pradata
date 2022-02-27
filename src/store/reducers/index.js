@@ -6,3 +6,5 @@ export { userFilterReducer } from "./user/userFilter";
 export { userDashboardReducer, adminDashboardReducer } from "./user/dashboard";
 
 export { authReducer } from "./auth/auth";
+
+export { connectReducer } from "./connect/connect";

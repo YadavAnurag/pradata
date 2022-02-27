@@ -9,6 +9,7 @@ import {
   authReducer,
   userDashboardReducer,
   adminDashboardReducer,
+  connectReducer,
 } from "./reducers/index";
 
 const composeEnhancers =
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   userDashboard: userDashboardReducer,
   adminDashboard: adminDashboardReducer,
+  connect: connectReducer,
 });
 
 // store creation
