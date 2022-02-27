@@ -14,8 +14,8 @@ form {
 input[type="text"] {
   border: 1px solid #cacccd;
   border-radius: $xsmall;
-  height: 50px;
-  font-size: $font-size-large;
+  height: 40px;
+  font-size: $font-size-small;
   font-weight: 300;
   padding: $small;
 }
@@ -42,5 +42,14 @@ textarea {
   div:nth-child(1) {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  input[type="text"] {
+    height: 50px;
+    font-size: $font-size-large;
+    font-weight: 300;
+    padding: $small;
   }
 }

@@ -256,18 +256,21 @@ const UserForm = (props) => {
       {/* <span>{error.address}</span> */}
 
       {/* hide status change if user is not admin */}
-      <div hidden={!isAdmin}>
-        {/* <label>Status</label> */}
-        <select name="status" value={status} onChange={handleStatusChange}>
-          {statusConfigs.map((status, key) => {
-            return (
-              <option key={key} value={status.value}>
-                {status.text}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+      {/* <label>Status</label> */}
+      <select
+        name="status"
+        value={status}
+        onChange={handleStatusChange}
+        hidden={!isAdmin}
+      >
+        {statusConfigs.map((status, key) => {
+          return (
+            <option key={key} value={status.value}>
+              {status.text}
+            </option>
+          );
+        })}
+      </select>
 
       <div>
         <button className="button">Save</button>

@@ -79,7 +79,6 @@ const PlanFilters = (props) => {
     <div className="content-container">
       <div className="input-group">
         <div className="input-group__item">
-          {/* <label>Title:</label> */}
           <input
             type="text"
             value={text}
@@ -106,35 +105,34 @@ const PlanFilters = (props) => {
             placeholder="Validity Period"
           />
         </div>
-        <div className="input-group">
-          <div className="input-group__item">
-            {/* <label>Sort:</label> */}
-            <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
-              {sortByConfigs.map((sortBy, key) => {
-                return (
-                  <option key={key} value={sortBy.value}>
-                    {sortBy.text}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="input-group__item">
-            {/* <label>Status:</label> */}
-            <select
-              name="planStatus"
-              value={planStatus}
-              onChange={handlePlanStatusChange}
-            >
-              {planStatusConfigs.map((status, key) => {
-                return (
-                  <option key={key} value={status.value}>
-                    {status.text}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+      </div>
+      <div className="input-group">
+        <div className="input-group__item">
+          {/* <label>Sort:</label> */}
+          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+            {sortByConfigs.map((sortBy, key) => {
+              return (
+                <option key={key} value={sortBy.value}>
+                  {sortBy.text}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="input-group__item">
+          <select
+            name="planStatus"
+            value={planStatus}
+            onChange={handlePlanStatusChange}
+          >
+            {planStatusConfigs.map((status, key) => {
+              return (
+                <option key={key} value={status.value}>
+                  {status.text}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
     </div>

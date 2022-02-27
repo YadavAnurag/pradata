@@ -2,6 +2,8 @@
 @import "./base/base";
 
 @import "utils/button";
+@import "utils/icons";
+@import "ui/accordion";
 
 @import "./components/box-layout";
 @import "./components/content-container";
@@ -29,3 +31,14 @@
 @import "./Components/plan/plan-list-page";
 @import "./Components/plan/plan-list";
 @import "./Components/plan/plan";
+
+// user
+@import "./Components/user/user";
+
+// usage
+@import "./Components/usage/usage-page";
+@import "./Components/usage/current-usage";
+
+// payment
+@import "./Components/payment/payment";
+@import "./Components/payment/add-payment-page";

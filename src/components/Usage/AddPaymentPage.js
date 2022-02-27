@@ -10,7 +10,9 @@ import {
   getUsagePaymentDetails,
 } from "../../store/utility/utility";
 import PaymentForm from "./PaymentForm";
-import moment from "moment";
+
+import User from "../User/User";
+import CurrentUsage from "./CurrentUsage";
 
 export const AddPaymentPage = (props) => {
   const history = useHistory();
@@ -18,13 +20,7 @@ export const AddPaymentPage = (props) => {
   const user = props.users.find(({ id }) => id === userId);
   const usage = user.usages.find(({ id }) => id === usageId);
 
-  const {
-    totalDueToThisUsage,
-    totalPaidAmountToThisUsage,
-    planDueDateToThisUsage,
-    planName,
-    planPrice,
-  } = getUsagePaymentDetails({ usage, plans: props.plans });
+  const currentUsage = getUsagePaymentDetails({ usage, plans: props.plans });
 
   const onSubmit = (paymentDetail) => {
     props
@@ -39,10 +35,11 @@ export const AddPaymentPage = (props) => {
   };
 
   // if no due then display no payment required jsx
-  console.log("totalDueToThisUsage", totalDueToThisUsage);
+  // console.log("totalDueToThisUsage", totalDueToThisUsage);
+  const totalDueToThisUsage = currentUsage.totalDueToThisUsage;
   const jsx =
     totalDueToThisUsage <= 0 ? (
-      <div>
+      <div className="payment-status">
         <h3>No Payment Required, all dues already settled </h3>
       </div>
     ) : (
@@ -61,37 +58,12 @@ export const AddPaymentPage = (props) => {
           <div className="page-header__title">
             <h1>Add Payment</h1>
           </div>
-          <div>
-            <p>
-              Name:
-              {
-                getUserFullName({
-                  firstName: user.firstName,
-                  middleName: user.middleName,
-                  lastName: user.lastName,
-                }).fullName
-              }
-            </p>
-            <p>Contact Number: {user.contactNumber}</p>
-            <p>EmailId: {user.emailId}</p>
-            <p>Account Status: {user.status}</p>
-          </div>
+          <User user={user} />
+          <CurrentUsage currentUsage={currentUsage} />
+          <div>{jsx}</div>
         </div>
       </div>
       <br />
-      <div className="content-container">
-        <div>
-          <p>Plan: {planName}</p>
-          <p>Renewed At: {moment(usage.startedAt).format()}</p>
-          <p>Plan Due Date: {moment(planDueDateToThisUsage).format()}</p>
-          <p>Price: &#8377;{planPrice / 100}</p>
-          <p>
-            Total Payment Received : &#8377;{totalPaidAmountToThisUsage / 100}
-          </p>
-          <p>Amount Due: &#8377;{totalDueToThisUsage / 100}</p>
-        </div>
-        <div>{jsx}</div>
-      </div>
     </div>
   );
 };

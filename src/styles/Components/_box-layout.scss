@@ -12,16 +12,22 @@
   background: fade-out($color: white, $amount: 0);
   border-radius: 3px;
   padding: $large $medium;
+  margin-top: $medium;
   text-align: center;
-  width: 32rem;
+  width: 34rem;
+  height: 80vh;
 
   p {
     padding-bottom: $medium;
   }
 }
-
+.box-layout__box {
+  h3 {
+    margin-bottom: $large;
+  }
+}
 .box-layout__title {
   color: $quaternary;
-  margin: 0 0 $medium 0;
+  margin: 0 0 $small 0;
   line-height: 1;
 }

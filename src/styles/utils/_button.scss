@@ -6,8 +6,8 @@
   display: inline-block;
   font-weight: 300;
   line-height: 1;
-  font-size: $font-size-large;
-  padding: $small $medium;
+  font-size: $font-size-small;
+  padding: $small;
   text-decoration: none;
 }
 
@@ -17,4 +17,11 @@
 
 .button--secondary {
   background: #888888;
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .button {
+    font-size: $font-size-large;
+    padding: $small $medium;
+  }
 }

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 import UsageList from "./UsageList";
+import User from "../User/User";
 import { getSelectedUsers } from "../../store/selectors/index";
 import { getUserFullName } from "../../store/utility/utility";
 
@@ -19,34 +20,20 @@ const UsagePage = (props) => {
   });
   const usages = user.usages;
 
-  const {
-    firstName,
-    middleName,
-    lastName,
-    emailId,
-    contactNumber,
-    address,
-    status,
-    createdAt,
-  } = user;
-
   return (
-    <div>
-      <div>
-        <Link to={`/users/edit?id=${userId}`}> Edit </Link>
-        <Link to={`/users/renew?userId=${userId}`}> Renew Plan </Link>
-        <p>
-          Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
-        </p>
-        <p>emailId: {emailId}</p>
-        <p>contactNumber: {contactNumber}</p>
-        <p>address: {address}</p>
-        <p>Account Status: {status}</p>
-        <div>Usage: {usages.length}</div>
-        <p>Account Created: {moment(createdAt).format()}</p>
+    <div className="content-container">
+      <User user={user} />
+      <div className="header-buttons">
+        <Link to={`/users/edit?id=${userId}`} className="button">
+          Edit
+        </Link>
+        <Link to={`/users/renew?userId=${userId}`} className="button">
+          Renew Plan
+        </Link>
       </div>
-      <br />
-
+      <div className="list-header">
+        <div className="show-for-desktop">All Usages</div>
+      </div>
       <UsageList usages={usages} />
     </div>
   );

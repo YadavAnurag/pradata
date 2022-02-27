@@ -25,65 +25,50 @@ const User = (props) => {
 
   return (
     <div>
-      <Link to={`/usages?userId=${id}`} className="list-item">
-        <div>
-          <h3 className="list-item__title">
-            {getUserFullName({ firstName, middleName, lastName }).fullName}
-          </h3>
-        </div>
-        <div className="list-item__user-due">
-          <p>Due:</p>
-          <p>
-            &#8377;
-            {getUserPaymentDetailsWithAllUsages(props.user, props.plans)
-              .totalDueAmount / 100}
-          </p>
-        </div>
-        <div className="list-item__user-details">
-          <div>
-            <p>Email Id:</p>
-            <p>{emailId}</p>
+      <div className="list-item-top">
+        <p className="list-item-top__status-value">{status}</p>
+      </div>
+      <Link to={`/usages?userId=${id}`} className="user-list-item">
+        <div className="list-item__user-and-due">
+          <div className="list-item__user">
+            <h3 className="list-item__title">
+              {getUserFullName({ firstName, middleName, lastName }).fullName}
+            </h3>
           </div>
+          <div className="list-item__due">
+            <p>Total Due:</p>
+            <p>
+              &#8377;&nbsp;
+              {getUserPaymentDetailsWithAllUsages(props.user, props.plans)
+                .totalDueAmount / 100}
+            </p>
+          </div>
+        </div>
+
+        <div className="list-item__user-details">
           <div>
             <p>Contact Number:</p>
             <p>{contactNumber}</p>
           </div>
           <div>
+            <p>Email Id:</p>
+            <p style={{ textTransform: "lowercase" }}>{emailId}</p>
+          </div>
+
+          <div>
             <p>Address:</p>
             <p>{address}</p>
           </div>
-          <div>
-            <p>Status:</p>
-            <p>{status}</p>
-          </div>
-          <div>
+          {/* <div>
             <p>Usage:</p>
             <p>{usages.length}</p>
-          </div>
+          </div> */}
           <div>
-            <p>Created:</p>
-            <p>{moment(createdAt).format()}</p>
+            <p>Connected At:</p>
+            <p>{moment(createdAt).format("DD-MMM-YYYY")}</p>
           </div>
         </div>
       </Link>
-
-      {/* <Link to={`/usages?userId=${id}`}>
-        <p>
-          Total Due: &#8377;
-          {getUserPaymentDetailsWithAllUsages(props.user, props.plans)
-            .totalDueAmount / 100}
-        </p>
-        <p>
-          Name: {getUserFullName({ firstName, middleName, lastName }).fullName}
-        </p>
-        <p>emailId: {emailId}</p>
-        <p>contactNumber: {contactNumber}</p>
-        <p>address: {address}</p>
-        <p>Account Status: {status}</p>
-        <div>Usage: {usages.length}</div>
-        <p>Account Created: {moment(createdAt).format()}</p>
-        <br />
-      </Link> */}
     </div>
   );
 };

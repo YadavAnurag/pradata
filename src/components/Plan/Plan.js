@@ -35,9 +35,6 @@ const Plan = (props) => {
           <p>Validity:</p>
           <p>{moment.duration(validityPeriod, "milliseconds").asDays()} Days</p>
         </div>
-        {/* <p className="plan__create_at">
-            Created On: {moment(createdAt).format()}
-          </p> */}
       </Link>
     </div>
   );

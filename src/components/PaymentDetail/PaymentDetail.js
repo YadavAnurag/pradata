@@ -7,12 +7,27 @@ const PaymentDetail = (props) => {
 
   return (
     <div>
-      <h3>Payment Detail </h3>
-      <p>id: {id}</p>
-      <p>paidAmount: &#8377;{paidAmount / 100}</p>
-      <p>paymentMethod: {paymentMethod}</p>
-      <p>PaymentReferenceId:{paymentReferenceId}</p>
-      <p>paidAt: {moment(paidAt).format("D-MMM-YYYY")}</p>
+      <div className="user-list-item">
+        <div className="list-item__user-details payment-details">
+          <div>
+            <p>Paid Amount: </p>
+            <p>&#8377;&nbsp;{paidAmount / 100}</p>
+          </div>
+
+          <div>
+            <p>Payment Method:</p>
+            <p>{paymentMethod}</p>
+          </div>
+          <div>
+            <p>Payment Reference Id:</p>
+            <p>{paymentReferenceId}</p>
+          </div>
+          <div>
+            <p>Paid At:</p>
+            <p>{moment(paidAt).format("DD-MMM-YYYY")}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

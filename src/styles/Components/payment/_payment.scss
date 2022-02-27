@@ -1,0 +1,13 @@
+.payment-details {
+  div:nth-child(1) {
+    p:nth-child(2) {
+      font-weight: bold;
+    }
+  }
+
+  div:nth-child(2) {
+    p:nth-child(2) {
+      text-transform: capitalize;
+    }
+  }
+}

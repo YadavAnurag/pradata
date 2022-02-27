@@ -11,7 +11,6 @@ const UserListPage = (props) => {
     <div>
       <UsersSummary />
       <UserFilters />
-      <p>Total Users: {props.users.length}</p>
       <UserList users={props.users} />
     </div>
   );

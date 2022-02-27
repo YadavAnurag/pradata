@@ -34,7 +34,13 @@ export const EditUserPage = (props) => {
         </div>
       </div>
       <div className="content-container">
-        <button onClick={onRemoveHandler}>Remove</button>
+        <button
+          onClick={onRemoveHandler}
+          className="button"
+          style={{ marginBottom: "1rem" }}
+        >
+          Remove
+        </button>
         <UserForm onSubmit={onSubmit} user={user} />
       </div>
     </div>

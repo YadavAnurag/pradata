@@ -1,0 +1,97 @@
+.user-list-item {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border: 1px solid darken($color: $background, $amount: 7%);
+  border-top: none;
+  border-radius: 0 0 $xsmall $xsmall;
+  color: darken($color: grey, $amount: 70%);
+  display: flex;
+  flex-direction: column;
+  padding: $small;
+  //   margin-top: $small;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: background 0.3s ease;
+  background: $background;
+  &:hover {
+    background: $background;
+  }
+  @media (min-width: $desktop-breakpoint) {
+    // align-items: center;
+    // flex-direction: row;
+    justify-content: space-between;
+    padding: $medium;
+  }
+}
+
+.list-item__user-and-due {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.list-item__due {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  p:nth-child(1) {
+    margin-right: $small;
+  }
+}
+
+.list-item__user-details {
+  margin-top: $medium;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  > * {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+
+    p:nth-child(1) {
+      font-weight: bold;
+      overflow-wrap: normal;
+    }
+    p:nth-child(2) {
+      margin-left: $medium;
+      text-align: end;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  // div:nth-child(2) {
+  //   p:nth-child(2) {
+  //     text-transform: lowercase;
+  //   }
+  // }
+  //   div:nth-child(2) {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     p:nth-child(1) {
+  //       font-weight: bold;
+  //     }
+  //   }
+  //   div:nth-child(3) {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     p:nth-child(1) {
+  //       font-weight: bold;
+  //     }
+  //   }
+  //   div:nth-child(4) {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     p:nth-child(1) {
+  //       font-weight: bold;
+  //     }
+  //   }
+  //   div:nth-child(5) {
+  //     display: flex;
+  //     justify-content: space-between;
+  //     p:nth-child(1) {
+  //       font-weight: bold;
+  //     }
+  //   }
+}

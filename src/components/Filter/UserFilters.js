@@ -140,7 +140,6 @@ const UserFilters = (props) => {
     <div className="content-container">
       <div className="input-group">
         <div className="input-group__item">
-          {/* <label>Name</label> */}
           <input
             type="text"
             value={text}
@@ -167,26 +166,6 @@ const UserFilters = (props) => {
             placeholder="Email Id"
           />
         </div>
-
-        {/* <label>Start Date</label>
-      <ReactDatePicker
-        selected={startDate}
-        onChange={handleStartDateChange}
-        customInput={<StartDateCustomInput />}
-        isClearable
-        placeholderText="I have been cleared!"
-        // showMonthDropdown
-        showYearDropdown
-      />
-
-      <label>End Date</label>
-      <ReactDatePicker
-        selected={endDate}
-        onChange={handleEndDateChange}
-        customInput={<StartDateCustomInput />}
-        isClearable
-        placeholderText="I have been cleared!"
-      /> */}
       </div>
       <div className="input-group">
         <div className="input-group__item">

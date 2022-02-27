@@ -13,7 +13,6 @@ const UsageList = (props) => {
 
   return (
     <div>
-      <h1>ALL Usages</h1>
       {props.usages.map((usage, key) => (
         <Usage key={key} usage={usage} user={user} plans={props.plans} />
       ))}

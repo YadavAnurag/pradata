@@ -1,11 +1,32 @@
 .list-item__price {
+  display: flex;
+  justify-content: space-between;
   p:nth-child(1) {
     font-weight: bold;
   }
 }
 
 .list-item__validity {
+  display: flex;
+  justify-content: space-between;
   p:nth-child(1) {
     font-weight: bold;
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .list-item__price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .list-item__validity {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p:nth-child(1) {
+      font-weight: bold;
+    }
   }
 }

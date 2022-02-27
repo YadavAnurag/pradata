@@ -1,0 +1,571 @@
+// remove
+.gg-remove {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 22px;
+}
+
+.gg-remove::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 5px;
+  top: 8px;
+  left: 4px;
+}
+
+// lock
+.gg-lock {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggs, 1));
+  width: 12px;
+  height: 11px;
+  border: 2px solid;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom: transparent;
+  margin-top: -12px;
+}
+
+.gg-lock::after {
+  content: "";
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 16px;
+  height: 10px;
+  border-radius: 2px;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px;
+  left: -4px;
+  top: 9px;
+}
+
+// lock-unlock
+.gg-lock-unlock {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggs, 1));
+  width: 12px;
+  height: 6px;
+  border: 2px solid;
+  border-top-right-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom: transparent;
+  margin-top: -18px;
+  margin-left: -2px;
+}
+
+.gg-lock-unlock::after,
+.gg-lock-unlock::before {
+  content: "";
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.gg-lock-unlock::after {
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px;
+  width: 16px;
+  height: 10px;
+  border-radius: 2px;
+  left: -4px;
+  top: 10px;
+}
+
+.gg-lock-unlock::before {
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  left: -2px;
+  top: 4px;
+}
+
+// home
+.gg-home {
+  background: linear-gradient(to left, currentColor 5px, transparent 0)
+      no-repeat 0 bottom/4px 2px,
+    linear-gradient(to left, currentColor 5px, transparent 0) no-repeat right
+      bottom/4px 2px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+  height: 14px;
+  border: 2px solid;
+  border-top: 0;
+  border-bottom: 0;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-bottom: -2px;
+}
+
+.gg-home::after,
+.gg-home::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.gg-home::before {
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-top-left-radius: 4px;
+  transform: rotate(45deg);
+  top: -5px;
+  border-radius: 3px;
+  width: 14px;
+  height: 14px;
+  left: 0;
+}
+
+.gg-home::after {
+  width: 8px;
+  height: 10px;
+  border: 2px solid;
+  border-radius: 100px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+  left: 3px;
+  bottom: 0;
+}
+
+// upload
+.gg-software-upload {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 6px;
+  border: 2px solid;
+  border-top: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  margin-top: 8px;
+}
+
+.gg-software-upload::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid;
+  border-top: 2px solid;
+  transform: rotate(45deg);
+  left: 2px;
+  bottom: 4px;
+}
+
+.gg-software-upload::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+  left: 5px;
+  bottom: 3px;
+}
+
+// download
+.gg-software-download {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 16px;
+  height: 6px;
+  border: 2px solid;
+  border-top: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  margin-top: 8px;
+}
+
+.gg-software-download::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+  left: 2px;
+  bottom: 4px;
+}
+
+.gg-software-download::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+  left: 5px;
+  bottom: 5px;
+}
+
+// file
+.gg-file {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 14px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-right: 0;
+  border-top: 0;
+  box-shadow: 0 0 0 2px;
+  border-radius: 1px;
+  border-top-right-radius: 4px;
+  overflow: hidden;
+}
+
+.gg-file::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  right: -1px;
+  top: -1px;
+}
+
+// profile
+.gg-profile,
+.gg-profile::after,
+.gg-profile::before {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100px;
+}
+
+.gg-profile {
+  overflow: hidden;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+
+.gg-profile::after,
+.gg-profile::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 8px;
+  height: 8px;
+}
+
+.gg-profile::after {
+  border-radius: 200px;
+  top: 11px;
+  left: 0px;
+  width: 18px;
+  height: 18px;
+}
+
+// qr
+.gg-qr {
+  transform: scale(var(--ggs, 1));
+}
+
+.gg-qr,
+.gg-qr::after {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
+}
+
+.gg-qr::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  box-shadow: 0 6px 0, 6px 6px 0, 6px 0 0;
+  top: 2px;
+  left: 2px;
+}
+
+// chevron-right
+.gg-chevron-right {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 0.8));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+.gg-chevron-right::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(-45deg);
+  right: 6px;
+  top: 4px;
+}
+
+// chevron-down
+.gg-chevron-down {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 0.8));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+.gg-chevron-down::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(45deg);
+  left: 4px;
+  top: 2px;
+}
+
+// chevron-up
+.gg-chevron-up {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 0.8));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+.gg-chevron-up::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(-45deg);
+  left: 4px;
+  bottom: 2px;
+}
+
+// gg-close
+.gg-close {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 40px;
+}
+
+.gg-close::after,
+.gg-close::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+  border-radius: 5px;
+  top: 8px;
+  left: 1px;
+}
+
+.gg-close::after {
+  transform: rotate(-45deg);
+}
+
+// gg-boy
+.gg-boy,
+.gg-boy::after,
+.gg-boy::before {
+  display: block;
+  box-sizing: border-box;
+  border-radius: 42px;
+}
+
+.gg-boy {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  transform: scale(var(--ggs, 1));
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px;
+}
+
+.gg-boy::after,
+.gg-boy::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 6px 0 0;
+  left: 6px;
+  top: 10px;
+}
+
+.gg-boy::after {
+  width: 20px;
+  height: 20px;
+  top: -13px;
+  right: -12px;
+}
+
+// gg-instagram
+.gg-instagram {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 0.8));
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 2px;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+}
+
+.gg-instagram::after,
+.gg-instagram::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.gg-instagram::after {
+  border: 2px solid;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  top: 3px;
+}
+
+.gg-instagram::before {
+  border-radius: 3px;
+  width: 2px;
+  height: 2px;
+  background: currentColor;
+  right: 1px;
+  top: 1px;
+}
+
+// gg-menu-boxed
+.gg-menu-boxed {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 2px solid;
+}
+
+.gg-menu-boxed::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 3px;
+  top: 2px;
+  left: 2px;
+  box-shadow: 0 4px 0, 0 8px 0;
+}
+
+// .gg-template
+
+.gg-template {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+  height: 6px;
+  border: 2px solid;
+  margin-top: -14px;
+}
+
+.gg-template::after,
+.gg-template::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 8px;
+  height: 10px;
+  top: 6px;
+}
+
+.gg-template::after {
+  border: 2px solid;
+  left: -2px;
+}
+
+.gg-template::before {
+  border-top: 6px double;
+  border-bottom: 2px solid;
+  right: -2px;
+}
