@@ -25,8 +25,8 @@ const HomePage = (props) => {
           <h2>cable TV connection</h2>
 
           {JSON.parse(localStorage.getItem("auth")).userId === "" ? (
-            <Link to={`/login`} className="button home-header__button">
-              Login
+            <Link to={`/connect`} className="button home-header__button">
+              Connect
             </Link>
           ) : (
             <Link to={`/plans`} className="button home-header__button">

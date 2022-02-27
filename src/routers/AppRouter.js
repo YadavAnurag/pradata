@@ -11,7 +11,7 @@ import EditPlanPage from "../components/Plan/EditPlanPage";
 import EditUserPage from "../components/User/EditUserPage";
 import ErrorPage from "../components/Error/ErrorPage";
 import HomePage from "../components/Home/HomePage";
-import HelpPage from "../components/Help/HelpPage";
+import ConnectPage from "../components/Connect/ConnectPage";
 import Header from "../components/Header/Header";
 import PlanListPage from "../components/Plan/PlanListPage";
 import PaymentPage from "../components/UserPayment/UserPayment";
@@ -52,7 +52,7 @@ const AppRouter = () => {
         <PublicRoute path="/plans/" component={PlanListPage} exact />
         <PublicRoute path="/payments" component={PaymentPage} exact />
         <PublicRoute path="/profile" component={ProfilePage} exact />
-        <PublicRoute path="/help" component={HelpPage} exact />
+        <PublicRoute path="/connect" component={ConnectPage} exact />
         <PublicRoute path="/" component={HomePage} exact />
         <Route>
           <ErrorPage />

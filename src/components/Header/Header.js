@@ -13,7 +13,7 @@ export const Header = (props) => {
       { to: "/users", text: "Users" },
       { to: "/plans", text: "Plans" },
       { to: "/profile", text: "Profile" },
-      { to: "/help", text: "Help" },
+      { to: "/connect", text: "Connect" },
     ],
     user: [
       { to: "/", text: "Home" },
@@ -21,12 +21,12 @@ export const Header = (props) => {
       { to: "/plans", text: "Plans" },
       { to: "/payments", text: "Payments" },
       { to: "/profile", text: "Profile" },
-      { to: "/help", text: "Help" },
+      { to: "/connect", text: "Connect" },
     ],
     public: [
       { to: "/", text: "Home" },
       { to: "/plans", text: "Plans" },
-      { to: "/help", text: "Help" },
+      { to: "/connect", text: "Connect" },
     ],
   };
 
