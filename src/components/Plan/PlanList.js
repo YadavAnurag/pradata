@@ -25,7 +25,14 @@ const PlanList = (props) => {
           </div>
         ) : (
           props.plans.map((plan, key) => {
-            return <Plan key={key} plan={plan} onRemove={props.onRemove} />;
+            return (
+              <Plan
+                key={key}
+                plan={plan}
+                onRemove={props.onRemove}
+                isAdmin={props.isAdmin}
+              />
+            );
           })
         )}
       </div>

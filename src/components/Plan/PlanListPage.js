@@ -22,7 +22,11 @@ const PlanListPage = (props) => {
     <div>
       <PlansSummary />
       <PlanFilters />
-      <PlanList plans={props.plans} onRemove={onRemove} />
+      <PlanList
+        plans={props.plans}
+        onRemove={onRemove}
+        isAdmin={props.isAdmin}
+      />
     </div>
   );
 
@@ -32,6 +36,7 @@ const PlanListPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     plans: getSelectedPlans(state.plans, state.planFilters),
+    isAdmin: state.auth.isAdmin,
   };
 };
 const mapDispatchToProps = (dispatch) => ({

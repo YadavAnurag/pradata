@@ -8,7 +8,8 @@ export const SET_USERS = "SET_USERS";
 export const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 
 // set user dashboard data
-export const SET_DASHBOARD_DATA = "SET_DASHBOARD_DATA";
+export const SET_USER_DASHBOARD_DATA = "SET_USER_DASHBOARD_DATA";
+export const SET_ADMIN_DASHBOARD_DATA = "SET_ADMIN_DASHBOARD_DATA";
 
 // usages
 export const ADD_USAGE = "ADD_USAGE";

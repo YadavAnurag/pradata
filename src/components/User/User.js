@@ -26,7 +26,9 @@ const User = (props) => {
   return (
     <div>
       <div className="list-item-top">
-        <p className="list-item-top__status-value">{status}</p>
+        <p className="list-item-top__status-value">
+          {props.isAdmin ? status : "My Information"}
+        </p>
       </div>
       <Link to={`/usages?userId=${id}`} className="user-list-item">
         <div className="list-item__user-and-due">
@@ -75,5 +77,6 @@ const User = (props) => {
 
 const mapStateToProps = (state) => ({
   plans: state.plans,
+  isAdmin: state.auth.isAdmin,
 });
 export default connect(mapStateToProps)(User);

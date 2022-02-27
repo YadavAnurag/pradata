@@ -9,13 +9,15 @@ const Plan = (props) => {
   return (
     <div className="plan_component">
       <div className="list-item-top">
-        <p className="plan__status-value">{status}</p>
-        <button
-          onClick={() => props.onRemove(id)}
-          className="list-item-top__remove button--link"
-        >
-          X
-        </button>
+        <p className="plan__status-value">{props.isAdmin ? status : "Plan"}</p>
+        {props.isAdmin && (
+          <button
+            onClick={() => props.onRemove(id)}
+            className="list-item-top__remove button--link"
+          >
+            X
+          </button>
+        )}
       </div>
       <Link to={`/plans/edit?id=${id}`} className="list-item">
         {/* <p>id: {id}</p> */}
