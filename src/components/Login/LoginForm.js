@@ -68,7 +68,18 @@ const LoginForm = (props) => {
 
       setError((previousError) => ({
         ...previousError,
-        emailId: "Please enter a valid Email Id",
+        emailId: "Please enter valid Email Id",
+      }));
+      loadCaptchaEnginge(6);
+    }
+
+    let isValidPasswordWhileSubmit = true;
+    if (!isValidPassword(password)) {
+      isValidPasswordWhileSubmit = false;
+
+      setError((previousError) => ({
+        ...previousError,
+        password: "Password Policy Not Matched",
       }));
       loadCaptchaEnginge(6);
     }
@@ -125,27 +136,29 @@ const LoginForm = (props) => {
         <input
           type="email"
           name="emailId"
-          placeholder="Email Id"
+          placeholder={error.emailId ? error.emailId : "Email Id"}
           value={emailId}
           onChange={handleEmailIdChange}
-          required
+          className={!!error.emailId ? "input input-error" : "input"}
+          // required
         />
-        <span>{error.emailId}</span>
+        {/* <span>{error.emailId}</span> */}
       </div>
       <div className="form__component">
         {/* <label>Password</label> */}
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder={error.password ? error.password : "Password"}
           value={password}
           onChange={handlePasswordChange}
+          className={!!error.password ? "input input-error" : "input"}
           title={`Password Should Contain\n\n1 Uppercase Character(A-Z) \n1 Lowercase Character(a-z) \n1 Special Character(!@#$%^&*)\n1 Digit(0-9)\nTotal 8 Characters length`}
-          required
+          // required
         />
-        <span>{error.password}</span>
+        {/* <span>{error.password}</span> */}
       </div>
-      <div className="form__component">
+      <div className="form__component__captcha">
         {/* <label>Captcha</label> */}
         <div className="captcha">
           <LoadCanvasTemplate />
@@ -157,11 +170,13 @@ const LoginForm = (props) => {
           type="text"
           name="captcha"
           placeholder="Enter above captcha"
+          placeholder={error.captcha ? error.captcha : "Enter above captcha"}
           value={captcha}
           onChange={handleCaptchaChange}
-          required
+          className={!!error.captcha ? "input input-error" : "input"}
+          // required
         />
-        <span>{error.captcha}</span>
+        {/* <span>{error.captcha}</span> */}
       </div>
 
       <div className="form__component__submit">

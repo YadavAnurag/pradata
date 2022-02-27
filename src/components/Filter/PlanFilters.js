@@ -85,6 +85,7 @@ const PlanFilters = (props) => {
             name="text"
             onChange={handleTextChange}
             placeholder="Plan Title"
+            className="input"
           />
         </div>
         <div className="input-group__item">
@@ -94,6 +95,7 @@ const PlanFilters = (props) => {
             value={price}
             onChange={handlePriceChange}
             placeholder="Plan Price"
+            className="input"
           />
         </div>
         <div className="input-group__item">
@@ -103,13 +105,19 @@ const PlanFilters = (props) => {
             value={validityPeriod}
             onChange={handleValidityPeriodChange}
             placeholder="Validity Period"
+            className="input"
           />
         </div>
       </div>
       <div className="input-group">
         <div className="input-group__item">
           {/* <label>Sort:</label> */}
-          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+          <select
+            name="sortBy"
+            value={sortBy}
+            onChange={handleSortByChange}
+            className="input"
+          >
             {sortByConfigs.map((sortBy, key) => {
               return (
                 <option key={key} value={sortBy.value}>
@@ -124,6 +132,7 @@ const PlanFilters = (props) => {
             name="planStatus"
             value={planStatus}
             onChange={handlePlanStatusChange}
+            className="input"
           >
             {planStatusConfigs.map((status, key) => {
               return (

@@ -9,6 +9,8 @@
 }
 
 .box-layout__box {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   background: fade-out($color: white, $amount: 0);
   border-radius: 3px;
   padding: $large $medium;

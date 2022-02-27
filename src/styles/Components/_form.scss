@@ -12,7 +12,6 @@ form {
 }
 
 input[type="text"] {
-  border: 1px solid #cacccd;
   border-radius: $xsmall;
   height: 40px;
   font-size: $font-size-small;
@@ -37,12 +36,21 @@ textarea {
   height: 100px;
   font-size: $small;
 }
-
+.form__component__captcha {
+  margin: $medium 0 0 0;
+}
 .captcha {
   div:nth-child(1) {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.input {
+  border: 1px solid #cacccd;
+}
+.input-error {
+  border: 1px solid red;
 }
 
 @media (min-width: $desktop-breakpoint) {

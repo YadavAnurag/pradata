@@ -146,6 +146,7 @@ const UserFilters = (props) => {
             name="text"
             onChange={handleTextChange}
             placeholder="Enter Text"
+            className="input"
           />
         </div>
         <div className="input-group__item">
@@ -155,6 +156,7 @@ const UserFilters = (props) => {
             value={contactNumber}
             onChange={handleContactNumberChange}
             placeholder="Contact Number"
+            className="input"
           />
         </div>
         <div className="input-group__item">
@@ -164,6 +166,7 @@ const UserFilters = (props) => {
             value={emailId}
             onChange={handleEmailIdChange}
             placeholder="Email Id"
+            className="input"
           />
         </div>
       </div>
@@ -174,6 +177,7 @@ const UserFilters = (props) => {
             name="planId"
             value={planId}
             onChange={handleCurrentPlanIdChange}
+            className="input"
           >
             <option key={"select"} value={"select"}>
               {"Select Plan"}
@@ -196,6 +200,7 @@ const UserFilters = (props) => {
             name="accountStatus"
             value={accountStatus}
             onChange={handleAccountStatusChange}
+            className="input"
           >
             <option key={"select"} value={"select"}>
               {"Select Status"}
@@ -215,6 +220,7 @@ const UserFilters = (props) => {
             name="isDue"
             value={isDue === null ? "" : isDue}
             onChange={handleIsDueChange}
+            className="input"
           >
             <option key={"select"} value={"select"}>
               {"Select Due"}
@@ -230,7 +236,12 @@ const UserFilters = (props) => {
         </div>
         <div className="input-group__item">
           {/* <label>Sort By</label> */}
-          <select name="sortBy" value={sortBy} onChange={handleSortByChange}>
+          <select
+            name="sortBy"
+            value={sortBy}
+            onChange={handleSortByChange}
+            className="input"
+          >
             <option key={"select"} value={"select"}>
               {"Sort By"}
             </option>

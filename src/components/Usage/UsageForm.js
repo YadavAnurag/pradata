@@ -132,38 +132,40 @@ const UsageForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Plan</label>
-        <select
-          name="planId"
-          value={planId}
-          onChange={handleCurrentPlanIdChange}
-        >
-          {props.plans.map((plan, key) => {
-            return (
-              <option key={key} value={plan.id}>
-                {plan.title}
-              </option>
-            );
-          })}
-        </select>
-        <span>{error.planId}</span>
-      </div>
       <h2>Payment Details</h2>
-      <label>Paid Amount</label>
+      {/* <label>Plan</label> */}
+      <select
+        name="planId"
+        value={planId}
+        onChange={handleCurrentPlanIdChange}
+        className={!!error.planId ? "input input-error" : "input"}
+      >
+        {props.plans.map((plan, key) => {
+          return (
+            <option key={key} value={plan.id}>
+              {plan.title}
+            </option>
+          );
+        })}
+      </select>
+      {/* <span>{error.planId}</span> */}
+
+      {/* <label>Paid Amount</label> */}
       <input
         type="text"
-        placeholder="Amount"
         value={paidAmount}
         onChange={handlePaidAmountChange}
+        placeholder={error.paidAmount ? error.paidAmount : "Amount"}
+        className={!!error.paidAmount ? "input input-error" : "input"}
       />
-      <span>{error.paidAmount}</span>
+      {/* <span>{error.paidAmount}</span> */}
 
-      <label>Payment Method</label>
+      {/* <label>Payment Method</label> */}
       <select
         name="method"
         value={paymentMethod}
         onChange={handlePaymentMethodChange}
+        className={!!error.paymentMethod ? "input input-error" : "input"}
       >
         {paymentMethodConfigs.map((paymentMethod, key) => {
           return (
@@ -173,19 +175,23 @@ const UsageForm = (props) => {
           );
         })}
       </select>
-      <span>{error.paymentMethod}</span>
+      {/* <span>{error.paymentMethod}</span> */}
 
-      <label>Payment Reference Id</label>
+      {/* <label>Payment Reference Id</label> */}
       <input
         type="text"
-        placeholder="Reference Id"
+        // placeholder="Reference Id"
         value={paymentReferenceId}
         onChange={handlePaymentReferenceIdChange}
+        placeholder={
+          error.paymentReferenceId ? error.paymentReferenceId : "Reference Id"
+        }
+        className={!!error.paymentReferenceId ? "input input-error" : "input"}
       />
-      <span>{error.paymentReferenceId}</span>
+      {/* <span>{error.paymentReferenceId}</span> */}
 
       <div>
-        <button>Save Plan</button>
+        <button className="button">Save Plan</button>
       </div>
     </form>
   );

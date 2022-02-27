@@ -15,6 +15,10 @@
   background: none;
 }
 
+.button--disabled {
+  cursor: not-allowed;
+}
+
 .button--secondary {
   background: #888888;
 }

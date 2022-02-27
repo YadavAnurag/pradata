@@ -193,9 +193,10 @@ const UserForm = (props) => {
       <input
         type="text"
         name="firstName"
-        placeholder={error.firstName ? error.firstName : "First Name"}
         value={firstName}
         onChange={handleFirstNameChange}
+        placeholder={error.firstName ? error.firstName : "First Name"}
+        className={!!error.firstName ? "input input-error" : "input"}
       />
       {/* <span>{error.firstName}</span> */}
 
@@ -203,9 +204,10 @@ const UserForm = (props) => {
       <input
         type="text"
         name="middleName"
-        placeholder={error.middleName ? `${error.middleName}` : "Middle Name"}
         value={middleName}
         onChange={handleMiddleNameChange}
+        placeholder={error.middleName ? error.middleName : "Middle Name"}
+        className={!!error.middleName ? "input input-error" : "input"}
       />
       {/* <span>{error.middleName}</span> */}
 
@@ -216,6 +218,8 @@ const UserForm = (props) => {
         placeholder={error.lastName ? error.lastName : "Last Name"}
         value={lastName}
         onChange={handleLastNameChange}
+        placeholder={error.lastName ? error.lastName : "Last Name"}
+        className={!!error.lastName ? "input input-error" : "input"}
       />
       {/* <span>{error.lastName}</span> */}
 
@@ -223,9 +227,10 @@ const UserForm = (props) => {
       <input
         type="text"
         name="emailId"
-        placeholder={error.emailId ? error.emailId : "Email Id"}
         value={emailId}
         onChange={handleEmailIdChange}
+        placeholder={error.emailId ? error.emailId : "Email Id"}
+        className={!!error.emailId ? "input input-error" : "input"}
         // readOnly={!isAdmin}
       />
       {/* <span>{error.emailId}</span> */}
@@ -240,18 +245,23 @@ const UserForm = (props) => {
         value={contactNumber}
         onChange={handleContactNumberChange}
         // readOnly={!isAdmin}
-        className="text-input"
+        // className="text-input"
+        placeholder={
+          error.contactNumber ? error.contactNumber : "Contact Number"
+        }
+        className={!!error.contactNumber ? "input input-error" : "input"}
       />
       {/* <span>{error.contactNumber}</span> */}
 
       {/* <label>Address</label> */}
       <textarea
         name="address"
-        placeholder={error.address ? error.address : "Address"}
         value={address}
         onChange={handleAddressChange}
         rows="2"
         cols="30"
+        placeholder={error.address ? error.address : "Address"}
+        className={!!error.address ? "input input-error" : "input"}
       ></textarea>
       {/* <span>{error.address}</span> */}
 
@@ -262,6 +272,7 @@ const UserForm = (props) => {
         value={status}
         onChange={handleStatusChange}
         hidden={!isAdmin}
+        className={"input"}
       >
         {statusConfigs.map((status, key) => {
           return (

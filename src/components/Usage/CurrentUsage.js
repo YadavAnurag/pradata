@@ -14,7 +14,7 @@ const CurrentUsage = (props) => {
     <div className="user-list-item">
       <div className="list-item__user-details list-item__current-usage">
         <div>
-          <p>planPrice:</p>
+          <p>Plan Price:</p>
           <p>{planPrice / 100}</p>
         </div>
         <div>
@@ -34,7 +34,7 @@ const CurrentUsage = (props) => {
           <p>{moment(planDueDateToThisUsage).format("DD-MMM-YYYY")}</p>
         </div>
         <div>
-          <p>planName:</p>
+          <p>Plan Name:</p>
           <p>{planName}</p>
         </div>
       </div>

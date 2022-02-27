@@ -28,10 +28,10 @@ const PaymentForm = (props) => {
 
     if (!value || value.match(/^\d{1,}(\.?\d{0,2})$/)) {
       // set error if user enters more price than required for selected plan
+      setPaidAmount(value);
       if (value * 100 <= props.dueAmount) {
         // update and clear error
         setError({ paidAmount: "" });
-        setPaidAmount(value);
       } else {
         setError({
           paidAmount:
@@ -114,23 +114,28 @@ const PaymentForm = (props) => {
     }
   };
 
+  const isError =
+    !!error.paidAmount || !!error.paymentMethod || !!error.paymentReferenceId;
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
       <h3>Payment Details</h3>
-      <label>Amount</label>
+      {/* <label>Amount</label> */}
       <input
         type="text"
-        placeholder="Amount"
+        placeholder={error.paidAmount ? error.paidAmount : "Amount"}
         value={paidAmount}
         onChange={handlePaidAmountChange}
+        className={!!error.paidAmount ? "input input-error" : "input"}
       />
-      <span>{error.paidAmount}</span>
+      {error.paidAmount && <span>{error.paidAmount}</span>}
 
-      <label>Payment Method</label>
+      {/* <label>Payment Method</label> */}
       <select
         name="method"
         value={paymentMethod}
         onChange={handlePaymentMethodChange}
+        className={!!error.paymentMethod ? "input input-error" : "input"}
       >
         {paymentMethodConfigs.map((paymentMethod, key) => {
           return (
@@ -140,19 +145,28 @@ const PaymentForm = (props) => {
           );
         })}
       </select>
-      <span>{error.paymentMethod}</span>
+      {/* <span>{error.paymentMethod}</span> */}
 
-      <label>Payment Reference Id</label>
+      {/* <label>Payment Reference Id</label> */}
       <input
         type="text"
         placeholder="Reference Id"
+        placeholder={
+          error.paymentReferenceId ? error.paymentReferenceId : "Reference Id"
+        }
         value={paymentReferenceId}
         onChange={handlePaymentReferenceIdChange}
+        className={!!error.paymentReferenceId ? "input input-error" : "input"}
       />
-      <span>{error.paymentReferenceId}</span>
+      {/* <span>{error.paymentReferenceId}</span> */}
 
       <div>
-        <button>Save Plan</button>
+        <button
+          className={isError ? "button button--disabled" : "button"}
+          disabled={isError}
+        >
+          Save
+        </button>
       </div>
     </form>
   );

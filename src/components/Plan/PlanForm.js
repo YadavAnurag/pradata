@@ -149,6 +149,7 @@ const PlanForm = (props) => {
       <input
         type="text"
         placeholder={error.title ? error.title : "Title"}
+        className={!!error.title ? "input input-error" : "input"}
         value={title}
         onChange={handleTitleChange}
       />
@@ -160,6 +161,7 @@ const PlanForm = (props) => {
         placeholder="Validity Period in Days"
         value={validityPeriod}
         onChange={handleValidityPeriod}
+        className={"input"}
       />
       {/* <label>Price</label> */}
       <input
@@ -167,6 +169,7 @@ const PlanForm = (props) => {
         placeholder="Price"
         value={price}
         onChange={handlePriceChange}
+        className={"input"}
       />
       {/* <label>Description</label> */}
       <input
@@ -174,10 +177,16 @@ const PlanForm = (props) => {
         placeholder={error.description ? error.description : "Description"}
         value={description}
         onChange={handleDescriptionChange}
+        className={!!error.description ? "input input-error" : "input"}
       />
       {/* <span>{error.description}</span> */}
       {/* <label>Status</label> */}
-      <select name="status" value={status} onChange={handleStatusChange}>
+      <select
+        name="status"
+        value={status}
+        onChange={handleStatusChange}
+        className="input"
+      >
         {planStatusConfigs.map((status, key) => {
           return (
             <option key={key} value={status.value}>
