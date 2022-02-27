@@ -2,23 +2,30 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import queryString from "query-string";
+import { Link } from "react-router-dom";
 
 import { initEditUser } from "../../store/actions/index";
 import Profile from "./Profile";
+import { Redirect } from "react-router-dom/";
+
+import { getUserFullName } from "../../store/utility/utility";
 
 const ProfilePage = (props) => {
   // fetch user
-  const userId = props.userId;
-  const user = props.users.find(({ id }) => id === userId);
-  console.log(userId, user);
+  console.log("Will match", props.users);
+  const user = props.users.find(({ id }) => id === props.userId);
+  console.log("Got", user);
 
   const jsx =
-    user === undefined ? (
-      <div>
-        <p>No such user...!</p>
-      </div>
+    props.userId === undefined || user === undefined ? (
+      <Redirect to="/" />
     ) : (
-      <div>
+      <div className="page-header">
+        <div className="content-container">
+          <h1 className="page-header__title">
+            {getUserFullName(user).fullName}
+          </h1>
+        </div>
         <Profile user={user} editUser={props.onInitEditUser} />
       </div>
     );

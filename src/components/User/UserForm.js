@@ -226,7 +226,7 @@ const UserForm = (props) => {
         placeholder={error.emailId ? error.emailId : "Email Id"}
         value={emailId}
         onChange={handleEmailIdChange}
-        readOnly={!isAdmin}
+        // readOnly={!isAdmin}
       />
       {/* <span>{error.emailId}</span> */}
 
@@ -239,7 +239,7 @@ const UserForm = (props) => {
         }
         value={contactNumber}
         onChange={handleContactNumberChange}
-        readOnly={!isAdmin}
+        // readOnly={!isAdmin}
         className="text-input"
       />
       {/* <span>{error.contactNumber}</span> */}

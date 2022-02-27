@@ -12,7 +12,7 @@ const Profile = (props) => {
   };
 
   return (
-    <div>
+    <div className="content-container">
       <UserForm user={props.user} onSubmit={onSubmit} />
     </div>
   );

@@ -61,13 +61,9 @@ const renderApp = () => {
 console.log("gonna call");
 //store.dispatch(initSetPlans()).then(() => {
 store.dispatch(initSetPlans()).then(() => {
-  if (store.getState().auth.isAdmin) {
-    store.dispatch(initSetUsers()).then(() => {
-      renderApp();
-    });
-  } else {
+  store.dispatch(initSetUsers()).then(() => {
     renderApp();
-  }
+  });
 
   // store.dispatch(initSetUsers()).then(() => {
   //   if (store.getState().auth.isAdmin) {
