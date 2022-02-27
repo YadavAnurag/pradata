@@ -9,6 +9,7 @@ import AddUserPage from "../components/User/AddUserPage";
 import Dashboard from "../components/Dashboard/Dashboard";
 import EditPlanPage from "../components/Plan/EditPlanPage";
 import EditUserPage from "../components/User/EditUserPage";
+import EditConnectPage from "../components/Connect/EditConnectPage";
 import ErrorPage from "../components/Error/ErrorPage";
 import HomePage from "../components/Home/HomePage";
 import ConnectPage from "../components/Connect/ConnectPage";
@@ -53,6 +54,7 @@ const AppRouter = () => {
         <PublicRoute path="/payments" component={PaymentPage} exact />
         <PublicRoute path="/profile" component={ProfilePage} exact />
         <PublicRoute path="/connect" component={ConnectPage} exact />
+        <PublicRoute path="/connect/edit" component={EditConnectPage} exact />
         <PublicRoute path="/" component={HomePage} exact />
         <Route>
           <ErrorPage />
