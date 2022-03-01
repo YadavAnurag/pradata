@@ -45,7 +45,7 @@ const AppRouter = () => {
         <PrivateRoute path="/payments" component={PaymentPage} exact />
         <PrivateRoute path="/profile" component={ProfilePage} exact />
 
-        <AdminRoute path="/users" component={UserListPage} exact={true} />
+        <PrivateRoute path="/users" component={UserListPage} exact={true} />
         <AdminRoute path="/users/add" component={AddUserPage} exact />
         <AdminRoute
           path="/users/add-payment"
