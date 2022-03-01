@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 import * as actionTypes from "../actionTypes";
 import planDataService from "../../../services/planData.Service";
@@ -39,6 +40,7 @@ export const initAddPlan = (planObject = {}) => {
       const response = await planDataService.create(plan);
       console.log("Got response", response);
       if (response.data.error) {
+        toast.error(response.data.msg);
         console.log(response.data.error);
         return Promise.reject(response.data.msg);
       } else {
@@ -67,6 +69,7 @@ export const initEditPlan = ({ id = "", updates = {} } = {}) => {
       const response = await planDataService.update(id, updates);
       console.log("Got response", response);
       if (response.data.error) {
+        toast.error(response.data.msg);
         console.log(response.data.error);
         return Promise.reject(response.data.msg);
       } else {
@@ -97,6 +100,7 @@ export const initRemovePlan = ({ id = "" } = {}) => {
       const response = await planDataService.delete(id);
       console.log("Got response", response);
       if (response.data.error) {
+        toast.error(response.data.msg);
         return Promise.reject(response.data.msg);
       } else {
         dispatch(removePlan({ id: response.data.removed }));
@@ -131,6 +135,7 @@ export const initSetPlans = () => {
     try {
       const response = await planDataService.getAll();
       if (response.data.error) {
+        toast.error(response.data.msg);
         console.log("got response", response.data.err);
         return Promise.reject(response.data.msg);
       } else {

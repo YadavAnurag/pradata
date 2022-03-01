@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import * as actionTypes from "../actionTypes";
 
 import authService from "../../../services/auth.Service";
@@ -16,9 +17,11 @@ export const initLogin = (authDetails) => {
     try {
       const response = await authService.authenticate(authDetails);
 
-      console.log("got response", response.data.error);
+      console.log("got response", response.data.error, response.data.msg);
 
       if (response.data.error) {
+        console.log("goona updated");
+        toast.error(response.data.msg);
         return Promise.reject(response.data.msg);
       } else {
         // no error

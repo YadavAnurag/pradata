@@ -13,11 +13,26 @@ export const EditPlanPage = (props) => {
   const { id: planId } = queryString.parse(history.location.search);
   const plan = props.plans.find(({ id }) => id === planId);
 
+  const toastId = React.useRef(null);
   const onSubmit = (updates) => {
     console.log("[EditPlanPage] - submitted", planId, updates);
-    props.onInitEditPlan(planId, updates);
-    history.push("/plans");
-    toast.info("Plan Updated");
+    toastId.current = toast.loading("Updating Plan...");
+    props
+      .onInitEditPlan(planId, updates)
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Plan Updated", { delay: 300 });
+          history.push("/plans");
+        }
+      })
+      .catch((err) => {
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
+      });
   };
 
   return (

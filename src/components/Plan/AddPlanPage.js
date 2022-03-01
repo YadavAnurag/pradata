@@ -9,16 +9,25 @@ import { toast } from "react-toastify";
 export const AddPlanPage = (props) => {
   const history = useHistory();
 
+  const toastId = React.useRef(null);
   const onSubmit = (plan) => {
     console.log("[AddPlanPage] - submitted", plan);
+    toastId.current = toast.loading("Adding Plan...");
     props
       .onInitAddPlan(plan)
-      .then(() => {
-        toast.success("Plan Added Successfully");
-        history.push("/plans");
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Plan Added", { delay: 300 });
+          history.push("/plans");
+        }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
       });
   };
 

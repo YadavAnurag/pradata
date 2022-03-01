@@ -12,10 +12,26 @@ import { initRemovePlan } from "../../store/actions/plan/plan";
 const PlanListPage = (props) => {
   const history = useHistory();
 
+  const toastId = React.useRef(null);
   const onRemove = (id) => {
-    props.onInitRemovePlan(id);
-    history.push("/plans");
-    toast.info("Plan Removed");
+    toastId.current = toast.loading("Updating Plan...");
+    props
+      .onInitRemovePlan(id)
+      .then((payload) => {
+        console.log("Payload", payload);
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.info("Plan Removed", { delay: 300 });
+          history.push("/plans");
+        }
+      })
+      .catch((err) => {
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
+      });
   };
 
   const jsx = (

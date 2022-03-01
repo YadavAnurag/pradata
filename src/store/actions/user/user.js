@@ -71,8 +71,14 @@ export const initEditUser = ({ id = "", updates = {} } = {}) => {
   return async (dispatch) => {
     try {
       const response = await userDataService.update(id, updates);
-      dispatch(editUser({ id, updates: response.data.updates }));
-      return Promise.resolve(response.data.updates);
+
+      if (response.data.error) {
+        toast.error(response.data.msg);
+        return Promise.reject(response.data.error);
+      } else {
+        dispatch(editUser({ id, updates: response.data.updates }));
+        return Promise.resolve(response.data.updates);
+      }
     } catch (err) {
       console.log(err);
       return Promise.reject(err);

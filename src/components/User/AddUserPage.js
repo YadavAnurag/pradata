@@ -9,15 +9,24 @@ import { toast } from "react-toastify";
 export const AddUserPage = (props) => {
   const history = useHistory();
 
+  const toastId = React.useRef(null);
   const onSubmit = (user) => {
+    toastId.current = toast.loading("Adding User...");
     props
       .onInitAddUser(user)
-      .then(() => {
-        toast.success("User Added Successfully");
-        history.push("/users");
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("User Added", { delay: 300 });
+          history.push("/users");
+        }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
       });
   };
 

@@ -12,16 +12,47 @@ export const EditUserPage = (props) => {
   const { id: userId } = queryString.parse(history.location.search);
   const user = props.users.find(({ id }) => id === userId);
 
+  const toastId = React.useRef(null);
+
   const onSubmit = (updates) => {
+    toastId.current = toast.loading("Updating User...");
     console.log("EditUserPage.js - got updates", updates);
-    props.onInitEditUser(userId, updates);
-    history.push("/users");
-    toast.info("User Updated");
+    props
+      .onInitEditUser(userId, updates)
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("User Updated", { delay: 300 });
+          history.push("/users");
+        }
+      })
+      .catch((err) => {
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
+      });
   };
   const onRemoveHandler = () => {
-    props.onInitRemoveUser(userId);
-    history.push("/users");
-    toast.info("User Removed");
+    toastId.current = toast.loading("Updating User...");
+
+    props
+      .onInitRemoveUser(userId)
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("User Removed", { delay: 300 });
+          history.push("/users");
+        }
+      })
+      .catch((err) => {
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
+      });
   };
 
   return (

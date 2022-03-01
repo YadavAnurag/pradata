@@ -25,7 +25,7 @@ const Navigation = (props) => {
   //   ],
   // };
 
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const handleToggleMenu = () => {
     setToggleMenu(!toggleMenu);
@@ -49,12 +49,15 @@ const Navigation = (props) => {
           {/* <span className="nav__title">Pradata</span> */}
           {props.routes.map((route, key) => {
             console.log("route", route, props.loggedIn);
-            if (props.loggedIn && route.to === "/logout") {
+            if (props.loggedIn && route.text === "Logout") {
               return (
                 <Link
                   key={key}
                   to={route.to}
-                  onClick={props.initLogout}
+                  onClick={() => {
+                    setToggleMenu(!toggleMenu);
+                    props.initLogout();
+                  }}
                   className="nav__link"
                 >
                   {route.text}
@@ -62,7 +65,12 @@ const Navigation = (props) => {
               );
             } else {
               return (
-                <Link key={key} to={route.to} className="nav__link">
+                <Link
+                  key={key}
+                  to={route.to}
+                  className="nav__link"
+                  onClick={() => setToggleMenu(!toggleMenu)}
+                >
                   {route.text}
                 </Link>
               );

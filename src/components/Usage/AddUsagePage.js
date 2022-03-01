@@ -11,16 +11,25 @@ export const AddUsagePage = (props) => {
   const history = useHistory();
   const { userId } = queryString.parse(history.location.search);
 
+  const toastId = React.useRef(null);
   const onSubmit = ({ planId, paymentDetails }) => {
+    toastId.current = toast.loading("Renewing Plan...");
     console.log("[AddUsagePage] - submitted", planId);
     props
       .onInitAddUsage({ userId, planId, paymentDetails })
-      .then(() => {
-        toast.success("Plan Renewed Successfully");
-        history.goBack();
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Plan Renewed", { delay: 300 });
+          history.goBack();
+        }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
       });
   };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Navigation from "../Navigation/Navigation";
 import { initLogout } from "../../store/actions/index";
@@ -14,7 +15,7 @@ export const Header = (props) => {
       { to: "/plans", text: "Plans" },
       { to: "/profile", text: "Profile" },
       { to: "/connect", text: "Connect" },
-      { to: "/logout", text: "Logout" },
+      { to: "/", text: "Logout" },
     ],
     user: [
       { to: "/", text: "Home" },
@@ -23,7 +24,7 @@ export const Header = (props) => {
       { to: "/payments", text: "Payments" },
       { to: "/profile", text: "Profile" },
       { to: "/connect", text: "Connect" },
-      { to: "/logout", text: "Logout" },
+      { to: "/", text: "Logout" },
     ],
     public: [
       { to: "/", text: "Home" },
@@ -50,11 +51,35 @@ export const Header = (props) => {
       routes = routesObject.user;
     }
   }
+
+  const history = useHistory();
+
+  const toastId = React.useRef(null);
+  const handleLogout = () => {
+    toastId.current = toast.loading("Logging Out...");
+    props
+      .onInitLogout()
+      .then((loggedOut) => {
+        if (!loggedOut) {
+          toast.dismiss(toastId.current);
+          toast.error("Failed !!!", { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Logged Out", { delay: 300 });
+          history.push(`/`);
+        }
+      })
+      .catch((err) => {
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
+      });
+  };
+
   console.log(routes);
   return (
     <header className="header-content">
       <Navigation
-        initLogout={props.initLogout}
+        initLogout={handleLogout}
         routes={routes}
         loggedIn={!!props.userId}
       />
@@ -70,7 +95,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    initLogout: () => dispatch(initLogout()),
+    onInitLogout: () => dispatch(initLogout()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

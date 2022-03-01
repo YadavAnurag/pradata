@@ -22,15 +22,24 @@ export const AddPaymentPage = (props) => {
 
   const currentUsage = getUsagePaymentDetails({ usage, plans: props.plans });
 
+  const toastId = React.useRef(null);
   const onSubmit = (paymentDetail) => {
+    toastId.current = toast.loading("Saving Payment...");
     props
       .onInitAddPayment(userId, usageId, paymentDetail)
-      .then(() => {
-        toast.success("Payment Added Successfully");
-        history.goBack();
+      .then((payload) => {
+        if (payload.error !== null) {
+          toast.dismiss(toastId.current);
+          toast.error(payload.msg, { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Payment Saved", { delay: 300 });
+          history.goBack();
+        }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
       });
   };
 

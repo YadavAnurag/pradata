@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import * as actionTypes from "../actionTypes";
 import connectDataService from "../../../services/connectData.Service";
 
@@ -16,6 +17,7 @@ export const initEditConnect = ({ updates = {} } = {}) => {
       const response = await connectDataService.update(updates);
       console.log("Got response", response);
       if (response.data.error) {
+        toast.error(response.data.msg);
         console.log(response.data.error);
         return Promise.reject(response.data.msg);
       } else {
@@ -51,6 +53,7 @@ export const initSetConnect = () => {
     try {
       const response = await connectDataService.get();
       if (response.data.error) {
+        toast.error(response.data.msg);
         console.log("got response", response.data.err);
         return Promise.reject(response.data.msg);
       } else {

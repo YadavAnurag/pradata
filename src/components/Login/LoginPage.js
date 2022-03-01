@@ -11,18 +11,27 @@ const LoginPage = (props) => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
+  const toastId = React.useRef(null);
   const onSubmit = (authDetails) => {
-    console.log("submitted");
+    toastId.current = toast.loading("Authenticating...");
     setIsLoading(true);
     props
       .onInitLogin(authDetails)
       .then((userId) => {
-        toast.success("Successfully Logged In");
-        history.push(`/dashboard`);
+        console.log("Got UserID", userId);
+        if (userId === null) {
+          toast.dismiss(toastId.current);
+          toast.error("Failed !!!", { delay: 300 });
+        } else {
+          toast.dismiss(toastId.current);
+          toast.success("Successfully Logged In", { delay: 300 });
+          history.push(`/dashboard`);
+        }
       })
       .catch((err) => {
         setIsLoading(false);
-        toast.error(err);
+        toast.dismiss(toastId.current);
+        toast.error(err.message);
       });
   };
 

@@ -5,7 +5,7 @@ import "./styles/styles.scss";
 import AppRouter from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 //import app from "./playground/app";
-import { ToastContainer, Zoom } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer/Footer";
 
@@ -19,15 +19,16 @@ const jsx = (
   <Provider store={store}>
     <ToastContainer
       position="top-right"
-      autoClose={3000}
+      autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick
+      closeOnClick={false}
       rtl={false}
       pauseOnFocusLoss
       draggable
-      pauseOnHover
-      transition={Zoom}
+      pauseOnHover={true}
+      transition={Slide}
+      theme={"colored"}
     />
     <div style={{ minHeight: "100vh" }}>
       <AppRouter />
