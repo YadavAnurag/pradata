@@ -77,6 +77,7 @@ const LoginForm = (props) => {
     if (!isValidPassword(password)) {
       isValidPasswordWhileSubmit = false;
 
+      setPassword("");
       setError((previousError) => ({
         ...previousError,
         password: "Password Policy Not Matched",
@@ -95,7 +96,11 @@ const LoginForm = (props) => {
       loadCaptchaEnginge(6);
     }
 
-    return isValidEmailIdWhileSubmit && isValidCaptchaWhileSubmit;
+    return (
+      isValidEmailIdWhileSubmit &&
+      isValidCaptchaWhileSubmit &&
+      isValidPasswordWhileSubmit
+    );
   };
 
   const handleSubmit = (e) => {
