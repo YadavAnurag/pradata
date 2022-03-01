@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "dotenv/config";
 import App from "./App";
 import { store } from "./App";
 import { initSetUsers } from "./store/actions/user/user";
@@ -16,6 +17,7 @@ const renderApp = () => {
   );
 };
 
+console.log("Env", process.env);
 // set plans
 store.dispatch(initSetPlans()).then(() => {
   store.dispatch(initSetUsers()).then(() => {

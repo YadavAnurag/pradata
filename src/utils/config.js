@@ -1,4 +1,4 @@
-const DEV_BASE_API_URL = "http://127.0.0.1:6002/api";
+const DEV_BASE_API_URL = process.env.REACT_APP_DEV_BASE_API_URL;
 const USER_ENDPOINT = "/user-management/users";
 
 const devConfig = {
