@@ -33,7 +33,6 @@ const ConnectPage = (props) => {
         <div className="connect-location">
           <iframe
             src={props.connectData.locationURL}
-            allowfullscreen=""
             loading="lazy"
             className="location-frame"
           ></iframe>

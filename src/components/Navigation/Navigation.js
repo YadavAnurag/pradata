@@ -77,7 +77,7 @@ const Navigation = (props) => {
         </ul>
       )}
       <div onClick={handleToggleMenu} className="trigger">
-        <i class="gg-menu"></i>
+        <i className="gg-menu"></i>
       </div>
     </nav>
   );
