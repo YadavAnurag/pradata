@@ -12,15 +12,10 @@ export const login = ({ userId, isAdmin }) => ({
 
 export const initLogin = (authDetails) => {
   return async (dispatch) => {
-    console.log("gonna send ", authDetails);
-
     try {
       const response = await authService.authenticate(authDetails);
 
-      console.log("got response", response.data.error, response.data.msg);
-
       if (response.data.error) {
-        console.log("goona updated");
         toast.error(response.data.msg);
         return Promise.reject(response.data.msg);
       } else {
@@ -35,7 +30,6 @@ export const initLogin = (authDetails) => {
         return Promise.resolve(response.data.userId);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject("Authentication Failed, Please try again later...");
     }
   };
@@ -52,7 +46,6 @@ export const initLogout = () => {
       dispatch(logout());
       return Promise.resolve(true);
     } catch (err) {
-      console.log(err);
       return Promise.reject("Logout Failed");
     }
   };

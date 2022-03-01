@@ -8,7 +8,6 @@ import User from "../User/User";
 
 const UserPayment = (props) => {
   const user = props.users.find((user) => {
-    console.log(user);
     return user.id === props.userId;
   });
   const usages = user.usages;

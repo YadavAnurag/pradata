@@ -11,7 +11,6 @@ const UserForm = (props) => {
   */
   const location = useLocation();
   const pathname = location.pathname;
-  // console.log(pathname, "pathname === /profile", pathname === "/profile");
 
   // TODO check if admin or not for all cases
   let isAdmin = true;
@@ -19,25 +18,12 @@ const UserForm = (props) => {
     isAdmin = props.user
       ? props.user.auth.isAdmin && props.user.id.startsWith("xyz")
       : false;
-    // console.log(
-    //   "isAdmin",
-    //   props.user
-    //     ? props.user.isAdmin && props.user.id.startsWith("xyz")
-    //     : false,
-    //   props.user
-    // );
   }
-
-  // check location
-  // const location = useLocation();
-  // const pathname = location.pathname;
-  // console.log(pathname, pathname === "/profile");
 
   // +state
   const [firstName, setFirstName] = useState(
     props.user ? props.user.firstName : ""
   );
-  // console.log("firstName", firstName);
   const [middleName, setMiddleName] = useState(
     props.user ? props.user.middleName : ""
   );
@@ -136,14 +122,12 @@ const UserForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("[PlanForm: handleSubmit - props.onSubmit]");
     if (firstName === "") {
       setError((previousError) => ({
         ...previousError,
         firstName: "Please enter first Name",
       }));
     }
-    console.log("emailid", emailId);
     if (emailId === "" || !validateEmailId(emailId)) {
       setError((previousError) => ({
         ...previousError,
@@ -162,12 +146,6 @@ const UserForm = (props) => {
         address: "Please enter user address",
       }));
     }
-    // console.log(
-    //   !!!error.first,
-    //   !!!error.description,
-    //   !!!error.price,
-    //   !!!error.validityPeriod
-    // );
 
     if (
       firstName !== "" &&

@@ -17,7 +17,6 @@ const UserListPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.users);
   return {
     users: getSelectedUsers(state.users, state.plans, state.userFilters),
   };

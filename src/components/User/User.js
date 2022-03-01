@@ -21,7 +21,6 @@ const User = (props) => {
   } = props.user;
 
   const some = getUserPaymentDetailsWithAllUsages(props.user, props.plans);
-  console.log("some\n", some);
 
   return (
     <div>

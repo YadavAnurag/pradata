@@ -15,7 +15,6 @@ export const EditPlanPage = (props) => {
 
   const toastId = React.useRef(null);
   const onSubmit = (updates) => {
-    console.log("[EditPlanPage] - submitted", planId, updates);
     toastId.current = toast.loading("Updating Plan...");
     props
       .onInitEditPlan(planId, updates)

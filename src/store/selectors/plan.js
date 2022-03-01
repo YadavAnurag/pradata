@@ -29,37 +29,6 @@ export const getSelectedPlans = (plans, planFilters) => {
       const validityPeriodMatch =
         plan.validityPeriod >= validityPeriod * 24 * 3600 * 1000;
 
-      // startDateMatch
-      // const startDateMatch =
-      //   planStatus === "" ? true : plan.createdAt >= startDate;
-      // console.log(
-      //   "plan.createdAt <= startDate",
-      //   moment(plan.createdAt).format(),
-      //   moment(startDate).format,
-      //   plan.createdAt >= startDate
-      // );
-
-      // endDateMatch
-      // const endDateMatch = planStatus === "" ? true : plan.createdAt <= endDate;
-      // console.log(
-      //   "plan.createdAt <= EndDate",
-      //   moment(plan.createdAt).format(),
-      //   moment(endDate).format(),
-      //   plan.createdAt <= endDate
-      // );
-      console.log(
-        "id",
-        plan.id,
-        "textMatch",
-        textMatch,
-        "priceMatch",
-        priceMatch,
-        "planStatusMatch",
-        planStatusMatch,
-        "validityPeriodMatch",
-        validityPeriodMatch
-      );
-
       return textMatch && priceMatch && planStatusMatch && validityPeriodMatch;
     })
     .sort((first, second) => {

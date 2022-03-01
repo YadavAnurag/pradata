@@ -18,11 +18,8 @@ const removeUser = (state, action) => {
 };
 
 const addUsage = (state, action) => {
-  console.log("reducer", action.usage);
   return state.map((user) => {
     if (user.id === action.userId) {
-      console.log("first was\n", user);
-      console.log("now", { ...user, usages: user.usages.concat(action.usage) });
       return { ...user, usages: user.usages.concat(action.usage) };
     } else return user;
   });

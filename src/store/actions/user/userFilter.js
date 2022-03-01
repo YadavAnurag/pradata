@@ -26,7 +26,6 @@ export const setCurrentPlanIdFilter = ({ currentPlanId = "" } = {}) => ({
 
 // setUserAccountStatusFilter
 export const setUserAccountStatusFilter = ({ userAccountStatus = "" } = {}) => {
-  console.log("And got this", userAccountStatus);
   return {
     type: actionTypes.SET_USER_ACCOUNT_STATUS_FILTER,
     userAccountStatus,

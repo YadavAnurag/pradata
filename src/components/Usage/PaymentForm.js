@@ -71,7 +71,6 @@ const PaymentForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("[PaymentForm: handleSubmit - props.onSubmit]");
     e.preventDefault();
     if (paidAmount === "") {
       setError((previousError) => ({
@@ -98,7 +97,6 @@ const PaymentForm = (props) => {
     if (paymentMethod === "digital")
       finalMatch = finalMatch && paymentReferenceId !== "";
     if (finalMatch) {
-      console.log("matched\n");
       const paymentDetail = {
         id: uuid(),
         paidAmount: Number.parseFloat(paidAmount) * 100,
@@ -109,7 +107,6 @@ const PaymentForm = (props) => {
             : "Use BHIM App for Digital Transaction",
         paidAt: moment().valueOf(),
       };
-      console.log(paymentDetail);
       props.onSubmit(paymentDetail);
     }
   };

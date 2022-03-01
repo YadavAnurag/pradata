@@ -21,12 +21,9 @@ const Dashboard = (props) => {
 
   let dashboardJSX = null;
   if (!!!props.userId) {
-    console.log("1");
     dashboardJSX = <Redirect to="/" />;
   } else {
-    console.log("2");
     if (props.isAdmin) {
-      console.log("3- props.adminDashboardData", props.adminDashboardData);
       dashboardJSX = (
         <AdminDashboardPage
           adminDashboardDataObject={props.adminDashboardData}
@@ -34,7 +31,6 @@ const Dashboard = (props) => {
         />
       );
     } else {
-      console.log("4");
       dashboardJSX = (
         <UserDashboardPage
           userDashboardDataArray={props.userDashboardData}

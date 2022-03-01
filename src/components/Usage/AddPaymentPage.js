@@ -44,7 +44,6 @@ export const AddPaymentPage = (props) => {
   };
 
   // if no due then display no payment required jsx
-  // console.log("totalDueToThisUsage", totalDueToThisUsage);
   const totalDueToThisUsage = currentUsage.totalDueToThisUsage;
   const jsx =
     totalDueToThisUsage <= 0 ? (

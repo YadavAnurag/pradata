@@ -12,9 +12,7 @@ import { getUserFullName } from "../../store/utility/utility";
 
 const ProfilePage = (props) => {
   // fetch user
-  console.log("Will match", props.users);
   const user = props.users.find(({ id }) => id === props.userId);
-  console.log("Got", user);
 
   const jsx =
     props.userId === undefined || user === undefined ? (

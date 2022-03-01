@@ -11,7 +11,6 @@ const Usage = (props) => {
   const planName = props.plans.filter((plan, key) => plan.id === planId)[0]
     .title;
 
-  console.log(planName, "[AddPaymentPage.js] - props.user", props);
   const isAdmin = JSON.parse(localStorage.getItem("auth")).isAdmin;
 
   return (

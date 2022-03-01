@@ -20,8 +20,6 @@ export const getSelectedUsers = (users, plans, userFilters) => {
 
   return users
     .filter((user) => {
-      console.log("got", user);
-
       const {
         totalPaymentReceived,
         dueAmount,
@@ -57,7 +55,6 @@ export const getSelectedUsers = (users, plans, userFilters) => {
        then don't exclude this user, have to include this user so mark match as true
       */
 
-      // console.log("isDue", isDue);
       let isDueMatch = true;
       if (isDue !== null) {
         //if user has any due or not
@@ -86,38 +83,6 @@ export const getSelectedUsers = (users, plans, userFilters) => {
 
       // return only non admin user
       const isNotAdminMatch = user.auth.isAdmin === false;
-
-      console.log(
-        "textMatch",
-        textMatch,
-        "contactNumberMatch",
-        contactNumberMatch,
-        "emailIdMatch",
-        emailIdMatch,
-        "currentPlanIdMatch",
-        currentPlanIdMatch,
-        "userAccountStatusMatch",
-        userAccountStatusMatch,
-        "isDueMatch",
-        isDueMatch,
-        "startDateMatch",
-        startDateMatch,
-        "endDateMatch",
-        endDateMatch
-      );
-
-      console.log(
-        "show or not",
-        textMatch &&
-          contactNumberMatch &&
-          emailIdMatch &&
-          currentPlanIdMatch &&
-          userAccountStatusMatch &&
-          isDueMatch &&
-          startDateMatch &&
-          endDateMatch &&
-          isNotAdminMatch
-      );
 
       return (
         textMatch &&
@@ -158,7 +123,6 @@ export const getSelectedUsers = (users, plans, userFilters) => {
           ? firstUserCurrentPlanDueDate - secondUserCurrentPlanDueDate
           : secondUserCurrentPlanDueDate - firstUserCurrentPlanDueDate;
       } else {
-        // console.log(`sortBy variable = ${sortBy} didn't match with any filter`);
         return 0;
       }
     });

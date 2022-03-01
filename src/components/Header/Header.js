@@ -34,20 +34,13 @@ export const Header = (props) => {
     ],
   };
 
-  console.log("userID", props.userId);
   let routes = null;
   if (!!!props.userId) {
-    console.log("1");
     routes = routesObject.public;
-    // UNDO;
-    // routes = routesObject.admin;
   } else {
-    console.log("2");
     if (props.isAdmin) {
-      console.log("3");
       routes = routesObject.admin;
     } else {
-      console.log("4");
       routes = routesObject.user;
     }
   }
@@ -75,7 +68,6 @@ export const Header = (props) => {
       });
   };
 
-  console.log(routes);
   return (
     <header className="header-content">
       <Navigation

@@ -105,14 +105,6 @@ const LoginForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("[Login Form: handleSubmit - props.onSubmit]");
-
-    console.log("will submit it", {
-      emailId,
-      password,
-      captcha,
-    });
     areInputsValid(emailId, password, captcha)
       .then((isValid) => {
         console.log("isValid", isValid);

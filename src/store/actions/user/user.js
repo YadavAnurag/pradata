@@ -11,7 +11,6 @@ import usageDataService from "../../../services/usageData.Service";
 
 //ADD_USER
 export const addUser = (user) => {
-  console.log("addUser called");
   return {
     type: actionTypes.ADD_USER,
     user,
@@ -44,11 +43,9 @@ export const initAddUser = (userObject = {}) => {
     createdAt: moment().valueOf(),
   };
 
-  console.log("Gonna send", user);
   return async (dispatch) => {
     try {
       const response = await userDataService.create(user);
-      console.log("Got response", response);
       dispatch(addUser(response.data.user));
       return Promise.resolve(response.data);
     } catch (err) {
@@ -72,18 +69,14 @@ export const initEditUser = ({ id = "", updates = {} } = {}) => {
     try {
       const response = await userDataService.update(id, updates);
 
-      console.log("1 Got EDIT User - ", updates);
       if (response.data.error) {
-        console.log("2 Got EDIT User - ", response.data);
         toast.error(response.data.msg);
         return Promise.reject(response.data);
       } else {
-        console.log("3 Got EDIT User - ", response.data);
         dispatch(editUser({ id, updates: response.data.updates }));
         return Promise.resolve(response.data);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -103,11 +96,9 @@ export const initRemoveUser = ({ id = "" } = {}) => {
       if (response.data.err) {
         throw new Error(response.data.err);
       }
-      console.log(response);
       dispatch(removeUser({ id: response.data.removed }));
       return Promise.resolve(response.data.removed);
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -138,9 +129,7 @@ export const initAddUsage = ({
 
   return async (dispatch) => {
     try {
-      console.log("Gonna send", usage);
       const response = await usageDataService.create(userId, usage);
-      console.log("Got response", response);
       if (response.data.error) {
         // if got error, then don't dispatch
         toast.error(response.data.error);
@@ -152,7 +141,6 @@ export const initAddUsage = ({
       return Promise.resolve(response.data.removed);
     } catch (err) {
       toast.error("Got error");
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -186,12 +174,10 @@ export const initAddPayment = ({
 
   return async (dispatch) => {
     try {
-      console.log("Gonna send", userId, usageId, paymentDetail);
       const response = await usageDataService.addPayment(
         paymentData.userId,
         paymentData
       );
-      console.log("Got response", response);
       if (response.data.error) {
         // if got error, then don't dispatch
         toast.error(response.data.msg);
@@ -209,7 +195,6 @@ export const initAddPayment = ({
       return Promise.resolve(response.data.msg);
     } catch (err) {
       toast.error("Got Error...");
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -232,12 +217,10 @@ export const fetchUsersFailed = () => {
 
 // set initSetUsers
 export const initSetUsers = () => {
-  console.log("user.js - initSetUsers - being initSetUsers");
   return async (dispatch) => {
     try {
       const response = await userDataService.getAll();
 
-      console.log("user.js - initSetUsers - response", response);
       dispatch(setUsers(response.data.users));
       return Promise.resolve(response.data.users);
     } catch (err) {

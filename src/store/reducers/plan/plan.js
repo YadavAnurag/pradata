@@ -15,10 +15,8 @@ const editPlan = (state, action) => {
 };
 const removePlan = (state, action) => {
   const updated = state.filter(({ id }) => {
-    console.log("[action/plan]", id, action.id);
     return id !== action.id;
   });
-  console.log(updated);
   return updated;
 };
 

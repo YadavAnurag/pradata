@@ -12,7 +12,6 @@ import profilePic from "../../assets/images/profile.png";
 import { initLogin, initSetUsers } from "../../store/actions";
 
 const HomePage = (props) => {
-  console.log("loginButton", JSON.parse(localStorage.getItem("auth")));
   return (
     <div>
       {/* <Header /> */}

@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 
 const ConnectForm = (props) => {
-  //   const {
-  //     title,
-  //     subTitle,
-  //     description,
-  //     name,
-  //     contactNumber,
-  //     emailId,
-  //     address,
-  //     locationURL,
-  //   } = props.connectData;
-
   // +state
   const [title, setTitle] = useState(
     props.connectData.title ? props.connectData.title : ""
@@ -48,7 +37,7 @@ const ConnectForm = (props) => {
     address: "",
     locationURL: "",
   });
-  console.log("useState, error", error);
+
   // -state
 
   // handles
@@ -127,8 +116,6 @@ const ConnectForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("[PlanForm: handleSubmit]");
-    console.log("[PlanForm: handleSubmit - props.onSubmit]");
     if (title === "") {
       setError((previousError) => ({
         ...previousError,
@@ -177,12 +164,6 @@ const ConnectForm = (props) => {
         locationURL: "Please Enter Location URL",
       }));
     }
-    // console.log(
-    //   !!!error.title,
-    //   !!!error.description,
-    //   !!!error.price,
-    //   !!!error.validityPeriod
-    // );
 
     if (
       title !== "" &&

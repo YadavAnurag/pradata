@@ -14,7 +14,6 @@ const UserDashboard = (props) => {
     planValidityPeriod,
     plan,
   } = props.dashboardData;
-  console.log(plan);
 
   return (
     <div className="content-container">

@@ -14,7 +14,6 @@ export const AddUsagePage = (props) => {
   const toastId = React.useRef(null);
   const onSubmit = ({ planId, paymentDetails }) => {
     toastId.current = toast.loading("Renewing Plan...");
-    console.log("[AddUsagePage] - submitted", planId);
     props
       .onInitAddUsage({ userId, planId, paymentDetails })
       .then((payload) => {

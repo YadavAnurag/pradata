@@ -34,21 +34,17 @@ export const initAddPlan = (planObject = {}) => {
     createdAt: moment().valueOf(),
   };
 
-  console.log("gonna send");
   return async (dispatch) => {
     try {
       const response = await planDataService.create(plan);
-      console.log("Got response", response);
       if (response.data.error) {
         toast.error(response.data.msg);
-        console.log(response.data.error);
         return Promise.reject(response.data.msg);
       } else {
         dispatch(addPlan(response.data.plan));
         return Promise.resolve(response.data);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -63,21 +59,17 @@ export const editPlan = ({ id = "", updates = {} } = {}) => ({
 
 // initEditPlan
 export const initEditPlan = ({ id = "", updates = {} } = {}) => {
-  console.log("gonna update plan");
   return async (dispatch) => {
     try {
       const response = await planDataService.update(id, updates);
-      console.log("Got response", response);
       if (response.data.error) {
         toast.error(response.data.msg);
-        console.log(response.data.error);
         return Promise.reject(response.data.msg);
       } else {
         dispatch(editPlan({ id, updates: response.data.updates }));
         return Promise.resolve(response.data);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -85,7 +77,6 @@ export const initEditPlan = ({ id = "", updates = {} } = {}) => {
 
 // REMOVE_PLAN
 export const removePlan = ({ id = "" } = {}) => {
-  console.log("got id", id);
   return {
     type: actionTypes.REMOVE_PLAN,
     id,
@@ -94,11 +85,9 @@ export const removePlan = ({ id = "" } = {}) => {
 
 // initRemove
 export const initRemovePlan = ({ id = "" } = {}) => {
-  console.log("gonna remove plan");
   return async (dispatch) => {
     try {
       const response = await planDataService.delete(id);
-      console.log("Got response", response);
       if (response.data.error) {
         toast.error(response.data.msg);
         return Promise.reject(response.data.msg);
@@ -107,7 +96,6 @@ export const initRemovePlan = ({ id = "" } = {}) => {
         return Promise.resolve(response.data.removed);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -130,20 +118,17 @@ export const fetchPlansFailed = () => {
 
 // set initSetPlans
 export const initSetPlans = () => {
-  console.log("initSetPlans begins");
   return async (dispatch) => {
     try {
       const response = await planDataService.getAll();
       if (response.data.error) {
         toast.error(response.data.msg);
-        console.log("got response", response.data.err);
         return Promise.reject(response.data.msg);
       } else {
         dispatch(setPlans(response.data.plans));
         return Promise.resolve(response.data);
       }
     } catch (err) {
-      console.log(err);
       return Promise.reject(err);
     }
   };

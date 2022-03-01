@@ -15,8 +15,6 @@ if (!localStorage.length) {
   };
 }
 
-console.log("authDefaultState", authDefaultState);
-
 export const authReducer = (state = authDefaultState, action) => {
   switch (action.type) {
     case "LOGIN":

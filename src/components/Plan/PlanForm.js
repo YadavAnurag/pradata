@@ -23,7 +23,6 @@ const PlanForm = (props) => {
     description: "",
     validityPeriod: "",
   });
-  console.log("useState, error", error);
   // -state
 
   // configs
@@ -92,8 +91,6 @@ const PlanForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("[PlanForm: handleSubmit]");
-    console.log("[PlanForm: handleSubmit - props.onSubmit]");
     if (title === "") {
       setError((previousError) => ({
         ...previousError,
@@ -118,12 +115,6 @@ const PlanForm = (props) => {
         description: "Please enter some description",
       }));
     }
-    console.log(
-      !!!error.title,
-      !!!error.description,
-      !!!error.price,
-      !!!error.validityPeriod
-    );
 
     if (
       title !== "" &&

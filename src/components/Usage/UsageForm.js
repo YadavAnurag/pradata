@@ -79,7 +79,6 @@ const UsageForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("[UsageForm: handleSubmit - props.onSubmit]");
     e.preventDefault();
     if (planId === "") {
       setError((previousError) => ({

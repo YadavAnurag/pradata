@@ -81,7 +81,6 @@ const UserFilters = (props) => {
   const handleAccountStatusChange = (e) => {
     const value = e.target.value;
     setAccountStatus(value);
-    console.log("handle", value);
     props.setUserAccountStatusFilter(value);
   };
   const handleIsDueChange = (e) => {

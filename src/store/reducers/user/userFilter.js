@@ -27,7 +27,6 @@ export const userFilterReducer = (
     case actionTypes.SET_CURRENT_PLAN_ID_FILTER:
       return { ...state, currentPlanId: action.currentPlanId };
     case actionTypes.SET_USER_ACCOUNT_STATUS_FILTER:
-      console.log("action.userAccountStatus", action.userAccountStatus);
       return { ...state, userAccountStatus: action.userAccountStatus };
     case actionTypes.SET_IS_DUE_FILTER:
       return { ...state, isDue: action.isDue };

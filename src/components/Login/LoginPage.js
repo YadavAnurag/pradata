@@ -18,7 +18,6 @@ const LoginPage = (props) => {
     props
       .onInitLogin(authDetails)
       .then((userId) => {
-        console.log("Got UserID", userId);
         if (userId === null) {
           toast.dismiss(toastId.current);
           toast.error("Failed !!!", { delay: 300 });

@@ -46,9 +46,7 @@ const Navigation = (props) => {
     <nav className="nav">
       {(toggleMenu || screenWidth > 500) && (
         <ul className="nav__list">
-          {/* <span className="nav__title">Pradata</span> */}
           {props.routes.map((route, key) => {
-            console.log("route", route, props.loggedIn);
             if (props.loggedIn && route.text === "Logout") {
               return (
                 <Link

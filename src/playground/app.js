@@ -410,7 +410,6 @@ const getVisibleUsers = (users, plans, userFilters) => {
           ? firstUserCurrentPlanDueDate - secondUserCurrentPlanDueDate
           : secondUserCurrentPlanDueDate - firstUserCurrentPlanDueDate;
       } else {
-        // console.log(`sortBy variable = ${sortBy} didn't match with any filter`);
         return 0;
       }
     });
@@ -629,13 +628,6 @@ store.getState();
 const unsubscribe = store.subscribe(() => {
   const state = store.getState();
   const selectedPlans = getSelectedPlans(state.plans, state.planFilters);
-  console.log("start.plans", state.plans);
-  console.log(
-    "selectedPlans",
-    selectedPlans,
-    "\nplanFilters",
-    state.planFilters
-  );
 });
 
 // const firstUser = store.dispatch(

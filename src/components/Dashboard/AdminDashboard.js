@@ -9,7 +9,7 @@ const AdminDashboard = (props) => {
     totalDuesSinceLastOneYearForAllUsersCount,
     totalUsers,
   } = props.dashboardData;
-  console.log("passed", props.dashboardData);
+
   return (
     <div className="content-container">
       <div className="list-item-top">

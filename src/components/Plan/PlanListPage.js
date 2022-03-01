@@ -18,7 +18,6 @@ const PlanListPage = (props) => {
     props
       .onInitRemovePlan(id)
       .then((payload) => {
-        console.log("Payload", payload);
         if (payload.error !== null) {
           toast.dismiss(toastId.current);
           toast.error(payload.msg, { delay: 300 });

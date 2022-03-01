@@ -2,7 +2,6 @@ import * as actionTypes from "../../actions/actionTypes";
 
 // set users
 const setUserDashboardData = (state, action) => {
-  console.log("Herereere", action.userDashboardData);
   return [...state, ...action.userDashboardData];
 };
 
@@ -22,7 +21,6 @@ export const userDashboardReducer = (
 
 // set admin
 const setAdminDashboardData = (state, action) => {
-  console.log("3 Got response ", { ...state, ...action.adminDashboardData });
   return { ...state, ...action.adminDashboardData };
 };
 
