@@ -72,12 +72,15 @@ export const initEditUser = ({ id = "", updates = {} } = {}) => {
     try {
       const response = await userDataService.update(id, updates);
 
+      console.log("1 Got EDIT User - ", updates);
       if (response.data.error) {
+        console.log("2 Got EDIT User - ", response.data);
         toast.error(response.data.msg);
-        return Promise.reject(response.data.error);
+        return Promise.reject(response.data);
       } else {
+        console.log("3 Got EDIT User - ", response.data);
         dispatch(editUser({ id, updates: response.data.updates }));
-        return Promise.resolve(response.data.updates);
+        return Promise.resolve(response.data);
       }
     } catch (err) {
       console.log(err);

@@ -14,11 +14,13 @@ const UserPayment = (props) => {
   const usages = user.usages;
 
   return (
-    <div className="content-container">
-      <div className="list-header">
-        <div className="show-for-desktop">All Usages</div>
+    <div style={{ paddingBottom: "3rem" }}>
+      <div className="content-container">
+        <div className="list-header">
+          <div className="show-for-desktop">All Usages</div>
+        </div>
+        <UsageList usages={usages} />
       </div>
-      <UsageList usages={usages} />
     </div>
   );
 };

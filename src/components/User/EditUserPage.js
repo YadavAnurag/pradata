@@ -20,16 +20,19 @@ export const EditUserPage = (props) => {
     props
       .onInitEditUser(userId, updates)
       .then((payload) => {
+        console.log("1 Edit Payload", payload);
         if (payload.error !== null) {
           toast.dismiss(toastId.current);
           toast.error(payload.msg, { delay: 300 });
         } else {
+          console.log("2 Edit Payload", payload);
           toast.dismiss(toastId.current);
           toast.success("User Updated", { delay: 300 });
           history.push("/users");
         }
       })
       .catch((err) => {
+        console.log("3 Edit Payload");
         toast.dismiss(toastId.current);
         toast.error(err.message);
       });

@@ -225,7 +225,7 @@ const UserForm = (props) => {
 
       {/* <label>Email Id</label> */}
       <input
-        type="text"
+        type="email"
         name="emailId"
         value={emailId}
         onChange={handleEmailIdChange}
@@ -237,7 +237,7 @@ const UserForm = (props) => {
 
       {/* <label>Contact Number</label> */}
       <input
-        type="text"
+        type="number"
         name="contactNumber"
         placeholder={
           error.contactNumber ? error.contactNumber : "Contact Number"

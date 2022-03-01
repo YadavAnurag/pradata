@@ -35,7 +35,7 @@ const PlanListPage = (props) => {
   };
 
   const jsx = (
-    <div>
+    <div style={{ paddingBottom: "3rem" }}>
       <PlansSummary />
       <PlanFilters />
       <PlanList

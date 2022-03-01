@@ -44,7 +44,7 @@ const Dashboard = (props) => {
     }
   }
 
-  return <div>{dashboardJSX}</div>;
+  return <div style={{ paddingBottom: "4rem" }}>{dashboardJSX}</div>;
 };
 
 const mapStateToProps = (state) => {

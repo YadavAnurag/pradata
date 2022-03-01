@@ -27,6 +27,10 @@ input[type="password"] {
   @extend input[type="text"];
 }
 
+input[type="number"] {
+  @extend input[type="text"];
+}
+
 select {
   @extend input[type="text"];
 }
