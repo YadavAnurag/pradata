@@ -7,7 +7,7 @@ import configureStore from "./store/configureStore";
 //import app from "./playground/app";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 import onAuthStateChanged from "./utils/auth";
 
@@ -29,7 +29,10 @@ const jsx = (
       pauseOnHover
       transition={Zoom}
     />
-    <AppRouter />
+    <div style={{ minHeight: "100vh" }}>
+      <AppRouter />
+    </div>
+    <Footer />
   </Provider>
 );
 

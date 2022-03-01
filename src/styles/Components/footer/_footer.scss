@@ -4,11 +4,14 @@
   display: flex;
   justify-content: center;
   padding: $xsmall;
+
+  clear: both;
+  position: relative;
+  margin-top: -1px;
 }
 .footer {
   display: flex;
   flex-direction: row;
-  margin-top: -1px;
   a {
     color: white;
     text-decoration: none;

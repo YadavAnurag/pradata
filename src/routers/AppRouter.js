@@ -31,7 +31,7 @@ import LoginPage from "../components/Login/LoginPage";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Switch>
         <PublicRoute path="/dashboard" component={Dashboard} exact={true} />
         <PublicRoute path="/users" component={UserListPage} exact={true} />
@@ -61,7 +61,7 @@ const AppRouter = () => {
           <ErrorPage />
         </Route>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };

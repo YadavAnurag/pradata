@@ -50,17 +50,22 @@
 
     a {
       margin-right: 0px;
+      padding: $small 0;
     }
   }
   .nav__link:nth-child(1) {
-    margin-top: $large;
+    margin-top: $xlarge;
+  }
+  .nav__link:last-child {
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
   }
   .nav__link {
     border-top: 1px solid rgba($color: #fff, $alpha: 0.5);
     width: 100%;
     text-align: center;
     margin-right: 0px;
-    padding: $small 0;
+    padding: 0;
+    // margin: $small 0;
   }
   .trigger {
     display: block;

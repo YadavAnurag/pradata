@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = (props) => {
@@ -25,24 +25,54 @@ const Navigation = (props) => {
   //   ],
   // };
 
+  const [toggleMenu, setToggleMenu] = useState(true);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const handleToggleMenu = () => {
+    setToggleMenu(!toggleMenu);
+  };
+
+  const changeWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", changeWidth);
+
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, []);
+
   return (
     <nav className="nav">
-      <ul className="nav__list">
-        {/* <span className="nav__title">Pradata</span> */}
-        {props.routes.map((route, key) => {
-          return (
-            <Link key={key} to={route.to} className="nav__link">
-              {route.text}
-            </Link>
-          );
-        })}
-        {props.loggedIn ? (
-          <Link onClick={props.initLogout}>Logout</Link>
-        ) : (
-          <Link to={"/login"}>Login</Link>
-        )}
-      </ul>
-      <button className="trigger">BTN</button>
+      {(toggleMenu || screenWidth > 500) && (
+        <ul className="nav__list">
+          {/* <span className="nav__title">Pradata</span> */}
+          {props.routes.map((route, key) => {
+            console.log("route", route, props.loggedIn);
+            if (props.loggedIn && route.to === "/logout") {
+              return (
+                <Link
+                  key={key}
+                  to={route.to}
+                  onClick={props.initLogout}
+                  className="nav__link"
+                >
+                  {route.text}
+                </Link>
+              );
+            } else {
+              return (
+                <Link key={key} to={route.to} className="nav__link">
+                  {route.text}
+                </Link>
+              );
+            }
+          })}
+        </ul>
+      )}
+      <button onClick={handleToggleMenu} className="trigger">
+        BTN
+      </button>
     </nav>
   );
 };
