@@ -19,6 +19,7 @@ import PaymentPage from "../components/UserPayment/UserPayment";
 import ProfilePage from "../components/Profile/ProfilePage";
 import UserListPage from "../components/User/UserListPage";
 import UsagePage from "../components/Usage/UsagePage";
+import Footer from "../components/Footer/Footer";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRouter";
@@ -60,6 +61,7 @@ const AppRouter = () => {
           <ErrorPage />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };

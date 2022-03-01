@@ -1,0 +1,19 @@
+.footer-container {
+  background: linear-gradient(45deg, rgba(156, 14, 156, 1), $quaternary);
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: $xsmall;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  margin-top: -1px;
+  p {
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    padding-left: $xsmall;
+  }
+}
