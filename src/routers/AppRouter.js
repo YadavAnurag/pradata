@@ -23,6 +23,7 @@ import Footer from "../components/Footer/Footer";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRouter";
+import AdminRoute from "./AdminRouter";
 import LoginPage from "../components/Login/LoginPage";
 
 // const history = createBrowserHistory({
@@ -33,35 +34,33 @@ const AppRouter = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <PublicRoute path="/dashboard" component={Dashboard} exact={true} />
-        <PublicRoute path="/users" component={UserListPage} exact={true} />
-        <PublicRoute path="/users/add" component={AddUserPage} exact />
-        <PublicRoute path="/users/edit" component={EditUserPage} exact />
-        <PublicRoute
+        <PublicRoute path="/login" component={LoginPage} exact />
+        <PublicRoute path="/plans/" component={PlanListPage} exact />
+        <PublicRoute path="/connect" component={ConnectPage} exact />
+        <PublicRoute path="/" component={HomePage} exact />
+
+        <PrivateRoute path="/dashboard" component={Dashboard} exact={true} />
+        <PrivateRoute path="/users/edit" component={EditUserPage} exact />
+        <PrivateRoute path="/usages" component={UsagePage} exact />
+        <PrivateRoute path="/payments" component={PaymentPage} exact />
+        <PrivateRoute path="/profile" component={ProfilePage} exact />
+
+        <AdminRoute path="/users" component={UserListPage} exact={true} />
+        <AdminRoute path="/users/add" component={AddUserPage} exact />
+        <AdminRoute
           path="/users/add-payment"
           component={AddPaymentPage}
           exact
         />
+        <AdminRoute path="/users/renew" component={AddUsagePage} exact />
+        <AdminRoute path="/plans/add" component={AddPlanPage} exact />
+        <AdminRoute path="/plans/edit" component={EditPlanPage} exact />
+        <AdminRoute path="/connect/edit" component={EditConnectPage} exact />
 
-        <PublicRoute path="/usages" component={UsagePage} exact />
-        <PublicRoute path="/users/renew" component={AddUsagePage} exact />
-
-        <PublicRoute path="/plans/add" component={AddPlanPage} exact />
-        <PublicRoute path="/plans/edit" component={EditPlanPage} exact />
-
-        {/* <PrivateRoute path="/dashboard" component={Dashboard} exact={true} /> */}
-        <PublicRoute path="/login" component={LoginPage} exact />
-        <PublicRoute path="/plans/" component={PlanListPage} exact />
-        <PublicRoute path="/payments" component={PaymentPage} exact />
-        <PublicRoute path="/profile" component={ProfilePage} exact />
-        <PublicRoute path="/connect" component={ConnectPage} exact />
-        <PublicRoute path="/connect/edit" component={EditConnectPage} exact />
-        <PublicRoute path="/" component={HomePage} exact />
         <Route>
           <ErrorPage />
         </Route>
       </Switch>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 };

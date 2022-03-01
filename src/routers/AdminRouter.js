@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import Header from "../components/Header/Header";
 
-export const PrivateRoute = ({
+export const AdminRoute = ({
   isAuthenticated,
   component: Component,
   ...rest
@@ -12,7 +11,7 @@ export const PrivateRoute = ({
     <Route
       {...rest}
       component={(props) =>
-        isAuthenticated ? (
+        isAuthenticated && props.isAdmin ? (
           <div>
             {/* <Header /> */}
             <Component {...props} />
@@ -27,6 +26,7 @@ export const PrivateRoute = ({
 
 const mapStateToProps = (state) => ({
   isAuthenticated: !!state.auth.userId,
+  isAdmin: state.auth.isAdmin,
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(AdminRoute);
