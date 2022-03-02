@@ -1,8 +1,8 @@
 import moment from "moment";
 import { createStore, combineReducers } from "redux";
 import { v4 as uuid } from "uuid";
-import { users, plans } from "../fixtures/data";
-import { userFilters, planFilters } from "../fixtures/filters";
+import { users, plans } from "../renamed-fixtures/data";
+import { userFilters, planFilters } from "../renamed-fixtures/filters";
 import {
   getTotalPaymentReceivedToLastUsage,
   getUserFullName,

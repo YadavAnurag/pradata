@@ -7,10 +7,17 @@ import PlanList from "./PlanList";
 import { getSelectedPlans } from "../../store/selectors/index";
 import PlanFilters from "../Filter/PlanFilters";
 import PlansSummary from "./PlansSummary";
-import { initRemovePlan } from "../../store/actions/plan/plan";
+import { initRemovePlan, initSetPlans } from "../../store/actions/plan/plan";
 
 const PlanListPage = (props) => {
   const history = useHistory();
+
+  // fetch plans when plans page loads
+  React.useEffect(() => {
+    if (Object.keys(props.plans).length === 0) {
+      props.onInitSetPlan();
+    }
+  }, []);
 
   const toastId = React.useRef(null);
   const onRemove = (id) => {
@@ -38,7 +45,7 @@ const PlanListPage = (props) => {
       <PlansSummary />
       <PlanFilters />
       <PlanList
-        plans={props.plans}
+        plans={getSelectedPlans(props.plans, props.planFilters)}
         onRemove={onRemove}
         isAdmin={props.isAdmin}
       />
@@ -50,11 +57,13 @@ const PlanListPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    plans: getSelectedPlans(state.plans, state.planFilters),
+    plans: state.plans,
+    planFilters: state.planFilters,
     isAdmin: state.auth.isAdmin,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   onInitRemovePlan: (id) => dispatch(initRemovePlan({ id })),
+  onInitSetPlan: () => dispatch(initSetPlans()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PlanListPage);

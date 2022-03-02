@@ -1,5 +1,5 @@
 import * as actionTypes from "../../actions/actionTypes";
-import { users } from "../../../fixtures/data";
+// import { users } from "../../../fixtures/data";
 
 const addUser = (state, action) => {
   return [...state, action.user];

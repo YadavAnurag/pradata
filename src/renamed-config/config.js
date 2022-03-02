@@ -1,4 +1,4 @@
-const DEV_BASE_API_URL = process.env.REACT_APP_DEV_BASE_API_URL;
+const DEV_BASE_API_URL = process.env.REACT_APP_PROD_BASE_API_URL;
 const USER_ENDPOINT = "/user-management/users";
 
 const devConfig = {
@@ -9,7 +9,7 @@ const devConfig = {
 
 const prodConfig = {
   prodConfig: false,
-  serverURL: DEV_BASE_API_URL,
+  baseAPIURL: DEV_BASE_API_URL,
 };
 
 let config = {};

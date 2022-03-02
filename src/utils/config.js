@@ -1,15 +1,11 @@
-const DEV_BASE_API_URL = process.env.REACT_APP_DEV_BASE_API_URL;
-const USER_ENDPOINT = "/user-management/users";
-
 const devConfig = {
   devConfig: true,
-  baseAPIURL: DEV_BASE_API_URL,
-  userEndpoint: USER_ENDPOINT,
+  baseAPIURL: process.env.REACT_APP_DEV_BASE_API_URL,
 };
 
 const prodConfig = {
   prodConfig: false,
-  serverURL: DEV_BASE_API_URL,
+  baseAPIURL: process.env.REACT_APP_PROD_BASE_API_URL,
 };
 
 let config = {};
@@ -26,4 +22,4 @@ config.seedStore = true;
 // is Auth Required for login
 config.isAuthRequired = true;
 
-module.exports = config;
+export default config;

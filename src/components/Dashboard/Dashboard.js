@@ -2,12 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { initGetDashboardData } from "../../store/actions/index";
+import { initGetDashboardData, initSetUsers } from "../../store/actions/index";
 import AdminDashboardPage from "./AdminDashboardPage";
 import UserDashboardPage from "./UserDashboardPage";
 
 const Dashboard = (props) => {
   React.useEffect(() => {
+    if (Object.keys(props.users).length === 0) {
+      props.onInitSetUsers();
+    }
+
     if (props.isAdmin) {
       if (props.userDashboardData.length === 0) {
         props.onInitGetDashboardData(props.userId, props.isAdmin);
@@ -50,12 +54,14 @@ const mapStateToProps = (state) => {
     userDashboardData: state.userDashboard,
     adminDashboardData: state.adminDashboard,
     user: state.users.find(({ id }) => id === state.auth.userId),
+    users: state.users,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitGetDashboardData: (id, isAdmin) =>
       dispatch(initGetDashboardData(id, isAdmin)),
+    onInitSetUsers: () => dispatch(initSetUsers()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

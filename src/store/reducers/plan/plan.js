@@ -1,5 +1,5 @@
 import * as actionTypes from "../../actions/actionTypes";
-import { plans } from "../../../fixtures/data";
+// import { plans } from "../../../fixtures/data";
 
 const addPlan = (state, action) => {
   return [...state, action.plan];

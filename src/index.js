@@ -17,10 +17,5 @@ const renderApp = () => {
   );
 };
 
-console.log("Env", process.env);
-// set plans
-store.dispatch(initSetPlans()).then(() => {
-  store.dispatch(initSetUsers()).then(() => {
-    renderApp();
-  });
-});
+// console.log("Env", process.env);
+renderApp();
