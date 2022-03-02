@@ -20,28 +20,28 @@ const AdminDashboard = (props) => {
         <div className="list-item__user-details">
           <div>
             <p>Total Users :</p>
-            <p>{totalUsers}</p>
+            <p>{totalUsers.toString()}</p>
           </div>
           <div>
             <p>Active Users : </p>
-            <p>{numberOfActiveUsers}</p>
+            <p>{numberOfActiveUsers.toString()}</p>
           </div>
           <div>
             <p>Inactive Users :</p>
-            <p>{numberOfInactiveUsers}</p>
+            <p>{numberOfInactiveUsers.toString()}</p>
           </div>
           <div>
             <p>Due Date Passed Users :</p>
-            <p>{dueDatePassedForAllUsersCount}</p>
+            <p>{dueDatePassedForAllUsersCount.toString()}</p>
           </div>
           <div>
             <p>Due Date in 30 Days Users :</p>
-            <p>{dueDateWithInAMonthForAllUsersCount}</p>
+            <p>{dueDateWithInAMonthForAllUsersCount.toString()}</p>
           </div>
 
           <div>
             <p>Total Due in last 1 Year :</p>
-            <p>{totalDuesSinceLastOneYearForAllUsersCount / 100}</p>
+            <p>{(totalDuesSinceLastOneYearForAllUsersCount / 100).toString()}</p>
           </div>
         </div>
       </div>

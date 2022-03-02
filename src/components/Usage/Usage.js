@@ -11,7 +11,11 @@ const Usage = (props) => {
   const planName = props.plans.filter((plan, key) => plan.id === planId)[0]
     .title;
 
-  const isAdmin = JSON.parse(localStorage.getItem("auth")).isAdmin;
+  // check if localStorage contains auth
+  const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
+  const isAuthAvailableInLocalStorage = localStorage.length &&
+    (parsedLocalStorage !== null);
+  const isAdmin = isAuthAvailableInLocalStorage ? parsedLocalStorage.isAdmin : false;
 
   return (
     <div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
-import { initLogin, initSetUsers } from "../../store/actions";
+import { initLogin, initSetUsers, initSetPlans } from "../../store/actions";
 import LoginForm from "./LoginForm";
 
 const LoginPage = (props) => {
@@ -22,9 +22,16 @@ const LoginPage = (props) => {
           toast.dismiss(toastId.current);
           toast.error("Failed !!!", { delay: 300 });
         } else {
-          toast.dismiss(toastId.current);
-          toast.success("Successfully Logged In", { delay: 300 });
-          history.push(`/dashboard`);
+          // user logged in, fetch plans if plan not exists
+          // fetch plans, other it will redirect to dashboard and plans will be used
+          if (Object.keys(props.plans).length === 0) {
+            props.onInitSetPlans().then(() => {
+              toast.dismiss(toastId.current);
+              toast.success("Successfully Logged In", { delay: 300 });
+              history.push(`/dashboard`);
+            });
+          }
+
         }
       })
       .catch((err) => {
@@ -50,10 +57,17 @@ const LoginPage = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    plans: state.plans
+  }
+}
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitLogin: (authDetails) => dispatch(initLogin(authDetails)),
     onInitSetUsers: () => dispatch(initSetUsers()),
+    onInitSetPlans: () => dispatch(initSetPlans())
   };
 };
-export default connect(undefined, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

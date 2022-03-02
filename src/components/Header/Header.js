@@ -57,6 +57,7 @@ export const Header = (props) => {
           toast.dismiss(toastId.current);
           toast.error("Failed !!!", { delay: 300 });
         } else {
+          localStorage.clear();
           toast.dismiss(toastId.current);
           toast.success("Logged Out", { delay: 300 });
           history.push(`/`);

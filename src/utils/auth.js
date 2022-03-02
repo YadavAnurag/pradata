@@ -1,6 +1,12 @@
 const onAuthStateChanged = (auth) => {
+
+  // check if localStorage contains userId
+  const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
+  const isAuthAvailableInLocalStorage = localStorage.length &&
+    (parsedLocalStorage !== null);
+
   return new Promise((resolve, reject) => {
-    if (!localStorage.length) {
+    if (!isAuthAvailableInLocalStorage) {
       // no storage
       localStorage.setItem("auth", JSON.stringify(auth));
     } else {

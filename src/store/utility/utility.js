@@ -11,7 +11,7 @@ export const getTotalPaymentReceivedToLastUsage = (user, plans) => {
     dueAmount = 0;
   let totalPaymentReceived = 0,
     currentPlanDueDate = 1e13; // a large number, please do not use Infinity javascript sort function doesn't work on Infinity
-  /* 
+  /*
       there are no usages means there is no currentPlan
       so create a fake plan for login comparison and other things
     */

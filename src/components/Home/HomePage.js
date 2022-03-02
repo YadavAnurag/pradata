@@ -13,9 +13,11 @@ import { initLogin, initSetUsers } from "../../store/actions";
 
 // check if localStorage contains userId
 const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
-const isAuthAvailableInLocalStorage = storage.length &&
+const isAuthAvailableInLocalStorage = localStorage.length &&
   (parsedLocalStorage !== null);
 const userId = isAuthAvailableInLocalStorage ? parsedLocalStorage.userId : "";
+
+console.log("userId", userId);
 
 const HomePage = (props) => {
   return (

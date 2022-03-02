@@ -1,5 +1,10 @@
 let authDefaultState = null;
-if (!localStorage.length) {
+
+const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
+const isAuthAvailableInLocalStorage = localStorage.length &&
+    (parsedLocalStorage !== null);
+
+if (!isAuthAvailableInLocalStorage) {
   authDefaultState = { userId: "", isAdmin: false };
 } else {
   const previousAuthStorage = JSON.parse(localStorage.getItem("auth"));
