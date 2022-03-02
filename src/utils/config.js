@@ -1,10 +1,10 @@
 const devConfig = {
-  devConfig: true,
+  devConfig: false,
   baseAPIURL: process.env.REACT_APP_DEV_BASE_API_URL,
 };
 
 const prodConfig = {
-  prodConfig: false,
+  prodConfig: true,
   baseAPIURL: process.env.REACT_APP_PROD_BASE_API_URL,
 };
 
