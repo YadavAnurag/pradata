@@ -11,6 +11,12 @@ import profilePic from "../../assets/images/profile.png";
 
 import { initLogin, initSetUsers } from "../../store/actions";
 
+// check if localStorage contains userId
+const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
+const isAuthAvailableInLocalStorage = storage.length &&
+  (parsedLocalStorage !== null);
+const userId = isAuthAvailableInLocalStorage ? parsedLocalStorage.userId : "";
+
 const HomePage = (props) => {
   return (
     <div>
@@ -24,13 +30,13 @@ const HomePage = (props) => {
             <h2>Fast and Secure</h2>
             <h2>cable TV connection</h2>
 
-            {JSON.parse(localStorage.getItem("auth")).userId === "" ? (
+            {userId === "" ? (
               <Link to={`/connect`} className="button home-header__button">
                 Connect
               </Link>
             ) : (
-              <Link to={`/plans`} className="button home-header__button">
-                Plans
+              <Link to={`/dashboard`} className="button home-header__button">
+                Dashboard
               </Link>
             )}
           </div>
