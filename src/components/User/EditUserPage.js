@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import queryString from "query-string";
 import { toast } from "react-toastify";

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useParams, useLocation, useHistory } from "react-router";
+import { useLocation } from "react-router";
 import queryString from "query-string";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";

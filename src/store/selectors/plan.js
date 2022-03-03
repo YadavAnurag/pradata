@@ -1,5 +1,3 @@
-import moment from "moment";
-
 // getSelectedPlans
 export const getSelectedPlans = (plans, planFilters) => {
   const {
@@ -7,8 +5,6 @@ export const getSelectedPlans = (plans, planFilters) => {
     price = 100,
     planStatus = "active",
     validityPeriod = 15,
-    startDate = null,
-    endDate = null,
     sortBy = "priceAsc",
   } = { ...planFilters };
 
@@ -44,6 +40,8 @@ export const getSelectedPlans = (plans, planFilters) => {
         return sortBy === "validityPeriodAsc"
           ? first.validityPeriod - second.validityPeriod
           : second.validityPeriod - first.validityPeriod;
+      }else{
+        return 0;
       }
     });
 };

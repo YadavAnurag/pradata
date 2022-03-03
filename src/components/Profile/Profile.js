@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import moment from "moment";
 import { toast } from "react-toastify";
 
 import UserForm from "../User/UserForm";

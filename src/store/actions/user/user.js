@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid";
 import { toast } from "react-toastify";
 
 import * as actionTypes from "../actionTypes";
-import config from "../../../utils/config";
 import userDataService from "../../../services/userData.Service";
 import usageDataService from "../../../services/usageData.Service";
 

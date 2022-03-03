@@ -6,8 +6,6 @@ import { initGetDashboardData, initSetUsers, initSetPlans } from "../../store/ac
 import AdminDashboardPage from "./AdminDashboardPage";
 import UserDashboardPage from "./UserDashboardPage";
 
-import Spinner from "../UI/Spinner/Spinner";
-
 const Dashboard = (props) => {
   console.log("Came here", props.users);
 

@@ -7,7 +7,6 @@ import {
 } from "react-simple-captcha";
 
 import { isValidEmailId, isValidPassword } from "../../utils/validation";
-import { toast } from "react-toastify";
 import Spinner from "../UI/Spinner/Spinner";
 
 const LoginForm = (props) => {

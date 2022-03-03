@@ -33,6 +33,7 @@ const ConnectPage = (props) => {
       <div className="content-container content-container__connect connect__bottom">
         <div className="connect-location">
           <iframe
+            title={"unique"}
             src={locationURL}
             loading="lazy"
             className="location-frame"

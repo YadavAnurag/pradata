@@ -1,8 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import queryString from "query-string";
-import { Link } from "react-router-dom";
 
 import { initEditUser } from "../../store/actions/index";
 import Profile from "./Profile";

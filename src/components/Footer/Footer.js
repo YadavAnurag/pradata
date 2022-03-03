@@ -10,7 +10,7 @@ const Footer = (props) => {
     <div className="footer-container" onClick={onClickHandler}>
       <div className="footer">
         <p>Developed By &nbsp;:</p>
-        <a href="https://github.com/yadavanurag" target="_blank">
+        <a href="https://github.com/yadavanurag" target="_blank" rel="noreferrer">
           Anurag Yadav
         </a>
       </div>

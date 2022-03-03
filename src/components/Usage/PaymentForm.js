@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
-// import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
 
 const PaymentForm = (props) => {
   // +state
@@ -117,7 +115,6 @@ const PaymentForm = (props) => {
   return (
     <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
       <h3>Payment Details</h3>
-      {/* <label>Amount</label> */}
       <input
         type="text"
         placeholder={error.paidAmount ? error.paidAmount : "Amount"}
@@ -127,7 +124,6 @@ const PaymentForm = (props) => {
       />
       {error.paidAmount && <span>{error.paidAmount}</span>}
 
-      {/* <label>Payment Method</label> */}
       <select
         name="method"
         value={paymentMethod}
@@ -142,9 +138,7 @@ const PaymentForm = (props) => {
           );
         })}
       </select>
-      {/* <span>{error.paymentMethod}</span> */}
 
-      {/* <label>Payment Reference Id</label> */}
       <input
         type="text"
         placeholder="Reference Id"
@@ -155,7 +149,6 @@ const PaymentForm = (props) => {
         onChange={handlePaymentReferenceIdChange}
         className={!!error.paymentReferenceId ? "input input-error" : "input"}
       />
-      {/* <span>{error.paymentReferenceId}</span> */}
 
       <div>
         <button

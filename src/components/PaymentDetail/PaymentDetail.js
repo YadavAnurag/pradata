@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 const PaymentDetail = (props) => {
-  const { id, paidAmount, paymentMethod, paymentReferenceId, paidAt } =
+  const { paidAmount, paymentMethod, paymentReferenceId, paidAt } =
     props.paymentDetail;
 
   return (

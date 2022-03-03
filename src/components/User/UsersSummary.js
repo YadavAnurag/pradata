@@ -12,7 +12,11 @@ const UsersSummary = (props) => {
   const totalUsers = users.length;
   let adminUsersCount = 0;
   users.map(({ isAdmin }) => {
-    if (isAdmin) adminUsersCount++;
+    if (isAdmin){
+      return adminUsersCount++;
+    }else{
+      return 0;
+    }
   });
   const hiddenUsersCount =
     usersCount < totalUsers - adminUsersCount

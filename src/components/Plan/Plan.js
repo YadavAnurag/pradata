@@ -3,7 +3,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 const Plan = (props) => {
-  const { id, title, price, status, description, validityPeriod, createdAt } =
+  const { id, title, price, status, description, validityPeriod } =
     props.plan;
 
   return (

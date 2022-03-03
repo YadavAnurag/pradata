@@ -13,7 +13,6 @@ export const AdminRoute = ({
       component={(props) =>
         isAuthenticated && props.isAdmin ? (
           <div>
-            {/* <Header /> */}
             <Component {...props} />
           </div>
         ) : (

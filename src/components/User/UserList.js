@@ -18,7 +18,11 @@ const UserList = (props) => {
         ) : (
           props.users.map((user, key) => {
             // show only non-admin users
-            if (!user.auth.isAdmin) return <User key={key} user={user} />;
+            if (!user.auth.isAdmin){
+              return <User key={key} user={user} />;
+            }else{
+              return null;
+            }
           })
         )}
       </div>

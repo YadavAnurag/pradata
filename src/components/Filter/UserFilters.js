@@ -1,6 +1,5 @@
-import React, { useState, forwardRef, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 
 import {
   setUserTextFilter,
@@ -10,11 +9,7 @@ import {
   setUserAccountStatusFilter,
   setIsDueFilter,
   setSortByFilter,
-  // setUserStartDateFilter,
-  // setUserEndDateFilter,
 } from "../../store/actions/user/userFilter";
-// import ReactDatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
 
 const UserFilters = (props) => {
   // state
@@ -29,8 +24,7 @@ const UserFilters = (props) => {
   );
   const [isDue, setIsDue] = useState(props.filters.isDue);
   const [sortBy, setSortBy] = useState(props.filters.sortBy);
-  // const [startDate, setStartDate] = useState(props.filters.startDate);
-  // const [endDate, setEndDate] = useState(props.filters.endDate);
+
 
   // configs
   const accountStatusConfigs = [
@@ -48,8 +42,6 @@ const UserFilters = (props) => {
     { text: "Text ⤵", value: "textDesc" },
     { text: "Due Amount ⤵", value: "dueAmountDesc" },
     { text: "Due Amount ⤴", value: "dueAmountAsc" },
-    // { text: "Due Date ⤴", value: "dueDateAsc" },
-    // { text: "Due Date ⤵", value: "dueDateDesc" },
   ];
 
   // handlers
@@ -97,43 +89,6 @@ const UserFilters = (props) => {
     setSortBy(value);
     props.setSortByFilter(value);
   };
-
-  // // ReactDatePicker
-  // const StartDateCustomInput = forwardRef(({ value, onClick }, ref) => (
-  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
-  //     {moment(value).format("DD-MMM-YYYY")}
-  //   </button>
-  // ));
-  // const handleStartDateChange = (e) => {
-  //   setStartDate(e);
-  //   props.setUserStartDateFilter(e === null ? e : e.valueOf());
-
-  //   // if start or end data is null then make both of them null
-  //   // if (e === null) {
-  //   //   handleEndDateChange(null);
-  //   // }
-  // };
-  // const handleEndDateChange = (e) => {
-  //   setEndDate(e);
-  //   props.setUserEndDateFilter(e === null ? e : e.valueOf());
-
-  //   // if start or end data is null then make both of them null
-  //   // if (e === null) {
-  //   //   handleStartDateChange(null);
-  //   // }
-  // };
-
-  useEffect(() => {
-    // // if date is null then show placeholder in ReactDatePicker
-    // if (startDate === null) {
-    //   document.querySelectorAll(".example-custom-input")[0].textContent =
-    //     "--/--/----";
-    // }
-    // if (endDate === null) {
-    //   document.querySelectorAll(".example-custom-input")[1].textContent =
-    //     "--/--/----";
-    // }
-  });
 
   return (
     <div className="content-container">

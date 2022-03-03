@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import UsageList from "../Usage/UsageList";
 import {initSetUsers, initSetPlans} from "../../store/actions/index";
-import User from "../User/User";
 
 const UserPayment = (props) => {
 

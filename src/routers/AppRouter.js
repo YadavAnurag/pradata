@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
-// import { createBrowserHistory } from "history";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import AddPaymentPage from "../components/Usage/AddPaymentPage";
 import AddPlanPage from "../components/Plan/AddPlanPage";
@@ -19,16 +18,12 @@ import PaymentPage from "../components/UserPayment/UserPayment";
 import ProfilePage from "../components/Profile/ProfilePage";
 import UserListPage from "../components/User/UserListPage";
 import UsagePage from "../components/Usage/UsagePage";
-import Footer from "../components/Footer/Footer";
 
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRouter";
-import AdminRoute from "./AdminRouter";
+// import AdminRoute from "./AdminRouter";
 import LoginPage from "../components/Login/LoginPage";
 
-// const history = createBrowserHistory({
-//   forceRefresh: false,
-// });
 const AppRouter = () => {
   return (
     <BrowserRouter>

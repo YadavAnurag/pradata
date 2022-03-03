@@ -1,7 +1,5 @@
-import React, { useState, forwardRef, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
-import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import {
@@ -89,7 +87,6 @@ const PlanFilters = (props) => {
           />
         </div>
         <div className="input-group__item">
-          {/* <label>Price:</label> */}
           <input
             type="text"
             value={price}
@@ -99,7 +96,6 @@ const PlanFilters = (props) => {
           />
         </div>
         <div className="input-group__item">
-          {/* <label>Validity:</label> */}
           <input
             type="text"
             value={validityPeriod}
@@ -111,7 +107,6 @@ const PlanFilters = (props) => {
       </div>
       <div className="input-group">
         <div className="input-group__item">
-          {/* <label>Sort:</label> */}
           <select
             name="sortBy"
             value={sortBy}

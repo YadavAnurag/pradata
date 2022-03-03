@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 import { initAddPayment } from "../../store/actions/index";
 import {
-  getUserFullName,
   getUsagePaymentDetails,
 } from "../../store/utility/utility";
 import PaymentForm from "./PaymentForm";

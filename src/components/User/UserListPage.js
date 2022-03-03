@@ -36,7 +36,7 @@ const UserListPage = (props) => {
       {(fetchedUsers && fetchedPlans) ? (
         jsx
       ) : (
-        jsx
+        <p>Loading...</p>
       )}
     </div>
   )

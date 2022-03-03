@@ -15,14 +15,11 @@ export const getSelectedUsers = (users, plans, userFilters) => {
     sortBy = "textAsc",
     startDate = moment().startOf("month").valueOf(),
     endDate = moment().endOf("month").valueOf(),
-    isAdmin = false,
   } = { ...userFilters };
 
   return users
     .filter((user) => {
       const {
-        totalPaymentReceived,
-        dueAmount,
         currentPlan,
         currentPlanDueDate,
         userInDue,
@@ -51,7 +48,7 @@ export const getSelectedUsers = (users, plans, userFilters) => {
 
       // isDueMatch
       /*
-       initialize isDueMatch as true, because if no dues for a user, 
+       initialize isDueMatch as true, because if no dues for a user,
        then don't exclude this user, have to include this user so mark match as true
       */
 
