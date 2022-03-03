@@ -71,10 +71,10 @@ const User = (props) => {
       </div>
       {props.isAdmin ? (
         <Link to={`/usages?userId=${id}`}>
-          jsx
+          {jsx}
         </Link>
       ): (
-        jsx
+        {jsx}
       )}
     </div>
   );
