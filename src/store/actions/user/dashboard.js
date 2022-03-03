@@ -24,6 +24,7 @@ export const initGetDashboardData = (id, isAdmin) => {
       if (isAdmin) {
         dispatch(setAdminDashboardData(response.data));
       } else {
+        console.log("response.data", response.data);
         dispatch(setUserDashboardData(response.data));
       }
 

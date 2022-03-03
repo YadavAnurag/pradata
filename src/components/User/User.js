@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { getUserFullName } from "../../store/utility/utility";
@@ -16,12 +16,8 @@ const User = (props) => {
     contactNumber,
     address,
     status,
-    usages,
     createdAt,
   } = props.user;
-
-  // const some = getUserPaymentDetailsWithAllUsages(props.user, props.plans);
-
 
   const jsx = (
     <div className="user-list-item">
@@ -74,7 +70,9 @@ const User = (props) => {
           {jsx}
         </Link>
       ): (
-        {jsx}
+        <div>
+          {jsx}
+        </div>
       )}
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
 
 import Accordion from "../UI/Accordion/Accordion";
 import Plan from "../Plan/Plan";
 
 const UserDashboard = (props) => {
+  console.log(props);
   const {
     isPlanActive,
     isDueDatePassed,
@@ -21,7 +21,6 @@ const UserDashboard = (props) => {
         <p className="plan__status-value">
           {isPlanActive ? "Active Plan" : "Inactive"}
         </p>
-        {/* <p className="plan__status-value">Usage</p> */}
       </div>
       <div className="user-list-item">
         <div className="list-item__user-details">

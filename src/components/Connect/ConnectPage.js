@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -16,14 +16,15 @@ const ConnectPage = (props) => {
     locationURL,
   } = props.connectData;
 
-  React.useEffect(() => {
-    if (Object.keys(props.connectData).length === 0) {
-      props.onInitSetConnect();
+  const [fetchedConnect, setFetchedConnect] = useState(Object.keys(props.connectData).length !== 0);
+  useEffect(() => {
+    if (!fetchedConnect) {
+      props.onInitSetConnect().then(() => setFetchedConnect(true));
     }
-  }, []);
+  }, [fetchedConnect]);
 
   const jsx = (
-    <div className="page-header">
+    <div className="page-header page-header-connect">
       <div className="content-container content-container__connect">
         <h1 className="page-header__title">{title}</h1>
         <h3>{subTitle}</h3>

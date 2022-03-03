@@ -1,6 +1,5 @@
 import React from "react";
 import AdminDashboard from "./AdminDashboard";
-import User from "../User/User";
 
 const AdminDashboardPage = (props) => {
   return (

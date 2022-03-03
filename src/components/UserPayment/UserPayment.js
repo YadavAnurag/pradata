@@ -1,25 +1,40 @@
-import React from "react";
-import queryString from "query-string";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
 
 import UsageList from "../Usage/UsageList";
+import {initSetUsers, initSetPlans} from "../../store/actions/index";
 import User from "../User/User";
 
 const UserPayment = (props) => {
+
+  const [fetchedUsers, setFetchedUsers] = useState(props.users.length !== 0);
+  const [fetchedPlans, setFetchedPlans] = useState(props.plans.length !== 0);
+  useEffect(() => {
+    if(!fetchedUsers){
+      props.onInitSetUsers().then(() => setFetchedUsers(true));
+    }
+    if(!fetchedPlans){
+      props.onInitSetPlans().then(() => setFetchedPlans(true));
+    }
+  }, [fetchedUsers, fetchedPlans]);
+
   const user = props.users.find((user) => {
     return user.id === props.userId;
   });
-  const usages = user.usages;
+
 
   return (
     <div style={{ paddingBottom: "3rem" }}>
-      <div className="content-container">
-        <div className="list-header">
-          <div className="show-for-desktop">All Usages</div>
+      {(fetchedUsers && fetchedPlans) ? (
+        <div className="content-container">
+          <div className="list-header">
+            <div className="show-for-desktop">All Usages</div>
+          </div>
+          <UsageList usages={user.usages} />
         </div>
-        <UsageList usages={usages} />
-      </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
@@ -28,6 +43,13 @@ const mapStateToProps = (state) => {
   return {
     userId: state.auth.userId,
     users: state.users,
+    plans: state.plans
   };
 };
-export default connect(mapStateToProps)(UserPayment);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInitSetPlans: () => dispatch(initSetPlans()),
+    onInitSetUsers: () => dispatch(initSetUsers())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserPayment);

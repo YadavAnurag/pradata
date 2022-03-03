@@ -1,15 +1,14 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Header from "../Header/Header";
 import digiPic from "../../assets/images/digi.png";
 import fastPic from "../../assets/images/fast.png";
 import securedPic from "../../assets/images/secured.png";
 import historyPic from "../../assets/images/history.png";
 import profilePic from "../../assets/images/profile.png";
 
-import { initLogin, initSetUsers } from "../../store/actions";
+import { initLogin, initSetUsers, initSetPlans } from "../../store/actions";
 
 // check if localStorage contains userId
 const parsedLocalStorage = JSON.parse(localStorage.getItem("auth"));
@@ -17,17 +16,18 @@ const isAuthAvailableInLocalStorage = localStorage.length &&
   (parsedLocalStorage !== null);
 const userId = isAuthAvailableInLocalStorage ? parsedLocalStorage.userId : "";
 
-console.log("userId", userId);
-
 const HomePage = (props) => {
 
-  React.useEffect(() => {
-    if (props.users.length === 0) {
-      props.onInitSetUsers().then(() => {
-        console.log("users", props.users);
-      });
+  const [fetchedUsers, setFetchedUsers] = useState(props.users.length !== 0);
+  const [fetchedPlans, setFetchedPlans] = useState(props.plans.length !== 0);
+  useEffect(() => {
+    if(!fetchedUsers){
+      props.onInitSetUsers().then(() => setFetchedUsers(true));
     }
-  }, []);
+    if(!fetchedPlans){
+      props.onInitSetPlans().then(() => setFetchedPlans(true));
+    }
+  }, [fetchedUsers, fetchedPlans]);
 
   return (
     <div>
@@ -130,12 +130,14 @@ const HomePage = (props) => {
 const mapStateToProps = (state) => {
   return {
     users: state.users,
+    plans: state.plans
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitLogin: (id) => dispatch(initLogin({ id })),
     onInitSetUsers: () => dispatch(initSetUsers()),
+    onInitSetPlans: () => dispatch(initSetPlans())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

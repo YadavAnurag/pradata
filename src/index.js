@@ -3,9 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "dotenv/config";
 import App from "./App";
-import { store } from "./App";
-import { initSetUsers } from "./store/actions/user/user";
-import { initSetPlans } from "./store/actions/index";
 
 // + remove me, use above one
 const renderApp = () => {
