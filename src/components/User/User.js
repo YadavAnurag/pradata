@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { getUserFullName } from "../../store/utility/utility";
@@ -20,17 +20,12 @@ const User = (props) => {
     createdAt,
   } = props.user;
 
-  const some = getUserPaymentDetailsWithAllUsages(props.user, props.plans);
+  // const some = getUserPaymentDetailsWithAllUsages(props.user, props.plans);
 
-  return (
-    <div>
-      <div className="list-item-top">
-        <p className="list-item-top__status-value">
-          {props.isAdmin ? status : "My Information"}
-        </p>
-      </div>
-      <Link to={`/usages?userId=${id}`} className="user-list-item">
-        <div className="list-item__user-and-due">
+
+  const jsx = (
+    <div className="user-list-item">
+      <div className="list-item__user-and-due">
           <div className="list-item__user">
             <h3 className="list-item__title">
               {getUserFullName({ firstName, middleName, lastName }).fullName}
@@ -55,21 +50,32 @@ const User = (props) => {
             <p>Email Id:</p>
             <p style={{ textTransform: "lowercase" }}>{emailId}</p>
           </div>
-
           <div>
             <p>Address:</p>
             <p>{address}</p>
           </div>
-          {/* <div>
-            <p>Usage:</p>
-            <p>{usages.length}</p>
-          </div> */}
           <div>
             <p>Connected At:</p>
             <p>{moment(createdAt).format("DD-MMM-YYYY")}</p>
           </div>
         </div>
-      </Link>
+    </div>
+  );
+
+  return (
+    <div>
+      <div className="list-item-top">
+        <p className="list-item-top__status-value">
+          {props.isAdmin ? status : "My Information"}
+        </p>
+      </div>
+      {props.isAdmin ? (
+        <Link to={`/usages?userId=${id}`}>
+          jsx
+        </Link>
+      ): (
+        jsx
+      )}
     </div>
   );
 };

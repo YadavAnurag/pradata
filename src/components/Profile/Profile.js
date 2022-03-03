@@ -20,7 +20,7 @@ const Profile = (props) => {
         } else {
           toast.dismiss(toastId.current);
           toast.success("Profile Updated", { delay: 300 });
-          history.goBack();
+          history.push("/dashboard");
         }
       })
       .catch((err) => {

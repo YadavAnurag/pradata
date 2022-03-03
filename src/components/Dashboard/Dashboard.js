@@ -9,21 +9,22 @@ import UserDashboardPage from "./UserDashboardPage";
 import Spinner from "../UI/Spinner/Spinner";
 
 const Dashboard = (props) => {
+  console.log("Came here", props.users);
   React.useEffect(() => {
-    if (Object.keys(props.users).length === 0) {
-      props.onInitSetUsers().then(() => {
-        if (props.isAdmin) {
-          if (props.userDashboardData.length === 0) {
-            props.onInitGetDashboardData(props.userId, props.isAdmin);
-          }
-        } else {
-          if (Object.keys(props.adminDashboardData).length === 0) {
-            props.onInitGetDashboardData(props.userId, props.isAdmin);
-          }
-        }
-      });
+    if (!props.isAdmin) {
+      if (props.userDashboardData.length === 0) {
+        props.onInitGetDashboardData(props.userId, props.isAdmin);
+      }
+    } else {
+      if (Object.keys(props.adminDashboardData).length === 0) {
+        props.onInitGetDashboardData(props.userId, props.isAdmin);
+      }
     }
   }, []);
+  React.useEffect(() => {
+    props.onInitSetUsers();
+  }, [props.users]);
+
 
   let dashboardJSX = null;
   if (!!!props.userId) {
@@ -34,14 +35,16 @@ const Dashboard = (props) => {
         (Object.keys(props.adminDashboardData).length !== 0) ? (<AdminDashboardPage
           adminDashboardDataObject={props.adminDashboardData}
           user={props.user}
+          userId={props.userId}
         />) : (<Spinner />)
       );
     } else {
       dashboardJSX = (
-        (props.userDashboardData.length === 0) ? (
+        (props.userDashboardData.length !== 0) ? (
           <UserDashboardPage
             userDashboardDataArray={props.userDashboardData}
             user={props.user}
+            userId={props.userId}
         />
         ) : (<Spinner />)
       );

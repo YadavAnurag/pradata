@@ -20,6 +20,15 @@ const userId = isAuthAvailableInLocalStorage ? parsedLocalStorage.userId : "";
 console.log("userId", userId);
 
 const HomePage = (props) => {
+
+  React.useEffect(() => {
+    if (props.users.length === 0) {
+      props.onInitSetUsers().then(() => {
+        console.log("users", props.users);
+      });
+    }
+  }, []);
+
   return (
     <div>
       {/* <Header /> */}
@@ -33,13 +42,23 @@ const HomePage = (props) => {
             <h2>cable TV connection</h2>
 
             {userId === "" ? (
-              <Link to={`/connect`} className="button home-header__button">
-                Connect
-              </Link>
+              <div className="home-header__button-parent">
+                <Link to={`/plans`} className="button home-header__button first">
+                  Plans
+                </Link>
+                <Link to={`/connect`} className="button home-header__button second">
+                  Connect
+                </Link>
+              </div>
             ) : (
-              <Link to={`/dashboard`} className="button home-header__button">
-                Dashboard
-              </Link>
+              <div className="home-header__button-parent">
+                <Link to={`/dashboard`} className="button home-header__button first">
+                  Dashboard
+                </Link>
+                <Link to={`/plans`} className="button home-header__button second">
+                  Plans
+                </Link>
+              </div>
             )}
           </div>
           <div className="home-header-image">
@@ -108,15 +127,15 @@ const HomePage = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     users: state.users,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     onInitLogin: (id) => dispatch(initLogin({ id })),
     onInitSetUsers: () => dispatch(initSetUsers()),
   };
 };
-export default connect(undefined, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

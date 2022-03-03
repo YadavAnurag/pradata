@@ -1,12 +1,13 @@
 import React from "react";
 
+import {Redirect} from "react-router-dom";
 import UserDashboard from "./UserDashboard";
 import User from "../User/User";
 import UsageList from "../Usage/UsageList";
 import { getUserFullName } from "../../store/utility/utility";
 
 const UserDashboardPage = (props) => {
-  return (
+  const jsx = (
     <div className="content-container">
       <div className="page-header">
         <div className="content-container">
@@ -26,6 +27,13 @@ const UserDashboardPage = (props) => {
       </div>
     </div>
   );
+  return (
+    props.userId === "" ? (
+      <Redirect to="/" />
+    ) : (
+      jsx
+    )
+  )
 };
 
 export default UserDashboardPage;

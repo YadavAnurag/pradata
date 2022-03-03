@@ -22,12 +22,15 @@ const LoginPage = (props) => {
           toast.dismiss(toastId.current);
           toast.error("Failed !!!", { delay: 300 });
         } else {
+          // console.log("Logged In");
           // user logged in, fetch plans if plan not exists
           // fetch plans, other it will redirect to dashboard and plans will be used
           if (Object.keys(props.plans).length === 0) {
+            // console.log("Loading plans");
             props.onInitSetPlans().then(() => {
+              // console.log("Plan got loaded");
               toast.dismiss(toastId.current);
-              toast.success("Successfully Logged In", { delay: 300 });
+              toast.success("Successfully Logged In");
               history.push(`/dashboard`);
             });
           }
